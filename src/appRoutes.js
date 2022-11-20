@@ -4,12 +4,16 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Home from './components/auth/home'
 import Login from './components/auth/login'
 import SignUp from './components/auth/signUp'
+import LayoutWorker from './layoutWorker/layoutWorker'
+import NotFound from './components/notFound'
 
 const AppRoutes = () => {
     return (
         <Router>
             <Routes>
+
                 <Route index element={<Home />} />
+
                 {/*  Layout */}
                 <Route path='/' element={<Layout />}>
                     {/* Outlet */}
@@ -17,7 +21,13 @@ const AppRoutes = () => {
                     <Route path='/signUp' element={<SignUp />} />
                 </Route>
 
-                {/* <Route path='*' element={<NotFound />} /> */}
+                <Route path='/worker' element={<LayoutWorker />}>
+                    {/* Outlet */}
+                    {/* <Route path='/' element={<Login />} /> */}
+                </Route>
+
+                {/*   (*) => Rest of routes!?!?  */}
+                <Route path='*' element={<NotFound />} />
 
             </Routes>
         </Router>
