@@ -5,6 +5,8 @@ export const TOKEN_ROLE = "my-role";
 export const TOKEN_ID = "my-ID";
 export const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 export const regPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*.<>])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+export const regPhone = /^(\()?\d{3}(\))?(-|\s)?\d{3}(-|\s)\d{4}$/
+;
 
 export const doApiGet = async (_url) => {
     try {
