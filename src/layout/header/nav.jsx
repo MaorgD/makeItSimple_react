@@ -18,7 +18,7 @@ const Nav = () => {
                 <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
                     <Link to={'/'} className="-m-1.5 p-1.5">
                         <span className="sr-only">Your Company</span>
-                        <img className="w-24 md:w-28 lg:w-38 p-2" src="https://res.cloudinary.com/dukiq0kql/image/upload/v1668959681/%D7%9E%D7%9E%D7%9E_efwhsl.png" alt="" />
+                        <img className="w-24 md:w-28 lg:w-38 p-2" src="https://res.cloudinary.com/dukiq0kql/image/upload/v1668959681/%D7%9E%D7%9E%D7%9E_efwhsl.png" alt="logo" />
                     </Link>
                 </div>
                 <div className="flex lg:hidden">
@@ -55,9 +55,9 @@ const Nav = () => {
                             <Link to={'/'} className="-m-1.5 p-1.5">
                                 <span className="sr-only">Your Company</span>
                                 <img
-                                    className="h-8"
-                                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                                    alt=""
+                                    className="h-16"
+                                    src="https://res.cloudinary.com/dukiq0kql/image/upload/v1668959681/%D7%9E%D7%9E%D7%9E_efwhsl.png"
+                                    alt="logo"
                                 />
                             </Link>
                         </div>

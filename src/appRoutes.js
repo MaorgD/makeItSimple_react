@@ -11,7 +11,7 @@ const AppRoutes = () => {
     return (
         <Router>
             <Routes>
-
+מ
                 <Route index element={<Home />} />
 
                 {/*  Layout */}
@@ -22,8 +22,9 @@ const AppRoutes = () => {
                 </Route>
 
                 <Route path='/worker' element={<LayoutWorker />}>
+
                     {/* Outlet */}
-                    {/* <Route path='/' element={<Login />} /> */}
+                    
                 </Route>
 
                 {/*   (*) => Rest of routes!?!?  */}
