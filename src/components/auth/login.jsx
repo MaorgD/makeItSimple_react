@@ -33,16 +33,16 @@ const Login = () => {
                 localStorage.setItem(TOKEN_ID, data.id);
                 localStorage.setItem(TOKEN_JOBS, data.jobs);
                 console.log(data);
-                // if (data.jobs.includes("manager"))
-                //     nav("/resturant");
-                // else if (data.jobs.includes("chef"))
-                //     nav("/chef");
-
-                // else if (data.jobs.includes("waiter"))
-                //     nav("/waiter");
-
-                 if (!data.jobs)
+                if (data.jobs.includes("manager"))
                     nav("/worker");
+                else if (data.jobs.includes("chef"))
+                    nav("/worker");
+
+                else if (data.jobs.includes("waiter"))
+                    nav("/worker");
+
+                if (!data.jobs)
+                    nav("/");
             }
 
         }
