@@ -8,7 +8,7 @@ import { ThreeDots } from 'react-loader-spinner'
 
 import {
     API_URL, doApiMethodSignUpLogin,
-    TOKEN_NAME, TOKEN_ROLE, TOKEN_ID, regEmail, regPassword
+    TOKEN_NAME, TOKEN_ROLE, TOKEN_ID, regEmail, regPassword, TOKEN_JOBS
 } from '../../services/servise';
 
 const Login = () => {
@@ -28,24 +28,24 @@ const Login = () => {
             const { data } = await doApiMethodSignUpLogin(url, "POST", _dataBody);
             console.log(data);
             if (data.token) {
-                // localStorage.setItem(TOKEN_ROLE, data.userRole);
-                // localStorage.setItem(TOKEN_NAME, data.token);
-                // localStorage.setItem(TOKEN_ID, data.id);
+                localStorage.setItem(TOKEN_ROLE, data.userRole);
+                localStorage.setItem(TOKEN_NAME, data.token);
+                localStorage.setItem(TOKEN_ID, data.id);
+                localStorage.setItem(TOKEN_JOBS, data.jobs);
                 console.log(data);
-                if (data.jobs.includes("manager")) {
-                    nav("/resturant");
-                } else if (data.jobs.includes("chef")) {
-                    nav("/chef");
-                }
-            } else if (data.jobs.includes("waiter")) {
-                nav("/waiter");
-            }
-            else if (!data.jobs) {
-                nav("/");
+                // if (data.jobs.includes("manager"))
+                //     nav("/resturant");
+                // else if (data.jobs.includes("chef"))
+                //     nav("/chef");
+
+                // else if (data.jobs.includes("waiter"))
+                //     nav("/waiter");
+
+                 if (!data.jobs)
+                    nav("/worker");
             }
 
         }
-
         catch (err) {
 
             setIsSubmitted(false);

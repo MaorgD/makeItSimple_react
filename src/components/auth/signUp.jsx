@@ -7,7 +7,7 @@ import { LockClosedIcon } from '@heroicons/react/20/solid'
 
 import {
     API_URL, doApiMethodSignUpLogin,
-     regEmail, regPassword , regPhone
+    regEmail, regPassword, regPhone
 } from '../../services/servise';
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -26,7 +26,7 @@ const SignUp = () => {
 
     const doApi = async (_dataBody) => {
         try {
-            const url = API_URL + '/users';
+            const url = API_URL + '/users/manager';
             const { data } = await doApiMethodSignUpLogin(url, "POST", _dataBody);
             console.log(data);
             if (data.email) {
@@ -36,7 +36,7 @@ const SignUp = () => {
             console.log(err.response);
             alert(err.response.data.msg || err.response.data[0].message)
             setIsSubmitted(false);
-         }
+        }
     }
     return (
         <>
@@ -51,12 +51,6 @@ const SignUp = () => {
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                             Sign up
                         </h2>
-                        {/* <p className="mt-2 text-center text-sm text-gray-600">
-                            Or{' '}
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                start your 14-day free trial
-                            </a>
-                        </p> */}
                     </div>
                     <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">
                         <input type="hidden" name="remember" defaultValue="true" />
@@ -85,7 +79,7 @@ const SignUp = () => {
                                     type="text"
                                     required
                                     className="relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="Last name"/>
+                                    placeholder="Last name" />
                             </div>
                             {errors.fullName && errors.fullName.lastName && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid last name! Between 2-20 chars.</p>}
                             <div>
@@ -104,9 +98,9 @@ const SignUp = () => {
                             {errors.email && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid email</p>}
                             <div>
                                 <label htmlFor="phone-number" className="sr-only">
-                                Phone number
+                                    Phone number
                                 </label>
-                                <input {...register('phone', { required: true, minLength: 9, maxLength: 10, pattern: regPhone })}
+                                <input {...register('phone', { required: true, pattern: regPhone })}
                                     id="phone"
                                     name="phone"
                                     type="text"
@@ -116,7 +110,7 @@ const SignUp = () => {
                                     placeholder="Phone number" />
                             </div>
                             {errors.phone && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid phone.</p>}
-                               <div>
+                            <div>
                                 <label htmlFor="pin" className="sr-only">
                                     Pin code
                                 </label>
@@ -126,9 +120,9 @@ const SignUp = () => {
                                     type="text"
                                     required
                                     className="relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="pin code"/>
+                                    placeholder="pin code" />
                             </div>
-                            {errors.worker && errors.worker.pin && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid pin.</p>} 
+                            {errors.worker && errors.worker.pin && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid pin.</p>}
                             <div>
                                 <label htmlFor="password" className="sr-only">
                                     Password

@@ -1,19 +1,39 @@
 import { Fragment } from 'react'
 import { Link, useNavigate } from "react-router-dom"
-
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { TOKEN_NAME, TOKEN_ROLE, TOKEN_ID } from '../../services/servise'
 
 const navigation = [
-  { name: 'Home', to: '/worker', current: true },
-  { name: 'About', to: '/worker/about', current: false },
-  { name: 'Toys List', to: '/worker/toysList', current: false },
+  { name: 'Menu', to: '/menu', current: false },
+  { name: 'Shift sPage', to: '/shiftsPage', current: false },
 ]
-const navigationlogin = [
-  { name: 'My Info', to: '/worker/myinfo', current: false },
-  { name: 'My Toys', to: '/worker/mytoysList', current: false },
-  { name: 'Users list', to: '/worker/userslist', current: false },
+const navigationWaiter= [
+  { name: 'Tables', to: '/worker/tables', current: false },
+  { name: 'Order', to: '/worker/order', current: false },
+]
+const navigationChef = [
+  { name: 'work lane', to: '/worker/workLane', current: false },
+]
+const navigationCooker = [
+  { name: 'work lane', to: '/worker/workLane', current: false },
+]
+const navigationCheker = [
+  { name: 'resturant order', to: '/worker/resturantOrder', current: false },
+  { name: 'app order', to: '/worker/appOrder', current: false },
+]
+const navigationBartender = [
+  { name: 'bar`s work lane', to: '/worker/workLane', current: false },
+]
+const navigationShidtManager= [
+  { name: 'Tables', to: '/worker/tables', current: false },
+  { name: 'Order', to: '/worker/order', current: false },
+  { name: 'work lane', to: '/worker/workLane', current: false },
+  { name: 'resturant order', to: '/worker/resturantOrder', current: false },
+  { name: 'app order', to: '/worker/appOrder', current: false },
+  { name: 'bar`s work lane', to: '/worker/workLane', current: false },
+
+
 ];
 
 function classNames(...classes) {
@@ -37,7 +57,7 @@ export default function Header() {
 
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-gray-600">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -54,7 +74,7 @@ export default function Header() {
                 </Disclosure.Button>
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
+                <div className="flex flex-shrink-0 items-center ">
                   <img
                     className="block h-8 w-auto lg:hidden"
                     src="https://res.cloudinary.com/dukiq0kql/image/upload/v1668959681/%D7%9E%D7%9E%D7%9E_efwhsl.png"
@@ -82,7 +102,7 @@ export default function Header() {
                       </Link>
                     ))}
                     {localStorage.getItem(TOKEN_NAME) &&
-                      navigationlogin.map((item) => (
+                      navigation.map((item) => (
                         <Link
                           key={item.name}
                           to={item.to}

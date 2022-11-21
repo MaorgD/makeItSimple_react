@@ -6,13 +6,15 @@ import Login from './components/auth/login'
 import SignUp from './components/auth/signUp'
 import LayoutWorker from './layoutWorker/layoutWorker'
 import NotFound from './components/notFound'
+import Verification from './components/auth/verification'
 
 const AppRoutes = () => {
     return (
         <Router>
             <Routes>
-מ
+                מ
                 <Route index element={<Home />} />
+                <Route path='/verification/:name' element={<Verification />} />
 
                 {/*  Layout */}
                 <Route path='/' element={<Layout />}>
@@ -24,7 +26,7 @@ const AppRoutes = () => {
                 <Route path='/worker' element={<LayoutWorker />}>
 
                     {/* Outlet */}
-                    
+
                 </Route>
 
                 {/*   (*) => Rest of routes!?!?  */}
