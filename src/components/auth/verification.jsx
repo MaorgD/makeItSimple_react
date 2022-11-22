@@ -5,6 +5,7 @@ function Verification() {
     const params = useParams();
 
     return (
+        //
         <div className='container'>
             <div className='text-center'>
                 <h1>thank you {params.name} for sign up</h1>

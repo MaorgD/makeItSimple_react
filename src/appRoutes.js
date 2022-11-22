@@ -4,15 +4,14 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Home from './components/auth/home'
 import Login from './components/auth/login'
 import SignUp from './components/auth/signUp'
-import LayoutWorker from './layoutWorker/layoutWorker'
 import NotFound from './components/notFound'
 import Verification from './components/auth/verification'
+import LayoutManager from './layoutWorker/layoutWorker'
 
 const AppRoutes = () => {
     return (
         <Router>
             <Routes>
-                מ
                 <Route index element={<Home />} />
                 <Route path='/verification/:name' element={<Verification />} />
 
@@ -23,7 +22,7 @@ const AppRoutes = () => {
                     <Route path='/signUp' element={<SignUp />} />
                 </Route>
 
-                <Route path='/worker' element={<LayoutWorker />}>
+                <Route path='/manager' element={<LayoutManager />}>
 
                     {/* Outlet */}
 
