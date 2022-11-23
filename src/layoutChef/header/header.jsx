@@ -1,68 +1,16 @@
 import { Fragment } from 'react'
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { TOKEN_NAME, TOKEN_ROLE, TOKEN_ID } from '../../services/servise'
-
-// const navigation = [
-//   { name: 'Menu', to: '/menu', current: false },
-//   { name: 'Shift  Page', to: '/shift Page', current: false },
-// ]
-// const navigationWaiter= [
-//   { name: 'Tables', to: '/tables', current: false },
-//   { name: 'Order', to: '/order', current: false },
-//   { name: 'Menu', to: '/menu', current: false },
-//   { name: 'Shift  Page', to: '/shiftPage', current: false },
-//   { name: 'my Info', to: '/myInfo', current: false },
-
-// ]
-// const navigationChef = [
-//   { name: 'work lane', to: '/worker/workLane', current: false },
-//   { name: 'Menu', to: '/menu', current: false },
-//   { name: 'Shift  Page', to: '/shiftPage', current: false },
-//   { name: 'my Info', to: '/myInfo', current: false },
-
-// ]
-// const navigationCooker = [
-//   { name: 'work lane', to: '/worker/workLane', current: false },
-//   { name: 'Menu', to: '/menu', current: false },
-//   { name: 'Shift  Page', to: '/shiftPage', current: false },
-//   { name: 'my Info', to: '/myInfo', current: false },
-
-// ]
-// const navigationCheker = [
-//   { name: 'resturant order', to: '/worker/resturantOrder', current: false },
-//   { name: 'app order', to: '/worker/appOrder', current: false },
-//   { name: 'Menu', to: '/menu', current: false },
-//   { name: 'Shift  Page', to: '/shiftPage', current: false },
-//   { name: 'my Info', to: '/myInfo', current: false },
-
-// ]
-// const navigationBartender = [
-//   { name: 'bar`s work lane', to: '/worker/workLane', current: false },
-//   { name: 'Menu', to: '/menu', current: false },
-//   { name: 'Shift  Page', to: '/shiftPage', current: false },
-//   { name: 'my Info', to: '/myInfo', current: false },
-
-// ]
-// const navigationShiftManager= [
-//   { name: 'Tables', to: '/worker/tables', current: false },
-//   { name: 'Order', to: '/worker/order', current: false },
-//   { name: 'work lane', to: '/worker/workLane', current: false },
-//   { name: 'resturant order', to: '/worker/resturantOrder', current: false },
-//   { name: 'app order', to: '/worker/appOrder', current: false },
-//   { name: 'Shift  Page', to: '/shift Page', current: false },
-//   { name: 'my Info', to: '/myInfo', current: false },
-//   { name: 'Menu', to: '/menu', current: false },
-
-// ];
+import { TOKEN_NAME, TOKEN_ROLE, TOKEN_ID, TOKEN_JOBS } from '../../services/servise'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Header() {
+export default function Header(props) {
   const nav = useNavigate();
+
 
   const onLogOut = () => {
     //  del token
@@ -75,7 +23,6 @@ export default function Header() {
       nav("/");
     }
   }
-
 
   return (
     <Disclosure as="nav" className="bg-gray-600">
@@ -122,8 +69,8 @@ export default function Header() {
                         {item.name}
                       </Link>
                     ))} */}
-                    {localStorage.getItem(TOKEN_NAME) &&
-                      navigation.map((item) => (
+                    {localStorage.getItem(TOKEN_JOBS) &&
+                      props.navigationChef.map((item) => (
                         <Link
                           key={item.name}
                           to={item.to}
@@ -173,22 +120,22 @@ export default function Header() {
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          <Link
+                            to={"#"}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          <Link
+                            to={"#"}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Settings
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
@@ -204,7 +151,7 @@ export default function Header() {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden">
+          {/* <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               {navigation.map((item) => (
                 <Disclosure.Button
@@ -221,7 +168,7 @@ export default function Header() {
                 </Disclosure.Button>
               ))}
             </div>
-          </Disclosure.Panel>
+          </Disclosure.Panel> */}
         </>
       )}
     </Disclosure>

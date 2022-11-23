@@ -34,12 +34,12 @@ const Login = () => {
                 localStorage.setItem(TOKEN_JOBS, data.jobs);
                 console.log(data);
                 if (data.jobs.includes("manager"))
-                    nav("/worker");
+                    nav("/manager");
                 else if (data.jobs.includes("chef"))
-                    nav("/worker");
+                    nav("/chef");
 
                 else if (data.jobs.includes("waiter"))
-                    nav("/worker");
+                    nav("/waiter");
 
                 if (!data.jobs)
                     nav("/");

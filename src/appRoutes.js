@@ -6,7 +6,10 @@ import Login from './components/auth/login'
 import SignUp from './components/auth/signUp'
 import NotFound from './components/notFound'
 import Verification from './components/auth/verification'
-import LayoutManager from './layoutWorker/layoutWorker'
+import LayoutManager from './layoutManager/layoutManager'
+import SuperLayout from './superLayout/superLayout'
+import LayoutChef from './layoutChef/layoutChef'
+import LayoutWaiter from './layoutWaiter/layoutWaiter'
 
 const AppRoutes = () => {
     return (
@@ -15,16 +18,31 @@ const AppRoutes = () => {
                 <Route index element={<Home />} />
                 <Route path='/verification/:name' element={<Verification />} />
 
-                {/*  Layout */}
-                <Route path='/' element={<Layout />}>
-                    {/* Outlet */}
-                    <Route path='/login' element={<Login />} />
-                    <Route path='/signUp' element={<SignUp />} />
-                </Route>
+                <Route path='/' element={<SuperLayout />} >
 
-                <Route path='/manager' element={<LayoutManager />}>
+                    {/*  Layout */}
+                    <Route path='/' element={<Layout />}>
+                        {/* Outlet */}
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/signUp' element={<SignUp />} />
+                    </Route>
 
-                    {/* Outlet */}
+                    <Route path='/manager' element={<LayoutManager />}>
+
+                        {/* Outlet */}
+
+                    </Route>
+
+                    <Route path='/chef' element={<LayoutChef />}>
+
+                        {/* Outlet */}
+
+                    </Route>
+                    <Route path='/waiter' element={<LayoutWaiter/>}>
+
+                        {/* Outlet */}
+
+                    </Route>
 
                 </Route>
 
