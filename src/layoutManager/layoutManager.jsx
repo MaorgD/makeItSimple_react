@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from "react-router-dom"
-import Header from './header/header'
+import Header from '../components/worker/headerW'
 import {navigationManager} from '../services/navigation'
 
 
@@ -8,7 +8,7 @@ const LayoutManager = () => {
 console.log(navigationManager)
   return (
     <div>
-      <Header navigationManager={navigationManager} />
+      <Header navigation={navigationManager} />
       <Outlet />
     </div>
   )

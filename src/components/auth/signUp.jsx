@@ -9,6 +9,7 @@ import {
     API_URL, doApiMethodSignUpLogin,
     regEmail, regPassword, regPhone
 } from '../../services/servise';
+
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }

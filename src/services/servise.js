@@ -38,6 +38,22 @@ export const doApiMethodSignUpLogin = async (_url, _method, _body = {}) => {
         throw err;
     }
 }
+export const doApiMethodFillDetales = async (_url, _method, _body = {}) => {
+    try {
+        let resp = await axios({
+            method: _method,
+            url: _url,
+            data: JSON.stringify(_body),
+            headers: {
+                'Content-Type': 'application/json',
+                // "x-api-key":localStorage[TOKEN_NAME]
+            }
+        })
+        return resp;
+    } catch (err) {
+        throw err;
+    }
+}
 
 export const doApiMethodToken = async (_url, _method, _body = {}) => {
     try {

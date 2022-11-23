@@ -10,6 +10,7 @@ import LayoutManager from './layoutManager/layoutManager'
 import SuperLayout from './superLayout/superLayout'
 import LayoutChef from './layoutChef/layoutChef'
 import LayoutWaiter from './layoutWaiter/layoutWaiter'
+import WorkerFill from './components/auth/workerFill'
 
 const AppRoutes = () => {
     return (
@@ -25,6 +26,7 @@ const AppRoutes = () => {
                         {/* Outlet */}
                         <Route path='/login' element={<Login />} />
                         <Route path='/signUp' element={<SignUp />} />
+                        <Route path='/fillDetales' element={<WorkerFill />} />
                     </Route>
 
                     <Route path='/manager' element={<LayoutManager />}>
@@ -38,6 +40,7 @@ const AppRoutes = () => {
                         {/* Outlet */}
 
                     </Route>
+
                     <Route path='/waiter' element={<LayoutWaiter/>}>
 
                         {/* Outlet */}

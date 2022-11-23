@@ -70,7 +70,7 @@ export default function Header(props) {
                       </Link>
                     ))} */}
                     {localStorage.getItem(TOKEN_JOBS) &&
-                      props.navigationChef.map((item) => (
+                      props.navigation.map((item) => (
                         <Link
                           key={item.name}
                           to={item.to}

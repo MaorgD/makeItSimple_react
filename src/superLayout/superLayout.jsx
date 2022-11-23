@@ -6,11 +6,11 @@ import Footer from './footer/footer'
 
 const SuperLayout = () => {
   return (
-    <React.Fragment>
+    <>
         <Outlet/>
         <Footer/>
 
-    </React.Fragment>
+    </>
   )
 }
 
