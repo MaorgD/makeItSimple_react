@@ -18,6 +18,7 @@ export default function Header(props) {
       localStorage.removeItem(TOKEN_NAME)
       localStorage.removeItem(TOKEN_ROLE)
       localStorage.removeItem(TOKEN_ID)
+      localStorage.removeItem(TOKEN_JOBS)
 
       // pass to log in page
       nav("/");

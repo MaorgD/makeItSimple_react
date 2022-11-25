@@ -2,8 +2,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../../layout/header/nav'
-
+import{TUKEN_NAME,TUKEN_JOBS} from '../../services/servise'
 const Home = () => {
+
     return (
         <div className="isolate bg-white">
             <div className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">

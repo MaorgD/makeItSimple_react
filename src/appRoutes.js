@@ -11,6 +11,7 @@ import SuperLayout from './superLayout/superLayout'
 import LayoutChef from './layoutChef/layoutChef'
 import LayoutWaiter from './layoutWaiter/layoutWaiter'
 import WorkerFill from './components/auth/workerFill'
+import MyRestaurantsList from './components/auth/myRestaurantsList'
 
 const AppRoutes = () => {
     return (
@@ -27,6 +28,8 @@ const AppRoutes = () => {
                         <Route path='/login' element={<Login />} />
                         <Route path='/signUp' element={<SignUp />} />
                         <Route path='/fillDetales' element={<WorkerFill />} />
+                        <Route path='/myrestaurantlist' element={< MyRestaurantsList />} />
+
                     </Route>
 
                     <Route path='/manager' element={<LayoutManager />}>
@@ -41,7 +44,7 @@ const AppRoutes = () => {
 
                     </Route>
 
-                    <Route path='/waiter' element={<LayoutWaiter/>}>
+                    <Route path='/waiter' element={<LayoutWaiter />}>
 
                         {/* Outlet */}
 

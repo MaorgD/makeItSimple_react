@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
-import { Triangle } from 'react-loader-spinner'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
 
@@ -23,8 +22,8 @@ const WorkerFill = () => {
     }
 
     const doApi = async (_dataBody) => {
+        const url = API_URL + '/users/worker/:';
         try {
-            const url = API_URL + '/users/worker/:';
             const { data } = await doApiMethodFillDetales(url, "PATCH", _dataBody);
             console.log(data);
             if (data.token) {

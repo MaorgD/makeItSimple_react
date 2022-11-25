@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, useNavigate } from "react-router-dom"
+import { TOKEN_NAME, TOKEN_ROLE, TOKEN_ID, TOKEN_JOBS } from '../../services/servise'
 
 const navigation = [
     { name: 'App Page', href: 'App' },
@@ -12,6 +13,18 @@ const navigation = [
 const Nav = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const nav = useNavigate();
+    const onLogOut = () => {
+        // מחיקת טוקן
+        if (window.confirm("Are you sure you want to logout ?")) {
+            localStorage.removeItem(TOKEN_NAME)
+            localStorage.removeItem(TOKEN_ROLE)
+            localStorage.removeItem(TOKEN_JOBS)
+            localStorage.removeItem(TOKEN_ID)
+            // להעביר לעמוד לוג אין
+            nav("/");
+        }
+    }
+
     return (
         <div>
             <nav className="flex h-9 items-center justify-between" aria-label="Global">
@@ -39,14 +52,20 @@ const Nav = () => {
                     ))}
                 </div>
                 <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
-                    <Link
-                        to={'/login'}
+                    {localStorage.getItem(TOKEN_NAME) ?
 
-                        className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
-                    >
-                        Log in
-                    </Link>
+                        <button className='inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20' onClick={onLogOut}>Log out</button>
+                        :
+                        <Link
+                            to={'/login'}
+
+                            className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                        >
+                            Log in
+                        </Link>
+                    }
                 </div>
+
             </nav>
             <Dialog as="div" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
                 <Dialog.Panel focus="true" className="fixed inset-0 z-10 overflow-y-auto bg-white px-6 py-6 lg:hidden">
@@ -85,14 +104,21 @@ const Nav = () => {
                                     </Link>
                                 ))}
                             </div>
-                            <div className="py-6">
-                                <Link
-                                    to={'/'}
-                                    className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
-                                >
-                                    Log in
-                                </Link>
-                            </div>
+
+                            {localStorage.getItem(TOKEN_NAME) ?
+                                <div className="py-6">
+
+                                    <button className='-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-white hover:bg-red-600' onClick={onLogOut}>Log out</button>
+                                </div>
+                                :
+                                <div className="py-6">
+                                    <Link
+                                        to={'/'}
+                                        className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                                    >
+                                        Log in
+                                    </Link>
+                                </div>}
                         </div>
                     </div>
                 </Dialog.Panel>

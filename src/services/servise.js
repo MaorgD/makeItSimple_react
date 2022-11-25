@@ -6,7 +6,7 @@ export const TOKEN_ROLE = "my-role";
 export const TOKEN_ID = "my-ID";
 export const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 export const regPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*.<>])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
-export const regPhone = /^[0-9]+$/ ;
+export const regPhone = /^[0-9]+$/;
 
 export const doApiGet = async (_url) => {
     try {
@@ -14,6 +14,19 @@ export const doApiGet = async (_url) => {
             headers: {
                 'Content-Type': 'application/json',
                 // "x-api-key":localStorage[TOKEN_NAME]
+            }
+        })
+        return resp;
+    } catch (err) {
+        throw err;
+    }
+}
+export const doApiTukenGet = async (_url) => {
+    try {
+        let resp = await axios.get(_url, {
+            headers: {
+                // 'Content-Type': 'application/json',
+                "x-api-key": localStorage.getItem(TOKEN_NAME)
             }
         })
         return resp;
@@ -60,7 +73,7 @@ export const doApiMethodToken = async (_url, _method, _body = {}) => {
         let resp = await axios({
             method: _method,
             url: _url,
-            data: JSON.stringify(_body),
+            data: _body ? JSON.stringify(_body) : {},
             headers: {
                 // 'Content-Type': 'application/json',
                 "x-api-key": localStorage[TOKEN_NAME]
