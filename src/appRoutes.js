@@ -12,6 +12,7 @@ import LayoutChef from './layoutChef/layoutChef'
 import LayoutWaiter from './layoutWaiter/layoutWaiter'
 import WorkerFill from './components/auth/workerFill'
 import MyRestaurantsList from './components/auth/myRestaurantsList'
+import NewRestaurant from './components/auth/newRestaurant'
 
 const AppRoutes = () => {
     return (
@@ -29,10 +30,12 @@ const AppRoutes = () => {
                         <Route path='/signUp' element={<SignUp />} />
                         <Route path='/fillDetales' element={<WorkerFill />} />
                         <Route path='/myrestaurantlist' element={< MyRestaurantsList />} />
+                        <Route path='/newrestaurant' element={< NewRestaurant />} />
 
                     </Route>
 
                     <Route path='/manager' element={<LayoutManager />}>
+
 
                         {/* Outlet */}
 

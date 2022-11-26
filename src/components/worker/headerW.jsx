@@ -152,9 +152,9 @@ export default function Header(props) {
             </div>
           </div>
 
-          {/* <Disclosure.Panel className="sm:hidden">
+          <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
+              {props.navigation.map((item) => (
                 <Disclosure.Button
                   key={item.name}
                   as="a"
@@ -169,7 +169,7 @@ export default function Header(props) {
                 </Disclosure.Button>
               ))}
             </div>
-          </Disclosure.Panel> */}
+          </Disclosure.Panel>
         </>
       )}
     </Disclosure>

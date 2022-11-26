@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 const MyRestaurantsList = () => {
     const [ar, setAr] = useState([]);
 
-    // לשלוח עם יוז אפקט את דו איי פי איי שיעלה קומפוננטה של כל המסעדות לפי קומפוננטה של מסעדה בודדת
     useEffect(() => {
 
         doApi()
@@ -50,9 +49,7 @@ const MyRestaurantsList = () => {
                             })}
                         </div>
 
-                        {/* איך להעביר בלחיצה לעמוד יצירת מסעדה חדשה */}
-
-                        <Link to={"/newRestaurant"}
+                        <Link to={"/newrestaurant"}
                             className=" mt-5 group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-300 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
                             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -61,19 +58,6 @@ const MyRestaurantsList = () => {
                             Open new Restaurant
                         </Link>
                     </div>
-
-                    {/* <div className='col-md-6 d-flex'>
-                        <input ref={inpRef} placeholder='search for company...' type="search" className='form-control' />
-                        <button onClick={() => {
-                            nav("/employee/" + inpRef.current.value)
-                        }} className='btn btn-dark'>Search</button>
-                    </div> */}
-
-                    {/* <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                            
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </>
