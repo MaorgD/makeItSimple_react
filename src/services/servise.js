@@ -4,6 +4,7 @@ export const TOKEN_NAME = "my-token";
 export const TOKEN_JOBS = "my-jobs";
 export const TOKEN_ROLE = "my-role";
 export const TOKEN_ID = "my-ID";
+export const TOKEN_RES_ID = "res-ID";
 export const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 export const regPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*.<>])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 export const regPhone = /^[0-9]+$/;
@@ -84,6 +85,23 @@ export const doApiMethodToken = async (_url, _method, _body = {}) => {
         throw err;
     }
 }
+export const doApiMethodTokenNotStringify = async (_url, _method, _body = {}) => {
+    try {
+        let resp = await axios({
+            method: _method,
+            url: _url,
+            data: _body ? _body : {},
+            headers: {
+                // 'Content-Type': 'application/json',
+                "x-api-key": localStorage[TOKEN_NAME]
+            }
+        })
+        return resp;
+    } catch (err) {
+        throw err;
+    }
+}
+
 
 export const doApiMethodTokenPatch = async (_url, _method, _body = {}) => {
     try {
