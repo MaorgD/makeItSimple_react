@@ -8,18 +8,17 @@ const Restaurant = (props) => {
     return (
         <div className='col-md-4 overflow-hidden h-100'>
             {(item.name) ?
-                <div className='shadow p-2'>
+                <div onClick={() => { nav(`/manager/orders/`) }} className='shadow p-2'>
+                    {/* לשמור את האידי של המסעדה store */}
+                    {/* ליצור עמוד מסעדה  יור רסטורנט לפי הדר מנגר שמקבל פרופס מאותו מסעדה */}
                     <h2>{item.name}</h2>
-                    <button onClick={() => {
-                        nav(`/myrestaurant/${item.id}`)
-                        // לבדוק שהמעבר של הנאב בסדר ולבדוק שיש דף מיי רסטורנט שיציג מסעדה לפי הזרקת פרטים
-
-                    }}></button>
+                    {/* <button  onClick={() => {nav(`/myrestaurant/${item.id}`) }}></button> */}
                 </div>
+
                 : <h3>loading...</h3>}
+
         </div>
     )
 }
-
 export default Restaurant
 

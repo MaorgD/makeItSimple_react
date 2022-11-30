@@ -13,6 +13,7 @@ import LayoutWaiter from './layoutWaiter/layoutWaiter'
 import WorkerFill from './components/auth/workerFill'
 import MyRestaurantsList from './components/auth/myRestaurantsList'
 import NewRestaurant from './components/auth/newRestaurant'
+import Orders from './components/worker/orders/orders'
 
 const AppRoutes = () => {
     return (
@@ -35,6 +36,7 @@ const AppRoutes = () => {
                     </Route>
 
                     <Route path='/manager' element={<LayoutManager />}>
+                    <Route path='/manager/orders' element={< Orders />} />
 
 
                         {/* Outlet */}

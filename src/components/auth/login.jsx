@@ -4,14 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import { Triangle } from 'react-loader-spinner'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
-
-
+import { useDispatch } from 'react-redux';
+import { saveInfo } from '../../featchers/restaurantSlice';
 import {
     API_URL, doApiMethodSignUpLogin,
     TOKEN_NAME, TOKEN_ROLE, TOKEN_ID, regEmail, regPassword, TOKEN_JOBS
 } from '../../services/servise';
 
 const Login = () => {
+    const dispatch = useDispatch();
+
 
     const [isSubmitted, setIsSubmitted] = useState(false)
     const nav = useNavigate()
@@ -28,10 +30,18 @@ const Login = () => {
             const { data } = await doApiMethodSignUpLogin(url, "POST", _dataBody);
             console.log(data);
             if (data.token) {
-                localStorage.setItem(TOKEN_ROLE, data.userRole);
+                // localStorage.setItem(TOKEN_ROLE, data.userRole);
                 localStorage.setItem(TOKEN_NAME, data.token);
-                localStorage.setItem(TOKEN_ID, data.id);
-                localStorage.setItem(TOKEN_JOBS, data.jobs);
+                // localStorage.setItem(TOKEN_ID, data.id);
+                // localStorage.setItem(TOKEN_JOBS, data.jobs);
+
+                let user = {
+                    id: data.id,
+                    userRole: data.userRole,
+                    jobs: data.jobs,
+                }
+                dispatch(saveInfo({ userInfo: user }));
+
                 console.log(data);
                 if (data.jobs.includes("manager"))
                     nav("/myRestaurantList");

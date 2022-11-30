@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { TOKEN_NAME, TOKEN_ROLE, TOKEN_ID, TOKEN_JOBS } from '../../services/servise'
+import { useSelector } from 'react-redux';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -10,6 +11,8 @@ function classNames(...classes) {
 
 export default function Header(props) {
   const nav = useNavigate();
+
+  const userInfo = useSelector(state => state.restaurantSlice.user)
 
 
   const onLogOut = () => {
@@ -70,7 +73,7 @@ export default function Header(props) {
                         {item.name}
                       </Link>
                     ))} */}
-                    {localStorage.getItem(TOKEN_JOBS) &&
+                    {userInfo.jobs &&
                       props.navigation.map((item) => (
                         <Link
                           key={item.name}

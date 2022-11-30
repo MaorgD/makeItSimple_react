@@ -4,8 +4,11 @@ import { InformationCircleIcon } from '@heroicons/react/20/solid'
 import { API_URL, doApiMethodToken, doApiTukenGet, TOKEN_NAME } from '../../services/servise';
 import Restaurant from './restaurant';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 const MyRestaurantsList = () => {
+    const userInfo = useSelector(state => state.restaurantSlice.user)
     const [ar, setAr] = useState([]);
 
     useEffect(() => {
@@ -14,6 +17,7 @@ const MyRestaurantsList = () => {
     }, [])
 
     const doApi = async () => {
+        console.log(userInfo)
 
         const url = API_URL + '/restaurants/myrestaurants/';
         try {
