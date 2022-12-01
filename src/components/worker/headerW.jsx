@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { TOKEN_NAME, TOKEN_ROLE, TOKEN_ID, TOKEN_JOBS } from '../../services/servise'
+import { TOKEN_NAME, TOKEN_RES_ID } from '../../services/servise'
 import { useSelector } from 'react-redux';
 
 function classNames(...classes) {
@@ -19,9 +19,11 @@ export default function Header(props) {
     //  del token
     if (window.confirm("Are you sure you want to logout ?")) {
       localStorage.removeItem(TOKEN_NAME)
-      localStorage.removeItem(TOKEN_ROLE)
-      localStorage.removeItem(TOKEN_ID)
-      localStorage.removeItem(TOKEN_JOBS)
+      localStorage.removeItem(TOKEN_RES_ID)
+
+      // localStorage.removeItem(TOKEN_ROLE)
+      // localStorage.removeItem(TOKEN_ID)
+      // localStorage.removeItem(TOKEN_JOBS)
 
       // pass to log in page
       nav("/");

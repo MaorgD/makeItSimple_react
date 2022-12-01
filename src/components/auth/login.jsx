@@ -32,6 +32,7 @@ const Login = () => {
             if (data.token) {
                 // localStorage.setItem(TOKEN_ROLE, data.userRole);
                 localStorage.setItem(TOKEN_NAME, data.token);
+                localStorage.setItem(TOKEN_NAME, data.token);
                 // localStorage.setItem(TOKEN_ID, data.id);
                 // localStorage.setItem(TOKEN_JOBS, data.jobs);
 
@@ -39,6 +40,7 @@ const Login = () => {
                     id: data.id,
                     userRole: data.userRole,
                     jobs: data.jobs,
+
                 }
                 dispatch(saveInfo({ userInfo: user }));
 

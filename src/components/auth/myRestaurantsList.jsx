@@ -22,7 +22,7 @@ const MyRestaurantsList = () => {
         const url = API_URL + '/restaurants/myrestaurants/';
         try {
             let { data } = await doApiTukenGet(url);
-            console.log(data);
+            // console.log(data);
             setAr(data);
         }
         catch (err) {

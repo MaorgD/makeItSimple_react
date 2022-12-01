@@ -5,7 +5,7 @@ import AppRoutes from './appRoutes';
 import './App.css';
 
 function App() {
-
+// אחרי רענון הדף הנתונים נמחקים מהסטור
   const myStore = configureStore({
     reducer: {
       restaurantSlice
@@ -13,6 +13,7 @@ function App() {
   })
   return (
     <Provider store={myStore}>
+      
       <AppRoutes/>
     </Provider>
   );

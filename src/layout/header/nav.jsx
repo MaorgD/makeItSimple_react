@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, useNavigate } from "react-router-dom"
-import { TOKEN_NAME, TOKEN_ROLE, TOKEN_ID, TOKEN_JOBS } from '../../services/servise'
+import { TOKEN_NAME, TOKEN_RES_ID } from '../../services/servise'
 import { useSelector } from 'react-redux';
 
 import { useDispatch } from 'react-redux';
@@ -16,18 +16,19 @@ const navigation = [
 const Nav = () => {
     const dispatch = useDispatch();
 
-    const userInfo = useSelector(state => state.restaurantSlice.user)
+    // const userInfo = useSelector(state => state.restaurantSlice.user)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const nav = useNavigate();
     const onLogOut = () => {
         // מחיקת טוקן
         if (window.confirm("Are you sure you want to logout ?")) {
             localStorage.removeItem(TOKEN_NAME)
-            // localStorage.removeItem(TOKEN_ROLE)
+
+            localStorage.removeItem(TOKEN_RES_ID)
             // localStorage.removeItem(TOKEN_JOBS)
             // localStorage.removeItem(TOKEN_ID)
             dispatch(removeInfo());
-            console.log(userInfo)
+            // console.log(userInfo)
 
 
             // להעביר לעמוד לוג אין

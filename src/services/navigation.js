@@ -54,7 +54,6 @@ export const navigationManager= [
     { name: 'resturant order', to: '/worker/resturantOrder', current: false },
     { name: 'app order', to: '/worker/appOrder', current: false },
     { name: 'Shift  Page', to: '/shift Page', current: false },
-    { name: 'my Info', to: '/myInfo', current: false },
     { name: 'Menu', to: '/menu', current: false },
   
   ];

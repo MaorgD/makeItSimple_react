@@ -7,7 +7,8 @@ const initState = {
         userRole: "",
         jobs: [],
 
-    }
+    },
+    restaurantId: "",
 }
 
 const restaurantSlice = createSlice({
@@ -20,11 +21,17 @@ const restaurantSlice = createSlice({
         removeInfo: (state, action) => {
             state.user = {};
         },
+        saveResrtaurant: (state, action) => {
+            state.restaurantId = (action.payload.restaurantId)
+        },
+        removeResrtaurant: (state, action) => {
+            state.restaurantId = '';
+        },
 
     }
 })
 
-export const { removeInfo, saveInfo } = restaurantSlice.actions
+export const { removeInfo, saveInfo,saveResrtaurant,removeResrtaurant } = restaurantSlice.actions
 
 
 

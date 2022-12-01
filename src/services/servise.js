@@ -85,6 +85,23 @@ export const doApiMethodToken = async (_url, _method, _body = {}) => {
         throw err;
     }
 }
+
+export const doApiMethodRefresh = async (_url) => {
+    try {
+        let resp = await axios({
+            method: "GET",
+            url: _url,
+            headers: {
+                // 'Content-Type': 'application/json',
+                "x-api-key": localStorage[TOKEN_NAME]
+            }
+        })
+        return resp;
+    } catch (err) {
+        throw err;
+    }
+}
+
 export const doApiMethodTokenNotStringify = async (_url, _method, _body = {}) => {
     try {
         let resp = await axios({
