@@ -8,6 +8,8 @@ import jwt_decode from "jwt-decode";
 import { saveInfo } from './featchers/restaurantSlice';
 import Loader from './components/loader/loader'
 
+const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
+const ResetPassword = React.lazy(() => import('./components/auth/resetPassword'));
 const Home = React.lazy(() => import('./components/auth/home'));
 const Login = React.lazy(() => import('./components/auth/login'));
 const SignUp = React.lazy(() => import('./components/auth/signUp'));
@@ -20,17 +22,6 @@ const LayoutWaiter = React.lazy(() => import('./layoutWaiter/layoutWaiter'));
 const WorkerFill = React.lazy(() => import('./components/auth/workerFill'));
 const MyRestaurantsList = React.lazy(() => import('./components/auth/myRestaurantsList'));
 const NewRestaurant = React.lazy(() => import('./components/auth/newRestaurant'));
-
-// import SignUp from './components/auth/signUp'
-// import NotFound from './components/notFound'
-// import Verification from './components/auth/verification'
-// import LayoutManager from './layoutManager/layoutManager'
-// import SuperLayout from './superLayout/superLayout'
-// import LayoutChef from './layoutChef/layoutChef'
-// import LayoutWaiter from './layoutWaiter/layoutWaiter'
-// import WorkerFill from './components/auth/workerFill'
-// import MyRestaurantsList from './components/auth/myRestaurantsList'
-// import NewRestaurant from './components/auth/newRestaurant'
 
 const AppRoutes = () => {
     const dispatch = useDispatch();
@@ -49,9 +40,7 @@ const AppRoutes = () => {
     }, [])
 
     const getUserInfo = async () => {
-        // console.log(token)
         let url = API_URL + "/users/myInfo/"
-        // console.log(token)
         const { data } = await doApiMethodRefresh(url)
         console.log(data)
 
@@ -87,9 +76,11 @@ const AppRoutes = () => {
                         {/*  Layout */}
                         <Route path='/' element={<Layout />}>
                             {/* Outlet */}
+                            <Route path='/requestResetPass' element={<RequestResetPass />} />
+                            <Route path='/resetPassword/:userId/:uniqueString' element={<ResetPassword />} />
                             <Route path='/login' element={<Login />} />
                             <Route path='/signUp' element={<SignUp />} />
-                            <Route path='/fillDetales' element={<WorkerFill />} />
+                            <Route path='/fillDetales/:userId' element={<WorkerFill />} />
                             <Route path='/myrestaurantlist' element={< MyRestaurantsList />} />
                             <Route path='/newrestaurant' element={< NewRestaurant />} />
 

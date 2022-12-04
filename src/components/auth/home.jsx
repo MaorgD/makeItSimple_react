@@ -1,8 +1,6 @@
-
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../../layout/header/nav'
-import{TUKEN_NAME,TUKEN_JOBS} from '../../services/servise'
 const Home = () => {
 
     return (

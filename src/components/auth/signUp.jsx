@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner'
 import { useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
-
 import {
     API_URL, doApiMethodSignUpLogin,
     regEmail, regPassword, regPhone
@@ -20,7 +19,7 @@ const SignUp = () => {
     let { register, handleSubmit, getValues, formState: { errors } } = useForm();
 
     const onSub = (_dataBody) => {
-        delete _dataBody.password2
+        delete _dataBody.confirmPassword
         setIsSubmitted(true);
         doApi(_dataBody)
     }
@@ -61,38 +60,37 @@ const SignUp = () => {
                                 <label htmlFor="firstName" className="sr-only">
                                     First Name
                                 </label>
-                                <input {...register('fullName[firstName]', { required: true, minLength: 2, maxLength: 35, })}
+                                <input {...register('fullName[firstName]', { required: { value: true, message: 'first name is requried' }, minLength: { value: 2, message: "first name must be at least 2 characters" } })}
                                     id="FirstName"
                                     name="fullName[firstName]"
                                     type="text"
-                                    required
                                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     placeholder="First name" />
                             </div>
-                            {errors.fullName && errors.fullName.firstName && <div className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid first name! Between 2-20 chars.</div>}
+                            {errors.fullName && errors.fullName.firstName.type == 'minLength' && <div className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>{errors?.fullName.firstName?.message}</div>}
+                            {errors.fullName && errors.fullName.firstName.type == 'required' && <div className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>{errors?.fullName.firstName?.message}</div>}
                             <div>
                                 <label htmlFor="lastName" className="sr-only">
                                     Last Name
                                 </label>
-                                <input {...register('fullName[lastName]', { required: true, minLength: 2, maxLength: 35, })}
+                                <input {...register('fullName[lastName]', { required: { value: true, message: 'last name is requried' }, minLength: { value: 2, message: "last name must be at least 2 characters" } })}
                                     id=" LastName"
                                     name="fullName[lastName]"
                                     type="text"
-                                    required
                                     className="relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     placeholder="Last name" />
                             </div>
-                            {errors.fullName && errors.fullName.lastName && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid last name! Between 2-20 chars.</p>}
+                            {errors.fullName && errors.fullName.lastName.type == 'minLength' && <div className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>{errors?.fullName.lastName?.message}</div>}
+                            {errors.fullName && errors.fullName.lastName.type == 'required' && <div className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>{errors?.fullName.lastName?.message}</div>}
                             <div>
                                 <label htmlFor="email-address" className="sr-only">
                                     Email address
                                 </label>
-                                <input {...register('email', { required: true, minLength: 2, maxLength: 35, pattern: regEmail })}
+                                <input {...register('email', { required: true, pattern: regEmail })}
                                     id="email-address"
                                     name="email"
-                                    type="email"
+                                    type="text"
                                     autoComplete="email"
-                                    required
                                     className="relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     placeholder="Email address" />
                             </div>
@@ -106,7 +104,7 @@ const SignUp = () => {
                                     name="phone"
                                     type="text"
                                     autoComplete="phone"
-                                    required
+
                                     className="relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     placeholder="Phone number" />
                             </div>
@@ -119,7 +117,7 @@ const SignUp = () => {
                                     id=" pin"
                                     name="worker[pin]"
                                     type="text"
-                                    required
+
                                     className="relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     placeholder="pin code" />
                             </div>
@@ -128,33 +126,34 @@ const SignUp = () => {
                                 <label htmlFor="password" className="sr-only">
                                     Password
                                 </label>
-                                <input {...register('password', { required: true, minLength: 2, maxLength: 25, pattern: regPassword })}
+                                <input {...register('password', { required: { value: true, pattern: regPassword, message: 'password is requried' }, minLength: { value: 6, message: "password! Between 6-16 chars Must contain 1 letter and 1 sign." } })}
                                     id="password"
                                     name="password"
                                     type="password"
                                     autoComplete="current-password"
-                                    required
+
                                     className="relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     placeholder="Password" />
                             </div>
-                            {errors.password && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid password! Between 6-16 chars Must contain 1 letter and 1 sign. </p>}
+                            {errors.password && errors.password.type == 'required' && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>{errors?.password?.message}</p>}
+                            {errors.password && errors.password.type == 'minLength' && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>{errors?.password?.message}</p>}
                             <div>
                                 <label htmlFor="password" className="sr-only">
                                     confirm Password
                                 </label>
-                                <input {...register('password2', { required: true, validate: (value) => { return value == getValues('password') } })}
+                                <input {...register('confirmPassword', { required: true, validate: (value) => { return value == getValues('password') } })}
                                     id="confirmPassword"
-                                    name="password2"
+                                    name="confirmPassword"
                                     type="password"
                                     autoComplete="current-confirmPassword"
-                                    required
-                                    className={classNames(errors.password2 ? "relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+
+                                    className={classNames(errors.confirmPassword ? "relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                         :
                                         "relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")} placeholder="Confirm password"
                                 />
 
                             </div>
-                            {errors.password2 && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1  rounded-b-md'>passwords not match!</p>}
+                            {errors.confirmPassword && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1  rounded-b-md'>passwords not match!</p>}
 
                         </div>
 
@@ -171,11 +170,6 @@ const SignUp = () => {
                                 </label>
                             </div>
 
-                            <div className="text-sm">
-                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                    Forgot your password?
-                                </a>
-                            </div>
                         </div>
 
                         <div>

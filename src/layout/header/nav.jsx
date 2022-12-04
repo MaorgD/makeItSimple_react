@@ -3,8 +3,6 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, useNavigate } from "react-router-dom"
 import { TOKEN_NAME, TOKEN_RES_ID } from '../../services/servise'
-import { useSelector } from 'react-redux';
-
 import { useDispatch } from 'react-redux';
 import { removeInfo } from '../../featchers/restaurantSlice';
 const navigation = [
@@ -16,22 +14,13 @@ const navigation = [
 const Nav = () => {
     const dispatch = useDispatch();
 
-    // const userInfo = useSelector(state => state.restaurantSlice.user)
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const nav = useNavigate();
     const onLogOut = () => {
-        // מחיקת טוקן
         if (window.confirm("Are you sure you want to logout ?")) {
             localStorage.removeItem(TOKEN_NAME)
-
             localStorage.removeItem(TOKEN_RES_ID)
-            // localStorage.removeItem(TOKEN_JOBS)
-            // localStorage.removeItem(TOKEN_ID)
             dispatch(removeInfo());
-            // console.log(userInfo)
-
-
-            // להעביר לעמוד לוג אין
             nav("/");
         }
     }
@@ -65,7 +54,7 @@ const Nav = () => {
                 <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
                     {localStorage.getItem(TOKEN_NAME) ?
 
-                        <button className='inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20' onClick={onLogOut}>Log out</button>
+                        <button className='inline-block rounded-lg px-3 py-1.5 text-sm font-semibold bg-black text-white  hover:bg-red-900' onClick={onLogOut}>Log out</button>
                         :
                         <Link
                             to={'/login'}
@@ -119,13 +108,13 @@ const Nav = () => {
                             {localStorage.getItem(TOKEN_NAME) ?
                                 <div className="py-6">
 
-                                    <button className='-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-white hover:bg-red-600' onClick={onLogOut}>Log out</button>
+                                    <button className=' block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 bg-black text-white hover:bg-red-600' onClick={onLogOut}>Log out</button>
                                 </div>
                                 :
                                 <div className="py-6">
                                     <Link
-                                        to={'/'}
-                                        className="-mx-3 block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 text-gray-900 hover:bg-gray-400/10"
+                                        to={'/login'}
+                                        className=" block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 bg-black text-white hover:bg-gray-600"
                                     >
                                         Log in
                                     </Link>

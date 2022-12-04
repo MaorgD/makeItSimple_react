@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { InformationCircleIcon } from '@heroicons/react/20/solid'
 
-import { API_URL, doApiMethodToken, doApiTukenGet, TOKEN_NAME } from '../../services/servise';
+import { API_URL, doApiTukenGet } from '../../services/servise';
 import Restaurant from './restaurant';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -47,7 +47,7 @@ const MyRestaurantsList = () => {
                         <div className="row g-3">
                             {ar.map(item => {
                                 return (
-                                    // מה הkey?
+                                    
                                     <Restaurant key={item._id} item={item} />
                                 )
                             })}

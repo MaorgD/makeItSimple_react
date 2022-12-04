@@ -3,18 +3,14 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
-import {
-    API_URL, regEmail, doApiMethodTokenNotStringify, regPhone
-} from '../../services/servise';
+import {API_URL, regEmail, doApiMethodTokenNotStringify, regPhone} from '../../services/servise';
 
 const NewRestaurant = () => {
-    // לראות איך ליצור את הטופס ולשלוח אותו לאחר יצירת מסעדה למסעדה שנפתחה
-    // דף יצירת מסעדה בקשת פוסט ליצירת מסעדה להסתכל בגיט
     const [isSubmitted, setIsSubmitted] = useState(false)
     const nav = useNavigate()
-    let { register, handleSubmit, getValues, formState: { errors } } = useForm();
+    let { register, handleSubmit, formState: { errors } } = useForm();
     const onSub = (_dataBody) => {
-        console.log(_dataBody);
+        // console.log(_dataBody);
         setIsSubmitted(true);
         doApi(_dataBody)
     }
@@ -25,17 +21,12 @@ const NewRestaurant = () => {
             const { data } = await doApiMethodTokenNotStringify(url, "POST", _dataBody);
             console.log(data);
             if (data) {
-                
                 nav(`/manager`)
-
             }
-
-
         }
         catch (err) {
-
             setIsSubmitted(false);
-            console.log(err);
+            // console.log(err);
         }
     }
     return (

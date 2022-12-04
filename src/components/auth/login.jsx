@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Triangle } from 'react-loader-spinner'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
@@ -10,7 +10,9 @@ import {
     API_URL, doApiMethodSignUpLogin,
     TOKEN_NAME, TOKEN_ROLE, TOKEN_ID, regEmail, regPassword, TOKEN_JOBS
 } from '../../services/servise';
-
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
 const Login = () => {
     const dispatch = useDispatch();
 
@@ -91,31 +93,35 @@ const Login = () => {
                                 <label htmlFor="email-address" className="sr-only">
                                     Email address
                                 </label>
-                                <input {...register('email', { required: true, minLength: 2, maxLength: 35, pattern: regEmail })}
+                                <input {...register('email', { required: true, pattern: regEmail })}
                                     id="email-address"
                                     name="email"
-                                    type="email"
+                                    type="text"
                                     autoComplete="email"
-                                    required
                                     className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     placeholder="Email address"
 
                                 />
                             </div>
+                            {errors.email && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid email</p>}
+
                             <div>
                                 <label htmlFor="password" className="sr-only">
                                     Password
                                 </label>
-                                <input {...register('password', { required: true, minLength: 2, maxLength: 25, pattern: regPassword })}
+                                <input {...register('password', { required: { value: true, pattern: regPassword, message: 'password is requried' }, minLength: { value: 6, message: "password! Between 6-16 chars Must contain 1 letter and 1 sign." } })}
                                     id="password"
                                     name="password"
                                     type="password"
                                     autoComplete="current-password"
-                                    required
-                                    className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    className={classNames(errors.password ? "relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                        :
+                                        "relative block w-full appearance-none  rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
                                     placeholder="Password"
                                 />
                             </div>
+                            {errors.password && errors.password.type == 'required' && <p className='text-white font-bold bg-red-800 text-center  rounded-b-md border-gray-300  py-1'>{errors?.password?.message}</p>}
+                            {errors.password && errors.password.type == 'minLength' && <p className='text-white font-bold bg-red-800 text-center  rounded-b-md  border-gray-300  py-1'>{errors?.password?.message}</p>}
                         </div>
 
                         <div className="flex items-center justify-between">
@@ -132,9 +138,11 @@ const Login = () => {
                             </div>
 
                             <div className="text-sm">
-                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                    Forgot your password?
-                                </a>
+                                <div className="text-sm">
+                                    <Link to={'/requestResetPass'} className="font-medium text-indigo-600 hover:text-indigo-500">
+                                        Forgot your password?
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
