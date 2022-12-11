@@ -1,8 +1,8 @@
 import React from 'react'
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { saveResrtaurant } from '../../featchers/restaurantSlice';
-import { TOKEN_RES_ID } from '../../services/servise'
+import { getRestaurantInfo, saveResrtaurant } from '../../redux/featchers/restaurantSlice';
+import { RESTAURNAT_ID } from '../../services/servise'
 
 const Restaurant = (props) => {
     const nav = useNavigate();
@@ -10,8 +10,9 @@ const Restaurant = (props) => {
 
     let item = props.item;
     const onClickResta = () => {
-        dispatch(saveResrtaurant({ restaurantId: item._id }));
-        localStorage.setItem(TOKEN_RES_ID, item._id)
+        // dispatch(saveResrtaurant({ restaurantId: item._id }));
+        localStorage.setItem(RESTAURNAT_ID, item._id)
+        dispatch(getRestaurantInfo())
         nav(`/manager/orders/`)
     }
     return (

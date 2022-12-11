@@ -1,5 +1,5 @@
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { get, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner'
 import { useState } from 'react';
@@ -15,6 +15,7 @@ function classNames(...classes) {
 const SignUp = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+
     const nav = useNavigate();
     let { register, handleSubmit, getValues, formState: { errors } } = useForm();
 
@@ -22,6 +23,7 @@ const SignUp = () => {
         delete _dataBody.confirmPassword
         setIsSubmitted(true);
         doApi(_dataBody)
+
     }
 
     const doApi = async (_dataBody) => {
@@ -30,7 +32,7 @@ const SignUp = () => {
             const { data } = await doApiMethodSignUpLogin(url, "POST", _dataBody);
             console.log(data);
             if (data.email) {
-                nav(`/verification/${data.fullName.firstName}`)
+                nav(`/messages/?name=${data.fullName.firstName}`)
             }
         } catch (err) {
             console.log(err.response);
@@ -43,11 +45,11 @@ const SignUp = () => {
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8">
                     <div>
-                        <img
+                        {/* <img
                             className="mx-auto h-12 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                            src=""
                             alt="Your Company"
-                        />
+                        /> */}
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                             Sign up
                         </h2>
@@ -95,20 +97,24 @@ const SignUp = () => {
                                     placeholder="Email address" />
                             </div>
                             {errors.email && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid email</p>}
-                            <div>
-                                <label htmlFor="phone-number" className="sr-only">
-                                    Phone number
-                                </label>
-                                <input {...register('phone', { required: true, pattern: regPhone })}
-                                    id="phone"
-                                    name="phone"
-                                    type="text"
-                                    autoComplete="phone"
 
+                            <div className="col-span-6 sm:col-span-3">
+                                <label className="sr-only">
+                                    phone
+                                </label>
+                                <input
+                                    {...register('phone', { required: { value: true, message: 'phone is requried' }, pattern: regPhone, minLength: { value: 10, message: "phone must be at least 10 characters" }, maxLength: { value: 15, message: "phone cant be no more 15 characters" } })}
+                                    type="text"
+                                    name="phone"
+                                    id="phone"
+                                    autoComplete="phone"
                                     className="relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                     placeholder="Phone number" />
                             </div>
-                            {errors.phone && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid phone.</p>}
+                            {errors.phone && errors.phone.type === 'minLength' && <div className='text-white font-bold text-sm bg-red-800 text-center border-gray-300  py-1'>{errors?.phone?.message}</div>}
+                            {errors.phone && errors.phone.type === 'required' && <div className='text-white font-bold bg-red-800 text-center border-gray-300  py-1'>{errors?.phone?.message}</div>}
+                            {errors.phone && errors.phone.type === 'maxLength' && <div className='text-white font-bold bg-red-800 text-center border-gray-300  py-1'>{errors?.phone?.message}</div>}
+
                             <div>
                                 <label htmlFor="pin" className="sr-only">
                                     Pin code
@@ -157,20 +163,7 @@ const SignUp = () => {
 
                         </div>
 
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                    Remember me
-                                </label>
-                            </div>
 
-                        </div>
 
                         <div>
 

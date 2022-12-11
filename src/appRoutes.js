@@ -2,11 +2,13 @@ import React, { useEffect, Suspense } from 'react'
 import Layout from './layout/layout'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Orders from './components/worker/orders/orders'
-import { useDispatch, useSelector } from 'react-redux'
-import { API_URL, TOKEN_NAME, doApiMethodRefresh } from './services/servise'
-import jwt_decode from "jwt-decode";
-import { saveInfo } from './featchers/restaurantSlice';
+import { useDispatch } from 'react-redux'
+import { TOKEN_NAME, RESTAURNAT_ID } from './services/servise'
 import Loader from './components/loader/loader'
+import { getUserInfo } from './redux/featchers/userSlice'
+import Logout from './components/auth/logout'
+import Menu from './components/menu/menu'
+import { getRestaurantInfo } from './redux/featchers/restaurantSlice'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
 const ResetPassword = React.lazy(() => import('./components/auth/resetPassword'));
@@ -22,45 +24,30 @@ const LayoutWaiter = React.lazy(() => import('./layoutWaiter/layoutWaiter'));
 const WorkerFill = React.lazy(() => import('./components/auth/workerFill'));
 const MyRestaurantsList = React.lazy(() => import('./components/auth/myRestaurantsList'));
 const NewRestaurant = React.lazy(() => import('./components/auth/newRestaurant'));
+const Messages = React.lazy(() => import('./components/messages'));
+
 
 const AppRoutes = () => {
+
     const dispatch = useDispatch();
-    // let { user } = useSelector((state) => state.restaurantSlice);
 
     useEffect(() => {
-        let token;
         if (localStorage.getItem(TOKEN_NAME)) {
-            token = localStorage.getItem(TOKEN_NAME);
-
-            const decoded = jwt_decode(token)
-            if (decoded.exp < Date.now()) {
-                getUserInfo();
-            }
+            dispatch(getUserInfo())
+        }
+        if (localStorage.getItem(RESTAURNAT_ID)) {
+            dispatch(getRestaurantInfo())
         }
     }, [])
 
-    const getUserInfo = async () => {
-        let url = API_URL + "/users/myInfo/"
-        const { data } = await doApiMethodRefresh(url)
-        console.log(data)
 
-        if (!data._id) {
-            alert("ffffffffffff")
-            return
-        }
-        let user = {
-            id: data._id,
-            userRole: data.role,
-            jobs: data.worker.jobs
 
-        }
-        console.log(user)
-        dispatch(saveInfo({ userInfo: user }));
-    }
+
+
     return (
         <Suspense fallback={
             <div className='w-full flex justify-center h-screen items-center'>
-                
+
                 <Loader />
             </div>
         }
@@ -69,7 +56,8 @@ const AppRoutes = () => {
             <Router>
                 <Routes>
                     <Route index element={<Home />} />
-                    <Route path='/verification/:name' element={<Verification />} />
+                    <Route path='/messages/' element={<Messages />} />
+                    <Route path='/logout/' element={<Logout />} />
 
                     <Route path='/' element={<SuperLayout />} >
 
@@ -88,6 +76,8 @@ const AppRoutes = () => {
 
                         <Route path='/manager' element={<LayoutManager />}>
                             <Route path='/manager/orders' element={< Orders />} />
+                            <Route path='/manager/menu' element={< Menu />} />
+
 
 
                             {/* Outlet */}

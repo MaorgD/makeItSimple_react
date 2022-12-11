@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, useNavigate } from "react-router-dom"
-import { TOKEN_NAME, TOKEN_RES_ID } from '../../services/servise'
+import { TOKEN_NAME, RESTAURNAT_ID } from '../../services/servise'
 import { useDispatch } from 'react-redux';
-import { removeInfo } from '../../featchers/restaurantSlice';
+import { removeInfo } from '../../redux/featchers/restaurantSlice';
 const navigation = [
     { name: 'App Page', href: 'App' },
     { name: 'Features', href: '#' },
@@ -16,14 +16,14 @@ const Nav = () => {
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const nav = useNavigate();
-    const onLogOut = () => {
-        if (window.confirm("Are you sure you want to logout ?")) {
-            localStorage.removeItem(TOKEN_NAME)
-            localStorage.removeItem(TOKEN_RES_ID)
-            dispatch(removeInfo());
-            nav("/");
-        }
-    }
+    // const onLogOut = () => {
+    //     if (window.confirm("Are you sure you want to logout ?")) {
+    //         localStorage.removeItem(TOKEN_NAME)
+    //         localStorage.removeItem(RESTAURNAT_ID)
+    //         dispatch(removeInfo());
+    //         nav("/");
+    //     }
+    // }
 
     return (
         <div>
@@ -54,7 +54,7 @@ const Nav = () => {
                 <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
                     {localStorage.getItem(TOKEN_NAME) ?
 
-                        <button className='inline-block rounded-lg px-3 py-1.5 text-sm font-semibold bg-black text-white  hover:bg-red-900' onClick={onLogOut}>Log out</button>
+                        <Link to={"/Logout"} className='inline-block rounded-lg px-3 py-1.5 text-sm font-semibold bg-black text-white  hover:bg-red-900'>Log out</Link>
                         :
                         <Link
                             to={'/login'}
@@ -108,7 +108,8 @@ const Nav = () => {
                             {localStorage.getItem(TOKEN_NAME) ?
                                 <div className="py-6">
 
-                                    <button className=' block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 bg-black text-white hover:bg-red-600' onClick={onLogOut}>Log out</button>
+                                    <Link to={"/Logout"} className=' block rounded-lg py-2.5 px-3 text-base font-semibold leading-6 bg-black text-white hover:bg-red-600'
+                                    >Log out</Link>
                                 </div>
                                 :
                                 <div className="py-6">

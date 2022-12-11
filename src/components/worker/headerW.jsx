@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { TOKEN_NAME, TOKEN_RES_ID } from '../../services/servise'
+import { TOKEN_NAME, RESTAURNAT_ID } from '../../services/servise'
 import { useSelector } from 'react-redux';
 
 function classNames(...classes) {
@@ -12,23 +12,24 @@ function classNames(...classes) {
 export default function Header(props) {
   const nav = useNavigate();
 
-  const userInfo = useSelector(state => state.restaurantSlice.user)
+  const { user } = useSelector(state => state.userSlice)
+  // console.log(user.data.worker);
 
 
-  const onLogOut = () => {
-    //  del token
-    if (window.confirm("Are you sure you want to logout ?")) {
-      localStorage.removeItem(TOKEN_NAME)
-      localStorage.removeItem(TOKEN_RES_ID)
+  // const onLogOut = () => {
+  //    del token
+  //   if (window.confirm("Are you sure you want to logout ?")) {
+  //     localStorage.removeItem(TOKEN_NAME)
+  //     localStorage.removeItem(RESTAURNAT_ID)
 
-      // localStorage.removeItem(TOKEN_ROLE)
-      // localStorage.removeItem(TOKEN_ID)
-      // localStorage.removeItem(TOKEN_JOBS)
+  //     localStorage.removeItem(TOKEN_ROLE)
+  //     localStorage.removeItem(TOKEN_ID)
+  //     localStorage.removeItem(TOKEN_JOBS)
 
-      // pass to log in page
-      nav("/");
-    }
-  }
+  //     pass to log in page
+  //     nav("/");
+  //   }
+  // }
 
   return (
     <Disclosure as="nav" className="bg-gray-600">
@@ -74,8 +75,9 @@ export default function Header(props) {
                       >
                         {item.name}
                       </Link>
-                    ))} */}
-                    {userInfo.jobs &&
+                    ))} 
+                    */}
+                    {user?.data?.worker?.jobs &&
                       props.navigation.map((item) => (
                         <Link
                           key={item.name}
@@ -102,6 +104,7 @@ export default function Header(props) {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
+                {/* לסדר את הלינקים למקומות נכונים במקום # */}
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
@@ -146,7 +149,7 @@ export default function Header(props) {
                       </Menu.Item>
                       <Menu.Item>
                         {({ active }) => (
-                          <button className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')} onClick={onLogOut}>Log out</button>
+                          <Link to={"/Logout"} className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')} >Log out</Link>
                         )}
                       </Menu.Item>
                     </Menu.Items>

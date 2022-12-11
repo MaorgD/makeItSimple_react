@@ -5,11 +5,10 @@ import { Triangle } from 'react-loader-spinner'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
 import { useDispatch } from 'react-redux';
-import { saveInfo } from '../../featchers/restaurantSlice';
-import {
-    API_URL, doApiMethodSignUpLogin,
-    TOKEN_NAME, TOKEN_ROLE, TOKEN_ID, regEmail, regPassword, TOKEN_JOBS
-} from '../../services/servise';
+import { saveInfo } from '../../redux/featchers/restaurantSlice';
+import { API_URL, doApiMethodSignUpLogin, TOKEN_NAME, regEmail, regPassword } from '../../services/servise';
+import { getUserInfo } from '../../redux/featchers/userSlice';
+
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
@@ -32,32 +31,34 @@ const Login = () => {
             const { data } = await doApiMethodSignUpLogin(url, "POST", _dataBody);
             console.log(data);
             if (data.token) {
+
                 // localStorage.setItem(TOKEN_ROLE, data.userRole);
                 localStorage.setItem(TOKEN_NAME, data.token);
-                localStorage.setItem(TOKEN_NAME, data.token);
+                // localStorage.setItem(TOKEN_NAME, data.token);
                 // localStorage.setItem(TOKEN_ID, data.id);
                 // localStorage.setItem(TOKEN_JOBS, data.jobs);
-
-                let user = {
-                    id: data.id,
-                    userRole: data.userRole,
-                    jobs: data.jobs,
-
-                }
-                dispatch(saveInfo({ userInfo: user }));
-
-                console.log(data);
-                if (data.jobs.includes("manager"))
+                // let user = {
+                    //     id: data.id,
+                    //     userRole: data.userRole,
+                    //     jobs: data.jobs,
+                    
+                    // }
+                    // dispatch(saveInfo({ userInfo: user }));
+                    
+                    console.log(data);
+                    if (data.jobs.includes("manager"))
                     nav("/myRestaurantList");
-                else if (data.jobs.includes("chef"))
+                    else if (data.jobs.includes("chef"))
                     nav("/chef");
-
-                else if (data.jobs.includes("waiter"))
+                    
+                    else if (data.jobs.includes("waiter"))
                     nav("/waiter");
-
-                if (!data.jobs)
+                    
+                    if (!data.jobs)
                     nav("/");
-            }
+                }
+                // if (localStorage.getItem[TOKEN_NAME])
+                    dispatch(getUserInfo())
 
         }
         catch (err) {
@@ -71,20 +72,20 @@ const Login = () => {
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8">
                     <div>
-                        <img
+                        {/* <img
                             className="mx-auto h-12 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                            src=""
                             alt="Your Company"
-                        />
+                        /> */}
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                            Sign in to your account
+                            Log in your account over here
                         </h2>
-                        <p className="mt-2 text-center text-sm text-gray-600">
+                        {/* <p className="mt-2 text-center text-sm text-gray-600">
                             Or{' '}
                             <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                                 start your 14-day free trial
                             </a>
-                        </p>
+                        </p> */}
                     </div>
                     <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">
                         <input type="hidden" name="remember" defaultValue="true" />
@@ -109,7 +110,7 @@ const Login = () => {
                                 <label htmlFor="password" className="sr-only">
                                     Password
                                 </label>
-                                <input {...register('password', { required: { value: true, pattern: regPassword, message: 'password is requried' }, minLength: { value: 6, message: "password! Between 6-16 chars Must contain 1 letter and 1 sign." } })}
+                                <input {...register('password', { required: { value: true, pattern: regPassword, message: 'password is requried' }, minLength: { value: 6, message: "password! Between 6-16 chars Must contain 1 letter and 1 sign." }, maxLength: { value: 16, message: "password! Between 6-16 chars - 16 max !" } })}
                                     id="password"
                                     name="password"
                                     type="password"
@@ -122,6 +123,7 @@ const Login = () => {
                             </div>
                             {errors.password && errors.password.type == 'required' && <p className='text-white font-bold bg-red-800 text-center  rounded-b-md border-gray-300  py-1'>{errors?.password?.message}</p>}
                             {errors.password && errors.password.type == 'minLength' && <p className='text-white font-bold bg-red-800 text-center  rounded-b-md  border-gray-300  py-1'>{errors?.password?.message}</p>}
+                            {errors.password && errors.password.type == 'maxLength' && <p className='text-white font-bold bg-red-800 text-center  rounded-b-md  border-gray-300  py-1'>{errors?.password?.message}</p>}
                         </div>
 
                         <div className="flex items-center justify-between">

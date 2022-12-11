@@ -1,18 +1,60 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
-import {API_URL, regEmail, doApiMethodTokenNotStringify, regPhone} from '../../services/servise';
+import { API_URL, regEmail, doApiMethodTokenNotStringify, regPhone } from '../../services/servise';
+import { getCountries, getCities } from '../../helpers/fillCountry'
 
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
 const NewRestaurant = () => {
     const [isSubmitted, setIsSubmitted] = useState(false)
+    const [selectedCountry, setSelectedCountry] = useState("Israel");
+    const [selectedCity, setSelectedCity] = useState("Tel Aviv");
+    const [countries, setCountries] = useState([]);
+    const [cities, setCities] = useState([]);
+    const countryRef = useRef();
+    const cityRef = useRef();
+
+    useEffect(() => {
+        getAllCountries()
+        // console.log("Country")
+
+    }, [cities])
+
+    useEffect(() => {
+        // console.log(selectedCountry)
+        getAllCities(selectedCountry)
+
+    }, [selectedCountry])
+
+    const getAllCountries = async () => {
+        let countries = await getCountries();
+        let countriesName = await countries?.map((country) => country.country);
+        // console.log(countriesName)
+        setCountries(countriesName);
+    }
+
+    const getAllCities = async (_country) => {
+        let Cities = await getCities(_country);
+        // console.log(Cities)
+        setCities(Cities);
+    }
     const nav = useNavigate()
     let { register, handleSubmit, formState: { errors } } = useForm();
     const onSub = (_dataBody) => {
         // console.log(_dataBody);
         setIsSubmitted(true);
         doApi(_dataBody)
+    }
+
+    
+// להוריד??????? את השורה הזו
+    const onChangeSet = (_country) => {
+        // console.log(_country);
+        setSelectedCountry(_country)
     }
 
     const doApi = async (_dataBody) => {
@@ -29,27 +71,16 @@ const NewRestaurant = () => {
             // console.log(err);
         }
     }
+
+    // console.log(errors)
     return (
         <>
-            <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-                <div className="w-full max-w-md space-y-8">
-                    <div>
-                        <img
-                            className="mx-auto h-12 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                            alt="Your Company"
-                        />
-                        <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                            Srart your restaurant here !
-                        </h2>
-                        <p className="mt-2 text-center text-sm text-gray-600">
-                            Or{' '}
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                start your 14-day free trial
-                            </a>
-                        </p>
-                    </div>
-                    <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">
+            <div className="flex min-h-full items-center justify-center py-7 px-4 sm:px-6 lg:px-8">
+                <div className="w-full max-w-md space-y-6">
+                    <h2 className="mt-2 text-center text-3xl font-bold tracking-tight text-gray-900">
+                        Srart your restaurant here !
+                    </h2>
+                    <form onSubmit={handleSubmit(onSub)} className="mt-3 space-y-5" action="#" method="POST">
 
                         <div className="bg-white px-4 py-5 sm:p-6">
                             <div className="grid grid-cols-6 gap-6">
@@ -57,89 +88,149 @@ const NewRestaurant = () => {
                                     <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
                                         restaurant name
                                     </label>
-                                    <input {...register('name', { required: true, min: 2 })}
-
+                                    <input {...register('name', { required: { value: true, message: 'name is requried' }, minLength: { value: 2, message: "name must be at least 2 characters" } })}
+                                        id="name"
                                         type="text"
                                         name="name"
 
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                        className={classNames(errors.name ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                            :
+                                            "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
                                     />
+
+                                    {errors.name && errors.name.type === 'minLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.name?.message}</div>}
+                                    {errors.name && errors.name.type === 'required' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.name?.message}</div>}
                                 </div>
 
                                 <div className="col-span-6 sm:col-span-3">
-                                    <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                                    <label className="block text-sm font-medium text-gray-700">
                                         phone
                                     </label>
                                     <input
-                                        {...register('phone', { required: true, pattern: regPhone })}
+                                        {...register('phone', { required: { value: true, message: 'phone is requried' }, pattern: regPhone, minLength: { value: 10, message: "phone must be at least 10 characters" }, maxLength: { value: 15, message: "phone cant be no more 15 characters" } })}
                                         type="text"
                                         name="phone"
 
-                                        autoComplete="family-name"
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    />
+                                        autoComplete="phone"
+                                        className={classNames(errors.phone ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                            :
+                                            "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")} />
+                                    {errors.phone && errors.phone.type === 'minLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.phone?.message}</div>}
+                                    {errors.phone && errors.phone.type === 'required' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.phone?.message}</div>}
+                                    {errors.phone && errors.phone.type === 'maxLength' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.phone?.message}</div>}
                                 </div>
 
-                                <div className="col-span-6 sm:col-span-4">
-                                    <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                                <div className="col-span-6" >
+                                    <label className="block text-sm font-medium text-gray-700">
                                         Email address
                                     </label>
                                     <input {...register('email', { required: true, pattern: regEmail })}
-                                        type="text"
+                                        id="email-address"
                                         name="email"
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    />
+                                        type="text"
+                                        autoComplete="email"
+                                        className={classNames(errors.email ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                            :
+                                            "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")} />
+
+                                    {errors.email && <p className='text-white font-bold bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>Enter valid email</p>}
                                 </div>
+
 
                                 <div className="col-span-6 sm:col-span-3">
                                     <label htmlFor="country" className="block text-sm font-medium text-gray-700">
                                         Country
                                     </label>
-                                    <select {...register('address[country]', { required: true })}
+
+                                    <select ref={countryRef} defaultValue={selectedCountry}
+                                        onChange={() => {
+                                            // console.log(countryRef.current)
+                                            setSelectedCountry(countryRef.current.value)
+
+                                        }}
+                                        // {...register('address[country]',
+                                        //     { required: true })}
+                                        id="country"
                                         name="address[country]"
                                         className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    >;
+                                        <option value={"Israel"} key={0} className="capitalize">Israel </option>
+
+                                        {countries
+                                            ?.filter((country) => country !== "Israel")
+                                            .map((country, i) => (
+
+                                                <option value={country} key={i + 1} className="capitalize">
+                                                    {country}
+                                                </option>
+
+
+                                            ))}
+
+
+                                    </select>
+                                </div>
+
+                                <div className="col-span-6 sm:col-span-6 lg:col-span-3">
+                                    <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                                        City
+                                    </label>
+
+                                    <select ref={cityRef} defaultValue={selectedCity} onChange={() => { setSelectedCity(cityRef.current.value) }}
+                                        {...register('address[city]',
+                                            {
+                                                required: { value: true },
+                                            })}
+                                        id="city"
+                                        name="address[city]"
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                     >
-                                        <option>United States</option>
-                                        <option>Canada</option>
-                                        <option>Mexico</option>
+                                        {/* <option className="capitalize">Select City</option> */}
+
+                                        {cities?.map((city, i) => (
+                                            <option value={city} key={i + 1} className="capitalize">
+                                                {city}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
 
                                 <div className="col-span-6">
-                                    <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
+                                    <label className="block text-sm font-medium text-gray-700">
                                         Street address
                                     </label>
-                                    <input {...register('address[Street]', { required: true })}
+                                    <input {...register('address[Street]', { required: { value: true, message: 'street is requried' }, minLength: { value: 2, message: "street charcter must be more then 2 must be at least 1 characters" }, maxLength: { value: 20, message: "street charcter cant be no more 20 characters" } })}
                                         type="text"
                                         name="address[Street]"
                                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                     />
+                                    {errors.address && errors.address.Street.type === 'minLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.address.Street?.message}</div>}
+                                    {errors.address && errors.address.Street.type === 'maxLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.address.Street?.message}</div>}
+                                    {errors.address && errors.address.Street.type === 'required' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.address.Street?.message}</div>}
+
                                 </div>
 
-                                <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                                    <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                                        City
-                                    </label>
-                                    <input {...register('address[city]', { required: true })}
-                                        type="text"
-                                        name="address[city]"
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    />
-                                </div>
 
 
                                 <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                                     <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
-                                        ZIP / Postal code
+                                        address numner
                                     </label>
-                                    <input {...register('address[num]', { required: true })}
-                                        type="text"
+                                    <input {...register('address[num]', { required: { value: true, message: 'street number is requried' }, minLength: { value: 1, message: "street number must be at least 1 number" }, maxLength: { value: 9999, message: "street number cant be no more 20 number" } })}
                                         name="address[num]"
+                                        id="num"
+                                        type="text"
                                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                     />
+                                    {errors.address && errors.address.num.type === 'minLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.address.num?.message}</div>}
+
+                                    {errors.address && errors.address.num.type === 'maxLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.address.num?.message}</div>}
+
+                                    {errors.address && errors.address.num.type === 'required' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.address.num?.message}</div>}
+
                                 </div>
 
-                                <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                                <div className="col-span-6">
                                     <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
                                         info                                    </label>
                                     <input {...register('info', { required: true })}

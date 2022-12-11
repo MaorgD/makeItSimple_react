@@ -4,8 +4,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { useDispatch } from 'react-redux';
-import { saveInfo } from '../../featchers/restaurantSlice';
-import { API_URL, regEmail, doApiMethod} from '../../services/servise';
+import { saveInfo } from '../../redux/featchers/restaurantSlice';
+import { API_URL, regEmail, doApiMethod } from '../../services/servise';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -14,7 +14,7 @@ const RequestResetPass = () => {
     let { register, handleSubmit, formState: { errors } } = useForm();
     const nav = useNavigate()
     const [isSubmitted, setIsSubmitted] = useState(false)
-    
+
     const onSub = (_dataBody) => {
         // console.log(_dataBody);
         setIsSubmitted(true);
@@ -39,20 +39,19 @@ const RequestResetPass = () => {
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8">
                     <div>
-                        <img
+                        {/* <img
                             className="mx-auto h-12 w-auto"
                             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                             alt="Your Company"
-                        />
+                        /> */}
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                            Sign in to your account
-                        </h2>
-                        <p className="mt-2 text-center text-sm text-gray-600">
+                            Write here the email you want to send the confirmation to change your password                        </h2>
+                        {/* <p className="mt-2 text-center text-sm text-gray-600">
                             Or{' '}
                             <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
                                 start your 14-day free trial
                             </a>
-                        </p>
+                        </p> */}
                     </div>
                     <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">
                         <input type="hidden" name="remember" defaultValue="true" />

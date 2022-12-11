@@ -13,20 +13,24 @@ const WorkerFill = () => {
     const [fillDetales, setfillDetales] = useState(false)
     const nav = useNavigate()
     let { register, handleSubmit, getValues, formState: { errors } } = useForm();
+
     const onSub = (_dataBody) => {
-        console.log(_dataBody);
+        // console.log(_dataBody);
         delete _dataBody.confirmPassword
         setfillDetales(true);
         doApi(_dataBody)
     }
 
     const doApi = async (_dataBody) => {
-        const url = API_URL + '/worker/'+ params.userId;
+        const url = API_URL + '/users/worker/' + params.userId;
         try {
             const { data } = await doApiMethodFillDetales(url, "PATCH", _dataBody);
             console.log(data);
-           
-
+            if (data) {
+                nav("/login")
+            } else {
+                alert(data)
+            }
         }
         catch (err) {
 
@@ -51,7 +55,6 @@ const WorkerFill = () => {
                     <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">
                         <input type="hidden" name="remember" defaultValue="true" />
                         <div className="-space-y-px rounded-md shadow-sm">
-                            {/* להחליט איזה סוג אירורים עושים */}
                             <div>
                                 <label htmlFor="firstName" className="sr-only">
                                     First Name
@@ -146,27 +149,6 @@ const WorkerFill = () => {
 
 
                         </div>
-
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                    Remember me
-                                </label>
-                            </div>
-
-                            <div className="text-sm">
-                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                    Forgot your password?
-                                </a>
-                            </div>
-                        </div>
-
                         <div>
 
                             {!fillDetales ?
@@ -177,7 +159,7 @@ const WorkerFill = () => {
                                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                                         <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                                     </span>
-                                    Sign in
+                                    Update now
                                 </button>
                                 :
                                 <ThreeDots
