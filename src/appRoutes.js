@@ -7,7 +7,6 @@ import { TOKEN_NAME, RESTAURNAT_ID } from './services/servise'
 import Loader from './components/loader/loader'
 import { getUserInfo } from './redux/featchers/userSlice'
 import Logout from './components/auth/logout'
-import Menu from './components/menu/menu'
 import { getRestaurantInfo } from './redux/featchers/restaurantSlice'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
@@ -25,6 +24,8 @@ const WorkerFill = React.lazy(() => import('./components/auth/workerFill'));
 const MyRestaurantsList = React.lazy(() => import('./components/auth/myRestaurantsList'));
 const NewRestaurant = React.lazy(() => import('./components/auth/newRestaurant'));
 const Messages = React.lazy(() => import('./components/messages'));
+const Menu = React.lazy(() => import('./components/menu/menu'));
+
 
 
 const AppRoutes = () => {

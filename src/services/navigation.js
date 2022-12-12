@@ -48,13 +48,13 @@ export const navigationShiftManager= [
   ];
   
 export const navigationManager= [
-    { name: 'Tables', to: '/tables', current: false },
+    { name: 'Tables', to: '/manager/tables', current: false },
     { name: 'New Order', to: '/manager/orders', current: false },
     { name: 'work lane', to: '/workLane', current: false },
     { name: 'resturant order', to: '/resturantOrder', current: false },
     { name: 'app order', to: '/appOrder', current: false },
     { name: 'Shift  Page', to: '/shift Page', current: false },
-    { name: 'Menu', to: '/menu', current: false },  
+    { name: 'Menu', to: '/manager/menu', current: false },  
   ];
   
 

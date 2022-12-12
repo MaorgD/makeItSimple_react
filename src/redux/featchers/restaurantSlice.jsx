@@ -8,9 +8,9 @@ export const getRestaurantInfo = createAsyncThunk(
         if (localStorage.getItem(RESTAURNAT_ID)) {
             let url = API_URL + '/restaurants/byId/' + localStorage.getItem(RESTAURNAT_ID)
             let data = await doApiTukenGet(url)
-            console.log(data)
+            // console.log(data)
             if (!data.err) {
-                console.log(data.data)
+                // console.log(data.data)
 
                 return data.data;
             }
@@ -38,7 +38,7 @@ const restaurantSlice = createSlice({
             })
             .addCase(getRestaurantInfo.fulfilled, (state, action) => {
                 state.status = "success";
-                console.log(action.payload);
+                // console.log(action.payload);
                 if (action.payload == null) {
                     state.status = "failed";
                     state.restaurant = null

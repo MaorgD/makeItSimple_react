@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const MyRestaurantsList = () => {
+    // משתמשים ביוזר פה??
     const userInfo = useSelector((state) => state.userSlice)
     const [ar, setAr] = useState([]);
 
