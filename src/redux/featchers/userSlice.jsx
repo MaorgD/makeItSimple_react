@@ -7,7 +7,7 @@ export const getUserInfo = createAsyncThunk(
     "user,getUserInfo", async (dispatch, getState) => {
         if (localStorage.getItem(TOKEN_NAME)) {
             let data = await doApiTukenGet(API_URL + '/users/checkToken')
-            // console.log(data);
+            console.log(data);
             if (!data.err) {
 
                 return data.data;
@@ -36,7 +36,7 @@ const userSlice = createSlice({
             })
             .addCase(getUserInfo.fulfilled, (state, action) => {
                 state.status = "success";
-                // console.log(action.payload);
+                console.log(action.payload);
                 if (action.payload == null) {
                     state.status = "failed";
                     state.user = null

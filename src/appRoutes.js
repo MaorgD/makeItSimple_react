@@ -2,12 +2,13 @@ import React, { useEffect, Suspense } from 'react'
 import Layout from './layout/layout'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Orders from './components/worker/orders/orders'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { TOKEN_NAME, RESTAURNAT_ID } from './services/servise'
-import Loader from './components/loader/loader'
+import Loader from './components/ui/loader/loader'
 import { getUserInfo } from './redux/featchers/userSlice'
 import Logout from './components/auth/logout'
 import { getRestaurantInfo } from './redux/featchers/restaurantSlice'
+import FullItemMenu from './components/menu/fullItemMenu'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
 const ResetPassword = React.lazy(() => import('./components/auth/resetPassword'));
@@ -29,8 +30,13 @@ const Menu = React.lazy(() => import('./components/menu/menu'));
 
 
 const AppRoutes = () => {
-
     const dispatch = useDispatch();
+
+    let { showiteminfo } = useSelector((state) => state.toggleSlice);
+    let { item } = useSelector((state) => state.toggleSlice);
+    console.log(showiteminfo);
+    console.log(item);
+
 
     useEffect(() => {
         if (localStorage.getItem(TOKEN_NAME)) {
@@ -103,6 +109,7 @@ const AppRoutes = () => {
                     <Route path='*' element={<NotFound />} />
 
                 </Routes>
+                {showiteminfo ? <FullItemMenu item={item} /> : null}
             </Router>
         </Suspense>
     )

@@ -1,17 +1,18 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { onClickShow } from '../../redux/featchers/toggleSlice'
+import { onClickHide } from '../../redux/featchers/toggleSlice'
 import PopUPModel from '../ui/popUpModel'
 
-const ItemMenu = (props) => {
+const FullItemMenu = (props) => {
 const dispatch = useDispatch()
     const item = props.item
     console.log(item)
     const openItem = () => {
-        dispatch(onClickShow({item:item}));
+        dispatch(onClickHide())
     }
 
     return (
+        <PopUPModel>
 
             <>
                 <div onClick={openItem} key={item._id} className="group">
@@ -26,7 +27,8 @@ const dispatch = useDispatch()
                     <p className="mt-1 text-lg font-medium text-gray-900">{item.price}</p>
                 </div>
             </>
+        </PopUPModel>
     )
 }
 
-export default ItemMenu
+export default FullItemMenu
