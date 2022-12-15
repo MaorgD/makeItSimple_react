@@ -9,6 +9,7 @@ import { getUserInfo } from './redux/featchers/userSlice'
 import Logout from './components/auth/logout'
 import { getRestaurantInfo } from './redux/featchers/restaurantSlice'
 import FullItemMenu from './components/menu/fullItemMenu'
+import AddItemMenu from './components/menu/addItemMenu'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
 const ResetPassword = React.lazy(() => import('./components/auth/resetPassword'));
@@ -33,6 +34,7 @@ const AppRoutes = () => {
     const dispatch = useDispatch();
 
     let { showiteminfo } = useSelector((state) => state.toggleSlice);
+    let { showadditem } = useSelector((state) => state.toggleSlice);
     let { item } = useSelector((state) => state.toggleSlice);
     console.log(showiteminfo);
     console.log(item);
@@ -110,6 +112,7 @@ const AppRoutes = () => {
 
                 </Routes>
                 {showiteminfo ? <FullItemMenu item={item} /> : null}
+                {showadditem ? <AddItemMenu /> : null}
             </Router>
         </Suspense>
     )

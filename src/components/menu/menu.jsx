@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react'
 import { InformationCircleIcon } from '@heroicons/react/20/solid'
 import { RESTAURNAT_ID } from '../../services/servise';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import CategoryInMenu from './categoryInMenu';
 import ItemMenu from './itemMenu';
 import SubCategoryInMenu from './subCategoryInMenu';
+import { onClickAddItem } from '../../redux/featchers/toggleSlice'
 
 
 const Menu = () => {
   const { restaurant } = useSelector((state) => state.restaurantSlice);
   const { user } = useSelector((state) => state.userSlice);
-
+  const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   const [subCategories, setsubCategories] = useState([]);
   const [itesmOfCat, setItesmOfCat] = useState([]);
@@ -72,7 +73,7 @@ const Menu = () => {
 
   }
 
-  const setMenuItemByCat = ( _subCategory) => {
+  const setMenuItemByCat = (_subCategory) => {
     if (restaurant) {
       let tempsArr = []
       restaurant.menu.map((item) => {
@@ -82,12 +83,15 @@ const Menu = () => {
           }
         }
       })
-      
+
       setItesmOfCat(tempsArr)
       setIsSelecte(true)
       // getAllSubCategories(_category)
     }
 
+  }
+  const openAddItem = () => {
+    dispatch(onClickAddItem())
   }
 
 
@@ -126,14 +130,14 @@ const Menu = () => {
 
         </div>
         {user?.data?.worker?.jobs.includes("manager") &&
-          <Link to={"/addItemMenu"}
+          <div onClick={() => { openAddItem() }}
             className=" mt-5 group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-300 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
               <InformationCircleIcon className="h-4 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
             </span>
             Add new item to menu
-          </Link>
+          </div>
         }
       </div>
 
