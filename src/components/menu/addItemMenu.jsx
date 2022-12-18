@@ -7,7 +7,8 @@ import { info } from 'autoprefixer'
 import { API_URL, doApiMethodFillDetales, doApiMethodToken, doApiMethodTokenNotStringify, RESTAURNAT_ID } from '../../services/servise'
 import { useNavigate, useParams } from 'react-router-dom'
 // import { ReactFileInputCustom } from 'react-file-input-custom';
-import Axios from 'axios';
+// import Axios from 'axios';
+import { uploadImage } from '../../helpers/imageupload'
 
 
 
@@ -37,17 +38,17 @@ const AddItemMenu = (props) => {
     const [imageSelected, setImageSelected] = useState("");
 
 
-    const uploadImage = async () => {
-        const formData = new FormData();
-        formData.append("file", imageSelected);
-        formData.append("upload_preset", "makeItSimpleUsers");
+    // const uploadImage = async () => {
+    //     const formData = new FormData();
+    //     formData.append("file", imageSelected);
+    //     formData.append("upload_preset", "makeItSimpleUsers");
 
-        const resp = await Axios.post(
-            "https://api.cloudinary.com/v1_1/dukiq0kql/image/upload",
-            formData)
-            return resp.data.url
+    //     const resp = await Axios.post(
+    //         "https://api.cloudinary.com/v1_1/dukiq0kql/image/upload",
+    //         formData)
+    //         return resp.data.url
             
-    }
+    // }
     const onClickSave = (_dataBody) => {
 
         if (!newCategory) {
@@ -69,7 +70,7 @@ const AddItemMenu = (props) => {
     const doApi = async (_dataBody) => {
         const url = API_URL + '/menus/create/' + localStorage.getItem(RESTAURNAT_ID);
         try {
-            _dataBody.img = await uploadImage();
+            _dataBody.img = await uploadImage(imageSelected);
             const data = await doApiMethodTokenNotStringify(url, "POST", _dataBody);
             console.log(data);
             if (data) {
