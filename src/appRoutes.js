@@ -112,7 +112,7 @@ const AppRoutes = () => {
 
                 </Routes>
                 {showiteminfo ? <FullItemMenu item={item} /> : null}
-                {showadditem ? <AddItemMenu /> : null}
+                {showadditem ? <AddItemMenu item={item} /> : null}
             </Router>
         </Suspense>
     )

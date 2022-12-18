@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { InformationCircleIcon } from '@heroicons/react/20/solid'
 import { RESTAURNAT_ID } from '../../services/servise';
 import { Link } from 'react-router-dom';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import CategoryInMenu from './categoryInMenu';
 import ItemMenu from './itemMenu';
 import SubCategoryInMenu from './subCategoryInMenu';
@@ -91,7 +91,7 @@ const Menu = () => {
 
   }
   const openAddItem = () => {
-    dispatch(onClickAddItem())
+    dispatch(onClickAddItem({ item: categories }))
   }
 
 

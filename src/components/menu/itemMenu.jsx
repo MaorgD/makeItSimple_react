@@ -1,12 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { onClickShow } from '../../redux/featchers/toggleSlice'
-import PopUPModel from '../ui/popUpModel'
 
 const ItemMenu = (props) => {
 const dispatch = useDispatch()
     const item = props.item
-    console.log(item)
     const openItem = () => {
         dispatch(onClickShow({item:item}));
     }

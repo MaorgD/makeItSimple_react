@@ -4,7 +4,7 @@ const initialstate = {
     showiteminfo: false
     ,
     item: null,
-    showadditem:false,
+    showadditem: false,
 
 }
 
@@ -16,8 +16,10 @@ const toggleSlice = createSlice({
             state.showiteminfo = true;
             state.item = action.payload.item;
         },
-        onClickAddItem: (state) => {
+        onClickAddItem: (state, action) => {
             state.showadditem = true;
+            state.item = action.payload.item;
+
         },
         onClickHide: (state) => {
             state.showiteminfo = false;
@@ -25,10 +27,12 @@ const toggleSlice = createSlice({
         },
         onClickHideAddItem: (state) => {
             state.showadditem = false;
+            state.item = null
+
         },
 
     }
 })
 
-export const { onClickShow, onClickHide ,onClickAddItem,onClickHideAddItem} = toggleSlice.actions
+export const { onClickShow, onClickHide, onClickAddItem, onClickHideAddItem } = toggleSlice.actions
 export default toggleSlice.reducer

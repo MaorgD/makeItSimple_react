@@ -12,49 +12,39 @@ function classNames(...classes) {
 const NewRestaurant = () => {
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState("Israel");
-    const [selectedCity, setSelectedCity] = useState("Tel Aviv");
+    const [selectedCity, setSelectedCity] = useState("");
     const [countries, setCountries] = useState([]);
     const [cities, setCities] = useState([]);
     const countryRef = useRef();
     const cityRef = useRef();
-
     useEffect(() => {
         getAllCountries()
-        // console.log("Country")
+        console.log("Country")
 
     }, [cities])
 
     useEffect(() => {
-        // console.log(selectedCountry)
         getAllCities(selectedCountry)
-
+        console.log("selectedCountry")
     }, [selectedCountry])
 
     const getAllCountries = async () => {
         let countries = await getCountries();
         let countriesName = await countries?.map((country) => country.country);
-        // console.log(countriesName)
+        console.log(countriesName)
         setCountries(countriesName);
     }
 
     const getAllCities = async (_country) => {
         let Cities = await getCities(_country);
-        // console.log(Cities)
         setCities(Cities);
     }
     const nav = useNavigate()
     let { register, handleSubmit, formState: { errors } } = useForm();
     const onSub = (_dataBody) => {
-        // console.log(_dataBody);
+        console.log(_dataBody);
         setIsSubmitted(true);
         doApi(_dataBody)
-    }
-
-    
-// להוריד??????? את השורה הזו
-    const onChangeSet = (_country) => {
-        // console.log(_country);
-        setSelectedCountry(_country)
     }
 
     const doApi = async (_dataBody) => {
@@ -71,8 +61,6 @@ const NewRestaurant = () => {
             // console.log(err);
         }
     }
-
-    // console.log(errors)
     return (
         <>
             <div className="flex min-h-full items-center justify-center py-7 px-4 sm:px-6 lg:px-8">
@@ -103,7 +91,7 @@ const NewRestaurant = () => {
                                 </div>
 
                                 <div className="col-span-6 sm:col-span-3">
-                                    <label className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
                                         phone
                                     </label>
                                     <input
@@ -121,7 +109,7 @@ const NewRestaurant = () => {
                                 </div>
 
                                 <div className="col-span-6" >
-                                    <label className="block text-sm font-medium text-gray-700">
+                                    <label htmlFor="email-address" className="sr-only">
                                         Email address
                                     </label>
                                     <input {...register('email', { required: true, pattern: regEmail })}
@@ -129,11 +117,10 @@ const NewRestaurant = () => {
                                         name="email"
                                         type="text"
                                         autoComplete="email"
-                                        className={classNames(errors.email ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                            :
-                                            "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")} />
+                                        className="relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                        placeholder="Email address" />
 
-                                    {errors.email && <p className='text-white font-bold bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>Enter valid email</p>}
+                                    {errors.email && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid email</p>}
                                 </div>
 
 
@@ -142,14 +129,9 @@ const NewRestaurant = () => {
                                         Country
                                     </label>
 
-                                    <select ref={countryRef} defaultValue={selectedCountry}
-                                        onChange={() => {
-                                            // console.log(countryRef.current)
-                                            setSelectedCountry(countryRef.current.value)
-
-                                        }}
-                                        // {...register('address[country]',
-                                        //     { required: true })}
+                                    <select ref={countryRef} onChange={() => { setSelectedCountry(countryRef.current.value); }}
+                                        {...register('address[country]',
+                                            { required: true })}
                                         id="country"
                                         name="address[country]"
                                         className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
@@ -185,7 +167,7 @@ const NewRestaurant = () => {
                                         name="address[city]"
                                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                     >
-                                        {/* <option className="capitalize">Select City</option> */}
+                                        <option className="capitalize">Select City</option>
 
                                         {cities?.map((city, i) => (
                                             <option value={city} key={i + 1} className="capitalize">
@@ -199,8 +181,9 @@ const NewRestaurant = () => {
                                     <label className="block text-sm font-medium text-gray-700">
                                         Street address
                                     </label>
-                                    <input {...register('address[Street]', { required: { value: true, message: 'street is requried' }, minLength: { value: 2, message: "street charcter must be more then 2 must be at least 1 characters" }, maxLength: { value: 20, message: "street charcter cant be no more 20 characters" } })}
+                                    <input {...register('address[Street]', { required: { value: true, message: 'street is requried' }, minLength: { value: 1, message: "street num must be at least 1 characters" }, maxLength: { value: 20, message: "street num cant be no more 20 characters" } })}
                                         type="text"
+                                        id='Street'
                                         name="address[Street]"
                                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                     />
@@ -214,20 +197,13 @@ const NewRestaurant = () => {
 
                                 <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                                     <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
-                                        address numner
+                                        ZIP / Postal code
                                     </label>
-                                    <input {...register('address[num]', { required: { value: true, message: 'street number is requried' }, minLength: { value: 1, message: "street number must be at least 1 number" }, maxLength: { value: 9999, message: "street number cant be no more 20 number" } })}
-                                        name="address[num]"
-                                        id="num"
+                                    <input {...register('address[num]', { required: true })}
                                         type="text"
+                                        name="address[num]"
                                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                     />
-                                    {errors.address && errors.address.num.type === 'minLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.address.num?.message}</div>}
-
-                                    {errors.address && errors.address.num.type === 'maxLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.address.num?.message}</div>}
-
-                                    {errors.address && errors.address.num.type === 'required' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.address.num?.message}</div>}
-
                                 </div>
 
                                 <div className="col-span-6">
