@@ -6,6 +6,9 @@ import { useForm } from 'react-hook-form'
 import { info } from 'autoprefixer'
 import { API_URL, doApiMethodFillDetales, doApiMethodToken, doApiMethodTokenNotStringify, RESTAURNAT_ID } from '../../services/servise'
 import { useNavigate, useParams } from 'react-router-dom'
+// import { ReactFileInputCustom } from 'react-file-input-custom';
+import Axios from 'axios';
+
 
 
 function classNames(...classes) {
@@ -31,13 +34,22 @@ const AddItemMenu = (props) => {
     console.log(categories)
 
 
-    // const [file, setDishImagFile] = useState({});
-    // const item = props.item
+    const [imageSelected, setImageSelected] = useState("");
 
 
+    const uploadImage = async () => {
+        const formData = new FormData();
+        formData.append("file", imageSelected);
+        formData.append("upload_preset", "makeItSimpleUsers");
+
+        const resp = await Axios.post(
+            "https://api.cloudinary.com/v1_1/dukiq0kql/image/upload",
+            formData)
+            return resp.data.url
+            
+    }
     const onClickSave = (_dataBody) => {
 
-        // console.log(getValues("Category"));
         if (!newCategory) {
 
             _dataBody.category = selecteCategory;
@@ -48,9 +60,8 @@ const AddItemMenu = (props) => {
         }
         _dataBody.price = Number(_dataBody.price)
         _dataBody.calories = Number(_dataBody.calories)
-        _dataBody.img = "gg"
-        _dataBody.video = "gg"
         console.log(_dataBody);
+        // uploadImage()
         doApi(_dataBody)
         dispatch(onClickHideAddItem())
     }
@@ -58,6 +69,7 @@ const AddItemMenu = (props) => {
     const doApi = async (_dataBody) => {
         const url = API_URL + '/menus/create/' + localStorage.getItem(RESTAURNAT_ID);
         try {
+            _dataBody.img = await uploadImage();
             const data = await doApiMethodTokenNotStringify(url, "POST", _dataBody);
             console.log(data);
             if (data) {
@@ -68,38 +80,8 @@ const AddItemMenu = (props) => {
         }
         catch (err) {
             alert(err.response.data.msg);
-            setNewCategory(false)
         }
     }
-    // const uploadImage = async () => {
-    //     const formData = new FormData();
-    //     formData.append("file", file);
-    //     formData.append("upload_preset", "makeItSimpleUsers");
-    //     // formData.append("cloud_name", "dukiq0kql");
-    //     try{
-    //         const resp = await axios.post(
-    //             "https://api.cloudinary.com/v1_1/dukiq0kql/image/upload",{
-
-    //                 body:formData
-    //             }
-    //             );
-    //             console.log(resp.data)
-    //         successHandler("Upload image succesfully!")
-    //        return ({url:resp.data.url })
-    //     }
-    //     catch(err){
-    //         console.log(err)
-    //         errorHandler(err)
-    //     }
-    // }
-
-    //     const resp = await axios.post(
-    //         "https://api.cloudinary.com/v1_1/dukiq0kql/image/upload",
-    //         formData
-    //     );
-    //     console.log(resp)
-    //     return resp.data.url
-    // };
 
 
     useEffect(() => {
@@ -110,7 +92,6 @@ const AddItemMenu = (props) => {
             let tempsArr = []
             restaurant.menu.map((item) => {
 
-                // console.log(item);
                 if (item.category == _category) {
                     if (!tempsArr.includes(item.subCategory)) {
 
@@ -127,7 +108,6 @@ const AddItemMenu = (props) => {
 
             <>
                 <div>
-                    {/* <div className="md:grid  md:gap-6"> */}
 
                     <div className="mt-5 md:col-span-2 md:mt-0 ">
                         <form onSubmit={handleSubmit(onClickSave)} action="#" method="POST">
@@ -218,7 +198,7 @@ const AddItemMenu = (props) => {
                                                     {categories.map((category) => (
                                                         <option key={category} value={category}>{category}</option>
                                                     ))}
-                                                
+
                                                 </select>
                                             </div>
                                             :
@@ -253,7 +233,7 @@ const AddItemMenu = (props) => {
                                                 {subCategories.map((subCategory) => (
                                                     <option key={subCategory} value={subCategory}>{subCategory}</option>
                                                 ))}
-                                             
+
                                             </select>
                                         </div>
                                             :
@@ -293,32 +273,14 @@ const AddItemMenu = (props) => {
                                                     </svg>
                                                     <div className="flex text-sm text-gray-600">
                                                         <label className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
-
-
-
-
-
-                                                            {/* <span>Upload a file</span> */}
-                                                            {/* <input    {...register('img', { required: { value: false } })} id="img" name="img" type="file" className="sr-only" /> */}
-
-
-                                                            {/* <div className='col-4 col-md-3 col-lg-2 row'>
-                                                                <ReactFileInputCustom
-
-                                                                    handleChange={(e) => setDishImagFile(e.target.files[0])}
-                                                                    className={"p-2 w-100 w-lg-auto "}
-                                                                    text="Add picture"
-                                                                    textColor="white"
-                                                                    backgroundColor="hsl(118, 31%, 79%)"
-                                                                />
-                                                            </div>
-                                                       */}
-
-
+                                                            <input
+                                                                type="file"
+                                                                onChange={(e) => {
+                                                                    setImageSelected(e.target.files[0]);
+                                                                }}
+                                                            />
                                                         </label>
-                                                        {/* <p className="pl-1">or drag and drop</p> */}
                                                     </div>
-                                                    {/* <p className="text-xs text-gray-500">PNG, JPG, GIF up to 5MB</p> */}
                                                 </div>
                                             </div>
                                         </div>
@@ -330,7 +292,6 @@ const AddItemMenu = (props) => {
                             </div>
                         </form>
                     </div>
-                    {/* </div> */}
                 </div>
             </>
         </PopUPModel>
