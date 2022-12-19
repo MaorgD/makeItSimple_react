@@ -27,6 +27,7 @@ const MyRestaurantsList = React.lazy(() => import('./components/auth/myRestauran
 const NewRestaurant = React.lazy(() => import('./components/auth/newRestaurant'));
 const Messages = React.lazy(() => import('./components/messages'));
 const Menu = React.lazy(() => import('./components/menu/menu'));
+const Tables = React.lazy(() => import('./components/tables/tables'));
 
 
 
@@ -86,6 +87,7 @@ const AppRoutes = () => {
                         <Route path='/manager' element={<LayoutManager />}>
                             <Route path='/manager/orders' element={< Orders />} />
                             <Route path='/manager/menu' element={< Menu />} />
+                            <Route path='/manager/tables' element={< Tables />} />
 
 
 
