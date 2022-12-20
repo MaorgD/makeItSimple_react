@@ -1,8 +1,8 @@
 export const navigationWaiter= [
-    { name: 'Tables', to: '/tables', current: false },
+    { name: 'Tables', to: '/waiter/tables', current: false },
     // { name: 'quick Order', to: '/order', current: false },
-    { name: 'Menu', to: '/menu', current: false },
-    { name: 'Shift  Page', to: '/shiftPage', current: false },
+    { name: 'Menu', to: '/waiter/menu', current: false },
+    { name: 'orders', to: '/waiter/orders', current: false },
     // { name: 'my Info', to: '/myInfo', current: false },
   
   ]

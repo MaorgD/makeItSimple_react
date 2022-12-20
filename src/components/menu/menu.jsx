@@ -8,6 +8,7 @@ import ItemMenu from './itemMenu';
 import SubCategoryInMenu from './subCategoryInMenu';
 import { onClickAddItem } from '../../redux/featchers/toggleSlice'
 import MySlider from "../ui/slider/mySlider"
+import { getAllCategories } from '../../helpers/getMenuCategories';
 
 
 const Menu = () => {
@@ -22,24 +23,9 @@ const Menu = () => {
 
   useEffect(() => {
     if (restaurant)
-      getAllCategories()
+      setCategories(getAllCategories(restaurant))
+
   }, [restaurant])
-
-
-  const getAllCategories = async () => {
-    if (localStorage.getItem(RESTAURNAT_ID)) {
-      if (restaurant) {
-        let tempArr = [];
-        restaurant.menu.map(item => {
-          if (!tempArr.includes(item.category)) {
-
-            tempArr.push(item.category)
-          }
-        })
-        setCategories(tempArr)
-      }
-    }
-  }
 
   const getAllSubCategories = async (_category) => {
     if (restaurant) {
@@ -92,23 +78,36 @@ const Menu = () => {
 
   }
   const openAddItem = () => {
-    dispatch(onClickAddItem({ item: categories }))
+    dispatch(onClickAddItem())
   }
 
 
   return (
     <>
       <div className="bg-white">
-        <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-            MENU :
-          </h2>
+        <div className=" mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 justify-center">
+          <div className=' mt-2  '>
+
+            <h2 className=" text-center text-3xl font-bold tracking-tight text-gray-900">
+              MENU :
+            </h2>
+            <div className='flex justify-end'>
+              {user?.data?.worker?.jobs.includes("manager")
+                &&
+                <button onClick={() => { openAddItem() }}
+                  className="rounded-full border mr-4 border-transparent bg-indigo-300 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+
+                  Add new item
+                </button>
+              }
+            </div>
+          </div>
           <div className='m-5'>
 
             {categories && <MySlider arr={categories} setFunc={setMenuItem} typ={"CategoryInMenu"} />}
           </div>
 
-          <div  className='m-5'>
+          <div className='m-5'>
 
             {subCategories && <MySlider arr={subCategories} setFunc={setMenuItemByCat} typ={"SubCategoryInMenu"} />}
           </div>
@@ -123,16 +122,6 @@ const Menu = () => {
 
 
         </div>
-        {user?.data?.worker?.jobs.includes("manager") &&
-          <div onClick={() => { openAddItem() }}
-            className=" mt-5 group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-300 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-              <InformationCircleIcon className="h-4 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
-            </span>
-            Add new item to menu
-          </div>
-        }
       </div>
 
 

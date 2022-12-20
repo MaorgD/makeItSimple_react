@@ -8,26 +8,40 @@ import { useSelector } from 'react-redux';
 
 const MyRestaurantsList = () => {
     // משתמשים ביוזר פה??
-    const userInfo = useSelector((state) => state.userSlice)
+    const { user } = useSelector((state) => state.userSlice)
     const [ar, setAr] = useState([]);
+    const [isManager, setIsManager] = useState();
 
     useEffect(() => {
 
         doApi()
-    }, [])
+    }, [user])
 
     const doApi = async () => {
-        console.log(userInfo)
+        if (user) {
+            let url;
 
-        const url = API_URL + '/restaurants/myrestaurants/';
-        try {
-            let { data } = await doApiTukenGet(url);
-            // console.log(data);
-            setAr(data);
-        }
-        catch (err) {
-            console.log(err)
-            alert("there problem")
+            if (user?.data?.worker?.jobs.includes("manager")){
+                setIsManager(true)
+                url = API_URL + '/restaurants/myrestaurants/';
+            }
+            else{
+                setIsManager(false)
+
+                url = API_URL + '/restaurants//myworks';
+            }
+
+            try {
+
+                console.log(user);
+                let { data } = await doApiTukenGet(url);
+                setAr(data);
+                console.log(data)
+            }
+            catch (err) {
+                console.log(err)
+                alert("there problem")
+            }
         }
     }
 
@@ -45,22 +59,22 @@ const MyRestaurantsList = () => {
                             MY REATAURENTS :
                         </h2>
                         <div className="row g-3">
-                            {ar.map(item => {
+                            {ar && ar.map(item => {
                                 return (
 
-                                    <Restaurant key={item._id} item={item} />
+                                    <Restaurant key={item._id} item={item} jobs={user?.data?.worker?.jobs}/>
                                 )
                             })}
                         </div>
 
-                        <Link to={"/newrestaurant"}
+                        {user?.data?.worker?.jobs.includes("manager") && <Link to={"/newrestaurant"}
                             className=" mt-5 group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-300 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
                             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                                 <InformationCircleIcon className="h-4 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                             </span>
                             Open new Restaurant
-                        </Link>
+                        </Link>}
                     </div>
                 </div>
             </div>

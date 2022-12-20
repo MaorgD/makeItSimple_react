@@ -11,6 +11,7 @@ import { getRestaurantInfo } from './redux/featchers/restaurantSlice'
 import FullItemMenu from './components/menu/fullItemMenu'
 import FullItemOrder from './components/orders/fullItemOrder'
 import AddItemMenu from './components/menu/addItemMenu'
+import EditItemMenu from './components/menu/editItemMenu'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
 const ResetPassword = React.lazy(() => import('./components/auth/resetPassword'));
@@ -38,11 +39,10 @@ const AppRoutes = () => {
     let { showiteminfo } = useSelector((state) => state.toggleSlice);
     let { showadditem } = useSelector((state) => state.toggleSlice);
     let { showorderiteminfo } = useSelector((state) => state.toggleSlice);
+    let { showEditItem } = useSelector((state) => state.toggleSlice);
     let { item } = useSelector((state) => state.toggleSlice);
-    console.log(showiteminfo);
-    console.log(item);
-
-
+    // console.log(showiteminfo);
+    // console.log(item);
     useEffect(() => {
         if (localStorage.getItem(TOKEN_NAME)) {
             dispatch(getUserInfo())
@@ -51,10 +51,6 @@ const AppRoutes = () => {
             dispatch(getRestaurantInfo())
         }
     }, [])
-
-
-
-
 
     return (
         <Suspense fallback={
@@ -104,7 +100,9 @@ const AppRoutes = () => {
                         </Route>
 
                         <Route path='/waiter' element={<LayoutWaiter />}>
-
+                        <Route path='/waiter/orders' element={< Orders />} />
+                            <Route path='/waiter/menu' element={< Menu />} />
+                            <Route path='/waiter/tables' element={< Tables />} />
                             {/* Outlet */}
 
                         </Route>
@@ -117,7 +115,8 @@ const AppRoutes = () => {
                 </Routes>
                 {showiteminfo ? <FullItemMenu key={item._id} item={item} /> : null}
                 {showorderiteminfo ? <FullItemOrder key={item._id} item={item} /> : null}
-                {showadditem ? <AddItemMenu item={item} /> : null}
+                {showadditem ? <AddItemMenu /> : null}
+                {showEditItem ? <EditItemMenu item={item} /> : null}
             </Router>
         </Suspense>
     )

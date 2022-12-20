@@ -1,42 +1,42 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { onClickHideAddItem } from '../../redux/featchers/toggleSlice'
-import PopUPModel from '../ui/popUpModel'
-import { useForm } from 'react-hook-form'
-import { API_URL, doApiMethodTokenNotStringify, RESTAURNAT_ID } from '../../services/servise'
-import { useNavigate, useParams } from 'react-router-dom'
-import { uploadImage } from '../../helpers/imageupload'
-import { getAllCategories } from '../../helpers/getMenuCategories'
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { onClickHideEditItem, onClickreturninfo } from '../../redux/featchers/toggleSlice';
+import PopUPModel from '../ui/popUpModel';
+import { useForm } from 'react-hook-form';
+import { API_URL, doApiMethodTokenNotStringify, doApiMethodTokenPatch, RESTAURNAT_ID } from '../../services/servise';
+import { useNavigate, useParams } from 'react-router-dom';
+import { uploadImage } from '../../helpers/imageupload';
+import { getAllCategories } from '../../helpers/getMenuCategories';
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-const AddItemMenu = (props) => {
+    return classes.filter(Boolean).join(' ');
+};
+const EditItemMenu = (props) => {
     const { restaurant } = useSelector((state) => state.restaurantSlice);
     const [newCategory, setNewCategory] = useState(false);
     const [newSubCategory, setNewSubCategory] = useState(false);
     const [subCategories, setsubCategories] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [selecteCategory, setSelecteCategory] = useState();
-    const [selecteSubCategory, setSelecteSubCategory] = useState();
+    const [selecteCategory, setSelecteCategory] = useState(props.item.category);
+    const [selecteSubCategory, setSelecteSubCategory] = useState(props.item.subCategory);
     const selecteCategoryRef = useRef();
     const selecteSubCategoryRef = useRef();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [imageSelected, setImageSelected] = useState(null);
+    const [isChengeCategory, setIsChengeCategory] = useState(false);
 
 
-
+    console.log(props.item)
     useEffect(() => {
         if (restaurant) {
-            let arr = getAllCategories(restaurant)
-            setCategories(arr)
-            setSelecteCategory(arr[0])
+            setCategories(getAllCategories(restaurant).filter(category => category != props.item.category))
         }
     }, [restaurant])
 
     useEffect(() => {
-        getAllSubCategories(selecteCategory)
+        getAllSubCategories(selecteCategory);
+
     }, [selecteCategory])
 
     const onClickSave = (_dataBody) => {
@@ -49,16 +49,18 @@ const AddItemMenu = (props) => {
         }
         _dataBody.price = Number(_dataBody.price)
         _dataBody.calories = Number(_dataBody.calories)
-        doApi(_dataBody)
-        dispatch(onClickHideAddItem())
-    }
+        console.log(_dataBody)
+        doApiEdit(_dataBody);
+        dispatch(onClickHideEditItem())
+    };
 
-    const doApi = async (_dataBody) => {
-        const url = API_URL + '/menus/create/' + localStorage.getItem(RESTAURNAT_ID);
+    const doApiEdit = async (_dataBody) => {
+        const url = API_URL + '/menus/edit/' + props.item._id;
         try {
-            _dataBody.img = imageSelected? await uploadImage(imageSelected) : null;
-            const data = await doApiMethodTokenNotStringify(url, "POST", _dataBody);
-            console.log(data.err);
+
+            _dataBody.img = imageSelected ? await uploadImage(imageSelected) : props.item.img;
+            const data = await doApiMethodTokenPatch(url, "PATCH", _dataBody);
+            console.log(data);
             if (data) {
                 window.location.reload(false);
             } else {
@@ -68,8 +70,7 @@ const AddItemMenu = (props) => {
         catch (err) {
             alert(err.response.data.msg);
         }
-    }
-
+    };
 
     const getAllSubCategories = async (_category) => {
         if (restaurant) {
@@ -80,20 +81,31 @@ const AddItemMenu = (props) => {
                         tempsArr.push(item.subCategory)
                     }
                 }
-            })
-            setsubCategories(tempsArr)
-            setSelecteSubCategory(tempsArr[0])
+            });
+
+
+            setsubCategories(tempsArr.filter(subCategory => subCategory != props.item.subCategory));
+            setSelecteSubCategory(tempsArr[0]);
         }
-    }
+    };
     const closeItem = () => {
-        dispatch(onClickHideAddItem())
+        dispatch(onClickHideEditItem())
+
+    }
+    const returnItemInfo = () => {
+        dispatch(onClickreturninfo())
 
     }
     return (
         <PopUPModel>
             <>
+
                 <div>
-                    <button onClick={closeItem}>X</button>
+                    <div className='flex justify-between px-2 '>
+
+                        <button onClick={closeItem}>X</button>
+                        <button className='' onClick={returnItemInfo}> back </button>
+                    </div>
                     <div className="mt-5 md:col-span-2 md:mt-0 ">
                         <form onSubmit={handleSubmit(onClickSave)} action="#" method="POST">
                             <div className="shadow sm:overflow-hidden sm:rounded-md  ">
@@ -101,7 +113,7 @@ const AddItemMenu = (props) => {
                                     <div className='grid grid-cols-4 gap-4'>
                                         <div className="col-span-6 sm:col-span-3">
                                             <label className="block text-sm font-medium text-gray-700"> Name</label>
-                                            <input  {...register('name', { required: { value: true, message: 'Name is requried' }, minLength: { value: 2, message: "Name must be at least 2 characters" } })}
+                                            <input defaultValue={props.item.name}  {...register('name', { required: { value: true, message: 'Name is requried' }, minLength: { value: 2, message: "Name must be at least 2 characters" } })}
                                                 type="text"
                                                 name="name"
                                                 id="name"
@@ -115,7 +127,7 @@ const AddItemMenu = (props) => {
 
                                         <div className="col-span-6 sm:col-span-2">
                                             <label className="block text-sm font-medium text-gray-700">Price</label>
-                                            <input  {...register('price', { required: { value: true, message: 'Price is requried' } })}
+                                            <input defaultValue={props.item.price} {...register('price', { required: { value: true, message: 'Price is requried' } })}
                                                 type="number"
                                                 name="price"
                                                 id="price"
@@ -130,7 +142,7 @@ const AddItemMenu = (props) => {
 
                                         <div className="col-span-6 sm:col-span-2">
                                             <label className="block text-sm font-medium text-gray-700">Calories</label>
-                                            <input {...register('calories', { required: { value: false } })}
+                                            <input defaultValue={props.item.calories} {...register('calories', { required: { value: false } })}
                                                 type="number"
                                                 name="calories"
                                                 id="calories"
@@ -170,8 +182,14 @@ const AddItemMenu = (props) => {
                                                     ref={selecteCategoryRef}
                                                     onChange={() => {
                                                         setSelecteCategory(selecteCategoryRef.current.value)
+
+                                                        if (selecteCategoryRef.current.value == props.item.category) setIsChengeCategory(false);
+                                                        else setIsChengeCategory(true);
+
                                                     }}
                                                     className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+
+                                                    <option key={props.item.category} value={props.item.category}>{props.item.category}</option>
                                                     {categories.map((category) => (
                                                         <option key={category} value={category}>{category}</option>
                                                     ))}
@@ -203,7 +221,9 @@ const AddItemMenu = (props) => {
                                                 name="subCategory"
                                                 ref={selecteSubCategoryRef}
                                                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                {isChengeCategory == false && <option key={props.item.subCategory} value={props.item.subCategory}>{props.item.subCategory}</option>}
                                                 {subCategories.map((subCategory) => (
+
                                                     <option key={subCategory} value={subCategory}>{subCategory}</option>
                                                 ))}
                                             </select>
@@ -229,19 +249,15 @@ const AddItemMenu = (props) => {
                                             <label className="block text-sm font-medium text-gray-700">Info</label>
                                             <div className="mt-1">
                                                 <textarea    {...register('info', { required: { value: false } })}
+                                                    defaultValue={props.item.info}
                                                     id="info"
                                                     name="info"
-                                                    height="30"
-                                                    placeholder='Write details about the dish here.'
-
-                                                    rows="3"
-                                                    className=" resizeBlock mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
+                                                    rows="3" className="resizeBlock mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
                                             </div>
-
                                         </div>
 
                                         <div className="col-span-6 sm:col-span-4" >
-                                            <label className="block text-sm font-medium text-gray-700">Image</label>
+                                            <label className="block text-sm font-medium text-gray-700">Img</label>
                                             <div className="mt-1 flex justify-center rounded-md border-2 border-dashed border-gray-300 px-6 pt-5 pb-6">
                                                 <div className="space-y-1 text-center">
                                                     <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
@@ -263,9 +279,8 @@ const AddItemMenu = (props) => {
                                     </div>
                                 </div>
                                 <div className="px-4 py-3  sm:px-6 flex justify-center">
-                                    <button type='submit' className="w-1/3 rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-lg font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add</button>
+                                    <button type='submit' className="  w-1/3 rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-lg font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Save</button>
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -275,4 +290,4 @@ const AddItemMenu = (props) => {
     )
 }
 
-export default AddItemMenu
+export default EditItemMenu

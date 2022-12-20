@@ -1,14 +1,14 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { onClickShowOrder } from '../../redux/featchers/toggleSlice'
-
+import { getTimeAndDate } from "../../helpers/createTime"
 const ItemOrder = (props) => {
     const dispatch = useDispatch()
     const item = props.item
+    const dateCreate = getTimeAndDate(item.createdAt);
     const openItem = () => {
-        dispatch(onClickShowOrder({item:item}));
+        dispatch(onClickShowOrder({ item: item }));
     }
-
     return (
 
         <>
@@ -24,7 +24,7 @@ const ItemOrder = (props) => {
                     <h3 className=" text-sm text-gray-700 text-center pb-2">{item.status}</h3>
                     <p className=" text-lg font-medium text-gray-900">{item.finalPrice}</p>
                     <p className=" text-lg font-medium text-gray-900">{item.estimatedTime}</p>
-                    <p className=" text-lg font-medium text-gray-900">{item.createdAt}</p>
+                    <p className=" text-lg font-medium text-gray-900">{dateCreate}</p>
                 </div>
             </div>
         </>
