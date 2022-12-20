@@ -184,7 +184,7 @@ export default function Tables() {
             :
             <button onClick={() => { managerMode() }} className=' border-4 rounded-xl p-2' >edit</button>}
         </div>
-        {editMode && <CanvasControl editor={editor} setCanvasHeight={setCanvasHeight} setCanvasWidth={setCanvasWidth} onReady={onReady} />}
+        {editMode && <CanvasControl editor={editor} setCanvasHeight={setCanvasHeight} setCanvasWidth={setCanvasWidth} canvasHeight={canvasHeight} canvasWidth={canvasWidth} />}
       </div>
 
 

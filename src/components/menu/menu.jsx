@@ -7,6 +7,7 @@ import CategoryInMenu from './categoryInMenu';
 import ItemMenu from './itemMenu';
 import SubCategoryInMenu from './subCategoryInMenu';
 import { onClickAddItem } from '../../redux/featchers/toggleSlice'
+import MySlider from "../ui/slider/mySlider"
 
 
 const Menu = () => {
@@ -102,21 +103,14 @@ const Menu = () => {
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             MENU :
           </h2>
+          <div>
 
-          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8 my-3">
-            {
-              categories && categories.map((item) => (
-                <CategoryInMenu setMenuItem={setMenuItem} key={item} item={item} />
-              ))}
-
+            {categories && <MySlider arr={categories} setFunc={setMenuItem} typ={"CategoryInMenu"} />}
           </div>
-          <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8 my-3">
-            {
-              subCategories && subCategories.map((item) => (
-                <SubCategoryInMenu setMenuItemByCat={setMenuItemByCat} key={item} item={item} />
 
-              ))}
+          <div>
 
+            {subCategories && <MySlider arr={subCategories} setFunc={setMenuItemByCat} typ={"SubCategoryInMenu"} />}
           </div>
 
           {<div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">

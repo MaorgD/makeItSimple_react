@@ -139,7 +139,7 @@ const CanvasControl = (props) => {
             </div>
             <div>
                 <label>Width (px)</label>
-                <select name="cars" id="width" onChange={e => { changeCanvasWidth(e.target.value) }} >
+                <select name="cars" id="width"  defaultValue={props.canvasWidth} onChange={e => { changeCanvasWidth(e.target.value) }} >
                     <option value="600">600</option>
                     <option value="500">500</option>
                     <option value="400">400</option>
@@ -151,7 +151,7 @@ const CanvasControl = (props) => {
             </div>
             <div>
                 <label>Height (px)</label>
-                <select name="cars" id="height" onChange={e => { changeCanvasheight(e.target.value) }}>
+                <select name="cars" id="height" defaultValue={props.canvasHeight} onChange={e => { changeCanvasheight(e.target.value) }}>
                     <option value="600">600</option>
                     <option value="500">500</option>
                     <option value="400">400</option>

@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense } from 'react'
 import Layout from './layout/layout'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
-import Orders from './components/worker/orders/orders'
+import Orders from './components/orders/orders'
 import { useDispatch, useSelector } from 'react-redux'
 import { TOKEN_NAME, RESTAURNAT_ID } from './services/servise'
 import Loader from './components/ui/loader/loader'
@@ -9,6 +9,7 @@ import { getUserInfo } from './redux/featchers/userSlice'
 import Logout from './components/auth/logout'
 import { getRestaurantInfo } from './redux/featchers/restaurantSlice'
 import FullItemMenu from './components/menu/fullItemMenu'
+import FullItemOrder from './components/orders/fullItemOrder'
 import AddItemMenu from './components/menu/addItemMenu'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
@@ -36,6 +37,7 @@ const AppRoutes = () => {
 
     let { showiteminfo } = useSelector((state) => state.toggleSlice);
     let { showadditem } = useSelector((state) => state.toggleSlice);
+    let { showorderiteminfo } = useSelector((state) => state.toggleSlice);
     let { item } = useSelector((state) => state.toggleSlice);
     console.log(showiteminfo);
     console.log(item);
@@ -113,7 +115,8 @@ const AppRoutes = () => {
                     <Route path='*' element={<NotFound />} />
 
                 </Routes>
-                {showiteminfo ? <FullItemMenu item={item} /> : null}
+                {showiteminfo ? <FullItemMenu key={item._id} item={item} /> : null}
+                {showorderiteminfo ? <FullItemOrder key={item._id} item={item} /> : null}
                 {showadditem ? <AddItemMenu item={item} /> : null}
             </Router>
         </Suspense>

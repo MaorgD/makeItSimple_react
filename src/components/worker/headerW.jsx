@@ -52,12 +52,12 @@ export default function Header(props) {
                 <div className="flex flex-shrink-0 items-center ">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="https://res.cloudinary.com/dukiq0kql/image/upload/v1668959681/%D7%9E%D7%9E%D7%9E_efwhsl.png"
+                    src="https://res.cloudinary.com/dukiq0kql/image/upload/v1671472533/users/a7ngfxcc281r24bz4mju.png"
                     alt="Your Company"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
-                    src="https://res.cloudinary.com/dukiq0kql/image/upload/v1668959681/%D7%9E%D7%9E%D7%9E_efwhsl.png"
+                    src="https://res.cloudinary.com/dukiq0kql/image/upload/v1671472533/users/a7ngfxcc281r24bz4mju.png"
                     alt="Your Company"
                   />
                 </div>
@@ -112,7 +112,7 @@ export default function Header(props) {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src="https://res.cloudinary.com/dukiq0kql/image/upload/v1671472533/users/a7ngfxcc281r24bz4mju.png"
                         alt=""
                       />
                     </Menu.Button>
