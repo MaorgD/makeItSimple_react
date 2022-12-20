@@ -1,11 +1,11 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { onClickShowOrder } from '../../redux/featchers/toggleSlice'
-import { getTimeAndDate } from "../../helpers/createTime"
+import { getTimeAgo } from "../../helpers/createTime"
 const ItemOrder = (props) => {
     const dispatch = useDispatch()
     const item = props.item
-    const dateCreate = getTimeAndDate(item.createdAt);
+    const dateCreate = getTimeAgo(item.createdAt);
     const openItem = () => {
         dispatch(onClickShowOrder({ item: item }));
     }

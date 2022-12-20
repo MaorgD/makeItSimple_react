@@ -7,6 +7,7 @@ import {
 } from "../../services/tablesService";
 
 const CanvasControl = (props) => {
+    
     const seatsRef = useRef(0)
     const tableNumsRef = useRef()
     let editor = props.editor;
@@ -113,7 +114,12 @@ const CanvasControl = (props) => {
             // fabricCanvas.renderAll.bind(fabricCanvas);
         }
     }
+    const onSave = () => {
 
+        props.onDownloadJSON()
+
+    }
+    
 
     return (
         <div className='flex justify-center items-center '>
@@ -134,12 +140,14 @@ const CanvasControl = (props) => {
                     <button className=' border-4 rounded-xl p-2' onClick={() => { onAddCircle(1) }}>Add circle table</button>
                     <button className='border-4 rounded-xl p-2' onClick={() => { onAddTabale(1) }}>Add table</button>
                     <button className='border-4 rounded-xl p-2 bg-red-500' onClick={removeObjectFromCanvas}>Remove</button>
+                    <button className=' border-4 rounded-xl p-2' onClick={() => { onSave() }}>Save</button>
+
                 </div>
 
             </div>
             <div>
                 <label>Width (px)</label>
-                <select name="cars" id="width"  defaultValue={props.canvasWidth} onChange={e => { changeCanvasWidth(e.target.value) }} >
+                <select name="cars" id="width" defaultValue={props.canvasWidth} onChange={e => { changeCanvasWidth(e.target.value) }} >
                     <option value="600">600</option>
                     <option value="500">500</option>
                     <option value="400">400</option>

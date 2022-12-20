@@ -8,6 +8,7 @@ import { API_URL, RESTAURNAT_ID, doApiTukenGet, doApiMethodTokenNotStringify, do
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Tables() {
+  const { user } = useSelector((state) => state.userSlice);
 
   const [editMode, setEditMode] = useState(false)
   const [firstIn, setFirstIn] = useState(true)
@@ -20,15 +21,15 @@ export default function Tables() {
   useEffect(() => {
     if (editor) {
       // onUploadJson(restaurant.tablesCanvas)
-      
+
       initcanvas()
     }
 
-  }, [editor,restaurant?.tablesCanvas])
+  }, [editor, restaurant?.tablesCanvas])
   useEffect(() => {
     console.log(onReady)
-    if (editor&&restaurant&&firstIn) {
-      if(restaurant.tablesCanvas){
+    if (editor && restaurant && firstIn) {
+      if (restaurant.tablesCanvas) {
 
         onUploadJson(restaurant.tablesCanvas)
         setFirstIn(false)
@@ -97,16 +98,8 @@ export default function Tables() {
     editor.canvas.discardActiveObject()
     setEditMode(true)
   }
-  const onSave = () => {
 
-    onDownloadJSON()
 
-  }
-  const onUpload = () => {
-
-    doApiUploadJson()
-
-  }
 
   const doApiUploadJson = async () => {
     // צריך לעשות GET
@@ -172,20 +165,18 @@ export default function Tables() {
   return (
     <div className="">
       <h1>FabricJS React Sample</h1>
-      <div className="  flex justify-center ">
-        <div>
+      {user?.data?.worker?.jobs.includes("manager") &&
+        <div className="  flex justify-center ">
+          <div>
+            {user?.data?.worker?.jobs.includes("manager") && editMode ?
+              <button onClick={() => { customerMode() }} className=' border-4 rounded-xl p-2' >set</button>
+              :
+              <button onClick={() => { managerMode() }} className=' border-4 rounded-xl p-2' >edit</button>}
+          </div>
 
-          <button className=' border-4 rounded-xl p-2' onClick={() => { onSave() }}>Save</button>
-          {/* <button className='controlBtn' onClick={() => { onDownloadJSON() }}>DownloadJSON</button> */}
-          {/* <button className=' border-4 rounded-xl p-2' onClick={() => { onUpload() }}>UploadJson</button> */}
-
-
-          {editMode ? <button onClick={() => { customerMode() }} className=' border-4 rounded-xl p-2' >set</button>
-            :
-            <button onClick={() => { managerMode() }} className=' border-4 rounded-xl p-2' >edit</button>}
-        </div>
-        {editMode && <CanvasControl editor={editor} setCanvasHeight={setCanvasHeight} setCanvasWidth={setCanvasWidth} canvasHeight={canvasHeight} canvasWidth={canvasWidth} />}
-      </div>
+          {editMode && <CanvasControl onDownloadJSON={onDownloadJSON} editor={editor} setCanvasHeight={setCanvasHeight} setCanvasWidth={setCanvasWidth} canvasHeight={canvasHeight} canvasWidth={canvasWidth} />
+          }
+        </div>}
 
 
 
