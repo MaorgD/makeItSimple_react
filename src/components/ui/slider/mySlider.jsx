@@ -12,6 +12,7 @@ const MySlider = (props) => {
         slidesToShow: 4,
         slidesToScroll: 4,
         initialSlide: 0,
+        
 
         responsive: [
             {

@@ -11,7 +11,7 @@ const SubCategoryInMenu = (props) => {
         <>
 
             <div id={props.item} onClick={onClickSubCat}
-                key={props.item} className=" text-gray-700 border border-red-200 mt-2 text-2xl rounded-full  text-center  hover:bg-blue-400">
+                key={props.item} className=" text-gray-700 border border-red-200 mt-2 text-2xl rounded-full  text-center  hover:bg-blue-400 ml-3">
                 <h3 className="  ">{props.item}</h3>
             </div>
 

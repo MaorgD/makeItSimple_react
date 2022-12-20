@@ -103,12 +103,12 @@ const Menu = () => {
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             MENU :
           </h2>
-          <div>
+          <div className='m-5'>
 
             {categories && <MySlider arr={categories} setFunc={setMenuItem} typ={"CategoryInMenu"} />}
           </div>
 
-          <div>
+          <div  className='m-5'>
 
             {subCategories && <MySlider arr={subCategories} setFunc={setMenuItemByCat} typ={"SubCategoryInMenu"} />}
           </div>
