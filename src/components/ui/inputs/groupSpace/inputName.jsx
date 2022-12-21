@@ -17,9 +17,12 @@ const InputName = (props) => {
         <>
             <div className="col-span-6 sm:col-span-3">
                 <label htmlFor='name' className="block text-sm font-medium text-gray-700"> {label}</label>
-                <input 
-                defaultValue={defaultValue}{...register('name', { required: { value: true, message: 'Name is requried' }, 
-                minLength: { value: 2, message: "Name must be at least 2 characters" } })}
+                <input
+                    defaultValue={defaultValue}
+                    {...register('name', {
+                        required: { value: true, message: 'Name is requried' },
+                        minLength: { value: 2, message: "Name must be at least 2 characters" }
+                    })}
                     type="text"
                     name="name"
                     id="name"
@@ -34,7 +37,7 @@ const InputName = (props) => {
 
 
 
-            
+
         </>
     )
 }

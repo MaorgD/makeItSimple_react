@@ -165,7 +165,6 @@ const EditItemMenu = (props) => {
                                                 setSelecteSubCategory(selecteSubCategoryRef.current.value)
 
                                             }}
-                                                {...register('subCategory', { required: { value: false } })}
                                                 id="subCategory"
                                                 name="subCategory"
                                                 ref={selecteSubCategoryRef}

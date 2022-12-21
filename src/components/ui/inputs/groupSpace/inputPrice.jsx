@@ -17,7 +17,8 @@ const InputPrice = (props) => {
             <div className="col-span-6 sm:col-span-2">
                 <label htmlFor='price' className="block text-sm font-medium text-gray-700">Price</label>
                 <input
-                 defaultValue={defaultValue}  {...register('price', { required: { value: true, message: 'Price is requried' } })}
+                 defaultValue={defaultValue} 
+                  {...register('price', { required: { value: true, message: 'Price is requried' } })}
                     type="number"
                     name="price"
                     id="price"
