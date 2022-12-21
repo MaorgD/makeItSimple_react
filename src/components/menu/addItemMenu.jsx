@@ -7,6 +7,7 @@ import { API_URL, doApiMethodTokenNotStringify, RESTAURNAT_ID } from '../../serv
 import { useNavigate, useParams } from 'react-router-dom'
 import { uploadImage } from '../../helpers/imageupload'
 import { getAllCategories } from '../../helpers/getMenuCategories'
+import InputName from '../../helpers/inputName'
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -112,6 +113,7 @@ const AddItemMenu = (props) => {
                                             {errors.name && errors.name.type === 'minLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.name?.message}</div>}
                                             {errors.name && errors.name.type === 'required' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.name?.message}</div>}
                                         </div>
+                                        {/* <InputName /> */}
 
                                         <div className="col-span-6 sm:col-span-2">
                                             <label className="block text-sm font-medium text-gray-700">Price</label>

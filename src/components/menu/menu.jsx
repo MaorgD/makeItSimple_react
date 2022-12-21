@@ -97,7 +97,7 @@ const Menu = () => {
                 <button onClick={() => { openAddItem() }}
                   className="rounded-full border mr-4 border-transparent bg-indigo-300 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
 
-                  Add new item
+                  Add item
                 </button>
               }
             </div>
