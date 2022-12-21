@@ -58,7 +58,6 @@ const MySlider = (props) => {
                             <SubCategoryInMenu setMenuItemByCat={props.setFunc} key={item} item={item} />
                         ))}
                 </Slider>}
-            {console.log(arr)}
 
 
         </>

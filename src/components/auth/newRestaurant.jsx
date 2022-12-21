@@ -5,6 +5,9 @@ import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
 import { API_URL, regEmail, doApiMethodTokenNotStringify, regPhone } from '../../services/servise';
 import { getCountries, getCities } from '../../helpers/fillCountry'
+import InputName from '../ui/inputs/groupSpace/inputName';
+import InputPhone from '../ui/inputs/groupSpace/inputPhone';
+import InputEmail from '../ui/inputs/groupSpace/inputEmail';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -72,8 +75,9 @@ const NewRestaurant = () => {
 
                         <div className="bg-white px-4 py-5 sm:p-6">
                             <div className="grid grid-cols-6 gap-6">
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                            <InputName label={"Restaurant name"} register={register} errors={errors} />
+                                {/* <div className="col-span-6 sm:col-span-3">
+                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                                         restaurant name
                                     </label>
                                     <input {...register('name', { required: { value: true, message: 'name is requried' }, minLength: { value: 2, message: "name must be at least 2 characters" } })}
@@ -88,28 +92,29 @@ const NewRestaurant = () => {
 
                                     {errors.name && errors.name.type === 'minLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.name?.message}</div>}
                                     {errors.name && errors.name.type === 'required' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.name?.message}</div>}
-                                </div>
+                                </div> */}
 
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                                {/* <div className="col-span-6 sm:col-span-3">
+                                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                                         phone
                                     </label>
                                     <input
                                         {...register('phone', { required: { value: true, message: 'phone is requried' }, pattern: regPhone, minLength: { value: 10, message: "phone must be at least 10 characters" }, maxLength: { value: 15, message: "phone cant be no more 15 characters" } })}
                                         type="text"
                                         name="phone"
-
+                                        id="phone"
                                         autoComplete="phone"
                                         className={classNames(errors.phone ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                            :
-                                            "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")} />
-                                    {errors.phone && errors.phone.type === 'minLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.phone?.message}</div>}
-                                    {errors.phone && errors.phone.type === 'required' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.phone?.message}</div>}
-                                    {errors.phone && errors.phone.type === 'maxLength' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.phone?.message}</div>}
-                                </div>
+                                        :
+                                        "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")} />
+                                        {errors.phone && errors.phone.type === 'minLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.phone?.message}</div>}
+                                        {errors.phone && errors.phone.type === 'required' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.phone?.message}</div>}
+                                        {errors.phone && errors.phone.type === 'maxLength' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.phone?.message}</div>}
+                                    </div> */}
+                                    <InputPhone label={"Phone "} register={register} errors={errors} />
 
-                                <div className="col-span-6" >
-                                    <label htmlFor="email-address" className="sr-only">
+                                {/* <div className="col-span-6" >
+                                    <label htmlFor="email-address" className="">
                                         Email address
                                     </label>
                                     <input {...register('email', { required: true, pattern: regEmail })}
@@ -119,10 +124,11 @@ const NewRestaurant = () => {
                                         autoComplete="email"
                                         className="relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                         placeholder="Email address" />
+                                        
+                                        {errors.email && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid email</p>}
+                                    </div> */}
 
-                                    {errors.email && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid email</p>}
-                                </div>
-
+                                    <InputEmail label={" Email address "} register={register} errors={errors} />
 
                                 <div className="col-span-6 sm:col-span-3">
                                     <label htmlFor="country" className="block text-sm font-medium text-gray-700">

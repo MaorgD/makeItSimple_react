@@ -6,6 +6,7 @@ import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { useDispatch } from 'react-redux';
 import { saveInfo } from '../../redux/featchers/restaurantSlice';
 import { API_URL, regEmail, doApiMethod } from '../../services/servise';
+import InputEmail from '../ui/inputs/groupSpace/inputEmail';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -54,14 +55,13 @@ const RequestResetPass = () => {
                         </p> */}
                     </div>
                     <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">
-                        <input type="hidden" name="remember" defaultValue="true" />
                         <div className="-space-y-px rounded-md shadow-sm">
-                            <div>
-                                <label htmlFor="email-address" className="sr-only">
+                            {/* <div  className="col-span-6">
+                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                     Email address
                                 </label>
                                 <input {...register('email', { required: true, minLength: 2, maxLength: 35, pattern: regEmail })}
-                                    id="email-address"
+                                    id="email"
                                     name="email"
                                     type="text"
                                     autoComplete="email"
@@ -71,9 +71,9 @@ const RequestResetPass = () => {
                                     placeholder="Email address"
 
                                 />
-                            </div>
                             {errors.email && <p className='text-white font-bold bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>Enter valid email</p>}
-
+                            </div> */}
+                                     <InputEmail label={" Email address "} register={register} errors={errors} />
                         </div>
                         {!isSubmitted ?
                             <button
