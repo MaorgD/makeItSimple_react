@@ -71,7 +71,7 @@ const AddItemMenu = (props) => {
             }
         }
         catch (err) {
-            alert(err.response.data.msg);
+            alert(err.msg);
         }
     }
 
@@ -160,7 +160,7 @@ const AddItemMenu = (props) => {
                                             :
                                             <div className="col-span-6 sm:col-span-2">
                                                 <label className="block text-sm font-medium text-gray-700">SubCategory</label>
-                                                <input {...register('subCategory', { required: { value: true, message: 'SubCategory is requried' }, minLength: { value: 2, message: "SubCategory must be at least 2 characters" } })}
+                                                <input {...register('subCategory', { required: { value: false, message: 'SubCategory is requried' }, minLength: { value: 2, message: "SubCategory must be at least 2 characters" } })}
                                                     type="text"
                                                     name="subCategory"
                                                     id="subCategory"

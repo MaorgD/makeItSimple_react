@@ -21,7 +21,7 @@ const InputPhone = (props) => {
                     {label}
                 </label>
                 <input defaultValue={defaultValue}
-                    {...register('phone', { required: { value: true, message: 'phone is requried' }, pattern: regPhone, minLength: { value: 10, message: "phone must be at least 10 characters" }, maxLength: { value: 15, message: "phone cant be no more 15 characters" } })}
+                    {...register('phone', { required: { value: true, message: 'Phone is requried' }, pattern: regPhone, minLength: { value: 10, message: "Phone must be at least 10 characters" }, maxLength: { value: 15, message: "Phone cant be no more 15 characters" } })}
                     type="text"
                     name="phone"
                     id="phone"

@@ -9,6 +9,8 @@ import InputName from '../ui/inputs/groupSpace/inputName';
 import InputPhone from '../ui/inputs/groupSpace/inputPhone';
 import InputEmail from '../ui/inputs/groupSpace/inputEmail';
 import SelectCountry from '../ui/inputs/groupSpace/selectCountry';
+import InputStreetAddress from '../ui/inputs/groupSpace/inputStreetAddress';
+import InputZipCode from '../ui/inputs/groupSpace/inputzipcode';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -76,11 +78,12 @@ const NewRestaurant = () => {
 
                         <div className="bg-white px-4 py-5 sm:p-6">
                             <div className="grid grid-cols-6 gap-6">
-                            <InputName label={"Restaurant name"} register={register} errors={errors} />
-                              
-                                    <InputPhone label={"Phone "} register={register} errors={errors} />
+                                <InputName label={"Restaurant name"} register={register} errors={errors} />
 
-                                    <InputEmail label={" Email address "} register={register} errors={errors} />
+                                <InputPhone label={"Phone "} register={register} errors={errors} />
+
+                                <InputEmail label={" Email address "} register={register} errors={errors} />
+
 
                                 <div className="col-span-6 sm:col-span-3">
                                     <label htmlFor="country" className="block text-sm font-medium text-gray-700">
@@ -110,10 +113,8 @@ const NewRestaurant = () => {
 
                                     </select>
                                 </div>
-
                                 {/* <SelectCountry label={" Country "} register={register} errors={errors} ref={countryRef}
                                  setSelectedCountry={setSelectedCountry} countries={countries} /> */}
-
 
                                 <div className="col-span-6 sm:col-span-6 lg:col-span-3">
                                     <label htmlFor="city" className="block text-sm font-medium text-gray-700">
@@ -139,34 +140,9 @@ const NewRestaurant = () => {
                                     </select>
                                 </div>
 
-                                <div className="col-span-6">
-                                    <label className="block text-sm font-medium text-gray-700">
-                                        Street address
-                                    </label>
-                                    <input {...register('address[Street]', { required: { value: true, message: 'street is requried' }, minLength: { value: 1, message: "street num must be at least 1 characters" }, maxLength: { value: 20, message: "street num cant be no more 20 characters" } })}
-                                        type="text"
-                                        id='Street'
-                                        name="address[Street]"
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    />
-                                    {errors.address && errors.address.Street.type === 'minLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.address.Street?.message}</div>}
-                                    {errors.address && errors.address.Street.type === 'maxLength' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.address.Street?.message}</div>}
-                                    {errors.address && errors.address.Street.type === 'required' && <div className='text-white font-bold bg-red-800 text-center rounded-b-md border-gray-300  py-1'>{errors?.address.Street?.message}</div>}
+                                <InputStreetAddress label={" Street address "} register={register} errors={errors} />
 
-                                </div>
-
-
-
-                                <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                                    <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
-                                        ZIP / Postal code
-                                    </label>
-                                    <input {...register('address[num]', { required: true })}
-                                        type="text"
-                                        name="address[num]"
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    />
-                                </div>
+                                <InputZipCode label={"ZIP / Postal code"} register={register} errors={errors} />
 
                                 <div className="col-span-6">
                                     <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
@@ -179,7 +155,6 @@ const NewRestaurant = () => {
                                 </div>
                             </div>
                         </div>
-
 
                         <div>
 

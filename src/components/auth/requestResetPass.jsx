@@ -56,23 +56,7 @@ const RequestResetPass = () => {
                     </div>
                     <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">
                         <div className="-space-y-px rounded-md shadow-sm">
-                            {/* <div  className="col-span-6">
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                    Email address
-                                </label>
-                                <input {...register('email', { required: true, minLength: 2, maxLength: 35, pattern: regEmail })}
-                                    id="email"
-                                    name="email"
-                                    type="text"
-                                    autoComplete="email"
-                                    className={classNames(errors.email ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                        :
-                                        "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
-                                    placeholder="Email address"
-
-                                />
-                            {errors.email && <p className='text-white font-bold bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>Enter valid email</p>}
-                            </div> */}
+                           
                                      <InputEmail label={" Email address "} register={register} errors={errors} />
                         </div>
                         {!isSubmitted ?

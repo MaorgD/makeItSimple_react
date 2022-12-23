@@ -1,14 +1,7 @@
 import React from 'react'
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
-
 const InputImage = (props) => {
     const setImageSelected = props.setImageSelected
-
-
 
     return (
         <>

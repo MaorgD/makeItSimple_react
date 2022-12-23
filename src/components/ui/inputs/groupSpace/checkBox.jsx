@@ -1,15 +1,9 @@
 import React from 'react'
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
-
 const CheckBox = (props) => {
     const setNew = props.setNew
     const isNew = props.isNew
     const label = props.label
-
 
     return (
         <>

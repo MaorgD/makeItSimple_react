@@ -4,12 +4,10 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-
 const InputPrice = (props) => {
     const errors = props.errors
     const register = props.register
     const defaultValue = props.defaultValue
-
 
 
     return (

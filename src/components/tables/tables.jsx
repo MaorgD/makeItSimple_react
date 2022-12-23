@@ -140,7 +140,8 @@ export default function Tables() {
     delLines(editor);
     const mycanvas = editor.canvas;
     // Generate a JSON string representing the canvas contents
-    const json = JSON.stringify(mycanvas);
+    const json = JSON.stringify(mycanvas.toObject(['id'], true));
+    console.log(json);
     try {
       const url = API_URL + "/restaurants/setCanvas/" + localStorage.getItem(RESTAURNAT_ID)
 

@@ -1,14 +1,8 @@
 import React from 'react'
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
-
 const InputCalories = (props) => {
     const register = props.register
     const defaultValue = props.defaultValue
-
 
 
     return (

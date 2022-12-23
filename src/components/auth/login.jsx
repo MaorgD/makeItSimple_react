@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { saveInfo } from '../../redux/featchers/restaurantSlice';
 import { API_URL, doApiMethodSignUpLogin, TOKEN_NAME, regEmail, regPassword } from '../../services/servise';
 import { getUserInfo } from '../../redux/featchers/userSlice';
+import InputEmailLinked from '../ui/inputs/groupLinked/inputEmailLinked';
+import InputPasswordLinked from '../ui/inputs/groupLinked/inputPasswordLinked';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -31,34 +33,21 @@ const Login = () => {
             const { data } = await doApiMethodSignUpLogin(url, "POST", _dataBody);
             console.log(data);
             if (data.token) {
-
-                // localStorage.setItem(TOKEN_ROLE, data.userRole);
                 localStorage.setItem(TOKEN_NAME, data.token);
-                // localStorage.setItem(TOKEN_NAME, data.token);
-                // localStorage.setItem(TOKEN_ID, data.id);
-                // localStorage.setItem(TOKEN_JOBS, data.jobs);
-                // let user = {
-                    //     id: data.id,
-                    //     userRole: data.userRole,
-                    //     jobs: data.jobs,
-                    
-                    // }
-                    // dispatch(saveInfo({ userInfo: user }));
-                    
-                    console.log(data);
-                    if (data.jobs.includes("manager"))
+
+                console.log(data);
+                if (data.jobs.includes("manager"))
                     nav("/myRestaurantList");
-                    else if (data.jobs.includes("chef"))
+                else if (data.jobs.includes("chef"))
                     nav("/chef");
-                    
-                    else if (data.jobs.includes("waiter"))
+
+                else if (data.jobs.includes("waiter"))
                     nav("/myRestaurantList");
-                    
-                    if (!data.jobs)
+
+                if (!data.jobs)
                     nav("/");
-                }
-                // if (localStorage.getItem[TOKEN_NAME])
-                    dispatch(getUserInfo())
+            }
+            dispatch(getUserInfo())
 
         }
         catch (err) {
@@ -88,42 +77,23 @@ const Login = () => {
                         </p> */}
                     </div>
                     <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">
-                        <input type="hidden" name="remember" defaultValue="true" />
+                        {/* <input type="hidden" name="remember" defaultValue="true" /> */}
                         <div className="-space-y-px rounded-md shadow-sm">
-                            <div>
-                                <label htmlFor="email-address" className="sr-only">
-                                    Email address
-                                </label>
-                                <input {...register('email', { required: true, pattern: regEmail })}
-                                    id="email-address"
-                                    name="email"
-                                    type="text"
-                                    autoComplete="email"
-                                    className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="Email address"
+                            <InputEmailLinked
+                                label={" Email address "}
+                                register={register}
+                                errors={errors}
+                                className={"relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"}
+                            />
+                            <InputPasswordLinked
+                                label={" Password "}
+                                register={register}
+                                errors={errors}
+                                className={classNames(errors.password ? "relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    :
+                                    "relative block w-full appearance-none  rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
+                            />
 
-                                />
-                            </div>
-                            {errors.email && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>Enter valid email</p>}
-
-                            <div>
-                                <label htmlFor="password" className="sr-only">
-                                    Password
-                                </label>
-                                <input {...register('password', { required: { value: true, pattern: regPassword, message: 'password is requried' }, minLength: { value: 6, message: "password! Between 6-16 chars Must contain 1 letter and 1 sign." }, maxLength: { value: 16, message: "password! Between 6-16 chars - 16 max !" } })}
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    autoComplete="current-password"
-                                    className={classNames(errors.password ? "relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                        :
-                                        "relative block w-full appearance-none  rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
-                                    placeholder="Password"
-                                />
-                            </div>
-                            {errors.password && errors.password.type == 'required' && <p className='text-white font-bold bg-red-800 text-center  rounded-b-md border-gray-300  py-1'>{errors?.password?.message}</p>}
-                            {errors.password && errors.password.type == 'minLength' && <p className='text-white font-bold bg-red-800 text-center  rounded-b-md  border-gray-300  py-1'>{errors?.password?.message}</p>}
-                            {errors.password && errors.password.type == 'maxLength' && <p className='text-white font-bold bg-red-800 text-center  rounded-b-md  border-gray-300  py-1'>{errors?.password?.message}</p>}
                         </div>
 
                         <div className="flex items-center justify-between">

@@ -9,7 +9,6 @@ function classNames(...classes) {
 const InputEmail = (props) => {
     const errors = props.errors
     const register = props.register
-    const defaultValue = props.defaultValue
     const label = props.label
 
 
@@ -20,7 +19,7 @@ const InputEmail = (props) => {
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                    {label}
                 </label>
-                <input defaultValue={defaultValue} {...register('email', { required: true, minLength: 2, maxLength: 35, pattern: regEmail })}
+                <input {...register('email', { required: true, minLength: 2, maxLength: 35, pattern: regEmail })}
                     id="email"
                     name="email"
                     type="text"
