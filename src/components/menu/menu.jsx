@@ -102,6 +102,7 @@ const Menu = () => {
               }
             </div>
           </div>
+          
           <div className='m-5'>
 
             {categories && <MySlider arr={categories} setFunc={setMenuItem} typ={"CategoryInMenu"} />}

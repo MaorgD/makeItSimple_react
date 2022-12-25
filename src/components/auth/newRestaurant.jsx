@@ -11,6 +11,8 @@ import InputEmail from '../ui/inputs/groupSpace/inputEmail';
 import SelectCountry from '../ui/inputs/groupSpace/selectCountry';
 import InputStreetAddress from '../ui/inputs/groupSpace/inputStreetAddress';
 import InputZipCode from '../ui/inputs/groupSpace/inputzipcode';
+import SelectCountrySpaced from '../ui/inputs/groupSpace/selectCountrySpaced';
+import SelectCitySpaced from '../ui/inputs/groupSpace/selectCitySpaced';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -23,35 +25,35 @@ const NewRestaurant = () => {
     const [cities, setCities] = useState([]);
     const countryRef = useRef();
     const cityRef = useRef();
+    const nav = useNavigate()
+    let { register, handleSubmit, formState: { errors } } = useForm();
+
     useEffect(() => {
         getAllCountries()
         console.log("Country")
 
-    }, [cities])
+    }, [cities]);
 
     useEffect(() => {
         getAllCities(selectedCountry)
         console.log("selectedCountry")
+
     }, [selectedCountry])
 
     const getAllCountries = async () => {
-        let countries = await getCountries();
-        let countriesName = await countries?.map((country) => country.country);
+        let data = await getCountries();
+        let countriesName = await data?.map((country) => country.country);
         console.log(countriesName)
         setCountries(countriesName);
-    }
+    };
 
     const getAllCities = async (_country) => {
-        let Cities = await getCities(_country);
-        setCities(Cities);
-    }
-    const nav = useNavigate()
-    let { register, handleSubmit, formState: { errors } } = useForm();
-    const onSub = (_dataBody) => {
-        console.log(_dataBody);
-        setIsSubmitted(true);
-        doApi(_dataBody)
-    }
+        let data = await getCities(_country);
+        setCities(data);
+        setSelectedCity(data[0])
+
+    };
+
 
     const doApi = async (_dataBody) => {
         try {
@@ -66,7 +68,15 @@ const NewRestaurant = () => {
             setIsSubmitted(false);
             // console.log(err);
         }
-    }
+    };
+    const onSub = (_dataBody) => {
+        console.log(_dataBody);
+        if (_dataBody.address.city != "none") {
+
+            setIsSubmitted(true);
+            doApi(_dataBody)
+        }
+    };
     return (
         <>
             <div className="flex min-h-full items-center justify-center py-7 px-4 sm:px-6 lg:px-8">
@@ -84,7 +94,11 @@ const NewRestaurant = () => {
 
                                 <InputEmail label={" Email address "} register={register} errors={errors} />
 
+                                {countries &&
+                                    <SelectCountrySpaced label={"Country"} register={register} setSelectedCountry={setSelectedCountry} countries={countries} countryRef={countryRef} />
+                                }
 
+                                {/* 
                                 <div className="col-span-6 sm:col-span-3">
                                     <label htmlFor="country" className="block text-sm font-medium text-gray-700">
                                         Country
@@ -112,16 +126,21 @@ const NewRestaurant = () => {
 
 
                                     </select>
-                                </div>
+                                </div> */}
+
+
                                 {/* <SelectCountry label={" Country "} register={register} errors={errors} ref={countryRef}
                                  setSelectedCountry={setSelectedCountry} countries={countries} /> */}
 
+
+
+                                {/* 
                                 <div className="col-span-6 sm:col-span-6 lg:col-span-3">
                                     <label htmlFor="city" className="block text-sm font-medium text-gray-700">
                                         City
                                     </label>
 
-                                    <select ref={cityRef} defaultValue={selectedCity} onChange={() => { setSelectedCity(cityRef.current.value) }}
+                                    <select ref={cityRef}  onChange={() => { setSelectedCity(cityRef.current.value) }}
                                         {...register('address[city]',
                                             {
                                                 required: { value: true },
@@ -138,7 +157,10 @@ const NewRestaurant = () => {
                                             </option>
                                         ))}
                                     </select>
-                                </div>
+                                </div> */}
+
+                                {cities && <SelectCitySpaced label={"City"} register={register}
+                                    setSelectedCity={setSelectedCity} selectedCity={selectedCity} cities={cities} countryRef={countryRef} />}
 
                                 <InputStreetAddress label={" Street address "} register={register} errors={errors} />
 

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { fabric } from "fabric";
-import { API_URL, RESTAURNAT_ID, doApiMethodTokenPatch } from "../../services/servise";
+import { API_URL, RESTAURNAT_ID, doApiMethodToken, doApiMethodTokenPatch } from "../../services/servise";
 
 import {
     angle, width, height, radius, defaultT, defaultL,
@@ -13,7 +13,7 @@ const CanvasControl = (props) => {
     const tableNumsRef = useRef(0)
     let editor = props.editor;
 
-    const onAddTabale = (tableID) => {
+    const onAddRectangle = async (tableID) => {
 
         // בקשת API להוספת שולחן 
         // לשלוח שי פרמטרים של מספק שולחן ומספר מושבים
@@ -48,7 +48,6 @@ const CanvasControl = (props) => {
                 centeredRotation: true,
                 snapAngle: angle,
                 selectable: true,
-                // type: 'table',
                 number: tableNumsRef.current.value,
                 scrollX: 0,
                 scrollY: 0,
@@ -57,7 +56,7 @@ const CanvasControl = (props) => {
 
             })
             editor.canvas.add(g);
-            console.log(g.id)
+            // console.log(g.id)
 
         }
         console.log("table number", tableNumsRef.current.value)
@@ -93,7 +92,6 @@ const CanvasControl = (props) => {
             centeredRotation: true,
             snapAngle: angle,
             selectable: true,
-            // type: 'table',
             id: tableID,
             number: tableNumsRef.current.value,
 
@@ -101,12 +99,20 @@ const CanvasControl = (props) => {
         editor.canvas.add(g);
     };
 
-    const addTable = async () => {
+    const addTable = async (tableType) => {
         if (seatsRef.current.value > 0 && tableNumsRef.current.value) {
             let { data } = await doApiAdd({ status: "empty", seats: seatsRef.current.value, tableNumber: tableNumsRef.current.value, location: { x: 1, y: 5 } })
-            // console.log(data)
-            await onAddCircle(data)
+            console.log(data)
 
+            if (data) {
+                if (tableType == "circle")
+                    await onAddCircle(data)
+                if (tableType == "rectangle")
+                    await onAddRectangle(data)
+
+
+                await onSave()
+            }
 
         }
 
@@ -128,9 +134,28 @@ const CanvasControl = (props) => {
             console.log(err);
         }
     };
+    const doApiRemove = async (_id) => {
+        const url = `${API_URL}/tables/remove/${localStorage.getItem(RESTAURNAT_ID)}/${_id}`;
+        try {
+
+            const data = await doApiMethodToken(url, "DELETE");
+
+            if (data) {
+                return data
+            } else {
+                alert(data)
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+    };
 
     const removeObjectFromCanvas = () => {
+        console.log(editor.canvas.getActiveObject())
+        doApiRemove(editor.canvas.getActiveObject().id)
         editor.canvas.remove(editor.canvas.getActiveObject());
+        onSave()
     };
 
 
@@ -156,52 +181,68 @@ const CanvasControl = (props) => {
 
 
     return (
-        <div className='flex justify-center items-center '>
-            <div className='flex columns-auto' >
-                <div>
-
-                    <label >number of seats :</label>
-                    <input className='border-2 rounded-md m-1' ref={seatsRef} type={"number"} />
-                </div>
-                <div>
-
-                    <label >table number :</label>
-                    <input className='border-2 rounded-md m-1' ref={tableNumsRef} type={"text"} />
-                </div>
-            </div>
-            <div >
-                <div className='flex items-center justify-center'>
-                    <button className=' border-4 rounded-xl p-2' onClick={() => { addTable() }}>Add circle table</button>
-                    <button className='border-4 rounded-xl p-2' onClick={() => { onAddTabale(11111) }}>Add table</button>
+        <div className='border-4 p-2 rounded-md  shadow-2xl bg-blue-100 '>
+            <div className='  columns-1  space-y-3  ' >
+                <div className=' flex justify-evenly  w-full '>
                     <button className='border-4 rounded-xl p-2 bg-red-500' onClick={removeObjectFromCanvas}>Remove</button>
                     <button className=' border-4 rounded-xl p-2' onClick={() => { onSave() }}>Save</button>
 
                 </div>
+                <div className='w-full flex justify-center items-center'>
 
+                    <label >number of seats :</label>
+                    <input className='border-2 rounded-md m-1 ' ref={seatsRef} type={"number"} />
+                </div>
+                <div className='w-full flex justify-center items-center'>
+
+                    <label >table number :</label>
+                    <input className='border-2 rounded-md m-1' ref={tableNumsRef} type={"text"} />
+                </div>
+                <div className='flex justify-evenly '>
+
+                    <button className=' border-4 rounded-xl p-2 bg-lime-300' onClick={() => { addTable("circle") }}>Add circle table</button>
+                    <button className='border-4 rounded-xl p-2 bg-lime-300' onClick={() => { addTable("rectangle") }}>Add rectangle table</button>
+                </div>
             </div>
-            <div>
-                <label>Width (px)</label>
-                <select name="cars" id="width" defaultValue={props.canvasWidth} onChange={e => { changeCanvasWidth(e.target.value) }} >
-                    <option value="600">600</option>
-                    <option value="500">500</option>
-                    <option value="400">400</option>
-                    <option value="300">300</option>
-                    <option value="200">200</option>
-                    <option value="100">100</option>
 
-                </select >
-            </div>
-            <div>
-                <label>Height (px)</label>
-                <select name="cars" id="height" defaultValue={props.canvasHeight} onChange={e => { changeCanvasheight(e.target.value) }}>
-                    <option value="600">600</option>
-                    <option value="500">500</option>
-                    <option value="400">400</option>
-                    <option value="300">300</option>
-                    <option value="200">200</option>
-                    <option value="100">100</option>
+            <div className=' flex justify-evenly '>
+                <div className='flex-col'>
+                    <div>
 
-                </select>
+                        <label>Width (px)</label>
+                    </div>
+                    <div>
+
+                        <select id="width" defaultValue={props.canvasWidth} onChange={e => { changeCanvasWidth(e.target.value) }} >
+                            <option value="600">600</option>
+                            <option value="500">500</option>
+                            <option value="400">400</option>
+                            <option value="300">300</option>
+                            <option value="200">200</option>
+                            <option value="100">100</option>
+
+                        </select >
+                    </div>
+                </div>
+
+                <div className='flex-col'>
+                    <div>
+
+                        <label>Height (px)</label>
+                    </div>
+                    <div>
+
+                        <select id="height" defaultValue={props.canvasHeight} onChange={e => { changeCanvasheight(e.target.value) }}>
+                            <option value="600">600</option>
+                            <option value="500">500</option>
+                            <option value="400">400</option>
+                            <option value="300">300</option>
+                            <option value="200">200</option>
+                            <option value="100">100</option>
+
+                        </select>
+                    </div>
+                </div>
             </div>
 
 

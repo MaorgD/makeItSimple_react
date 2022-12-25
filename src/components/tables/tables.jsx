@@ -27,7 +27,7 @@ export default function Tables() {
 
   }, [editor, restaurant?.tablesCanvas])
   useEffect(() => {
-    console.log(onReady)
+    // console.log(onReady)
     if (editor && restaurant && firstIn) {
       if (restaurant.tablesCanvas) {
 
@@ -67,6 +67,7 @@ export default function Tables() {
 
 
   const customerMode = () => {
+    onDownloadJSON();
     editor.canvas.getObjects().map(o => {
       o.hasControls = false
       o.lockMovementX = true
@@ -76,12 +77,13 @@ export default function Tables() {
       // }
       o.borderColor = '#38A62E'
       o.borderScaleFactor = 2.5
-    })
-    editor.canvas.selection = false
-    editor.canvas.hoverCursor = 'pointer'
-    editor.canvas.discardActiveObject()
-    setEditMode(false)
-  }
+    });
+    editor.canvas.selection = false;
+    editor.canvas.hoverCursor = 'pointer';
+    editor.canvas.discardActiveObject();
+    setEditMode(false);
+  };
+
   const managerMode = () => {
     editor.canvas.getObjects().map(o => {
       o.hasControls = true
@@ -97,7 +99,7 @@ export default function Tables() {
     editor.canvas.hoverCursor = 'move'
     editor.canvas.discardActiveObject()
     setEditMode(true)
-  }
+  };
 
 
 
@@ -141,7 +143,7 @@ export default function Tables() {
     const mycanvas = editor.canvas;
     // Generate a JSON string representing the canvas contents
     const json = JSON.stringify(mycanvas.toObject(['id'], true));
-    console.log(json);
+    // console.log(json);
     try {
       const url = API_URL + "/restaurants/setCanvas/" + localStorage.getItem(RESTAURNAT_ID)
 
@@ -162,29 +164,92 @@ export default function Tables() {
     initcanvas();
 
   }
+  const onClickNewOrder = async () => {
+    if (selectedObjects[0]) {
+      let orderId = await doApiNewOrder()
+      // console.log(orderId._id)
+      await doApiAddOrderToTable(selectedObjects[0].id, orderId._id)
+
+      if (orderId) {
+      }
+
+    }
+
+  };
+
+  const doApiNewOrder = async () => {
+    try {
+      const url = API_URL + '/orders/addByWorker/' + localStorage.getItem(RESTAURNAT_ID);
+      const { data } = await doApiMethodTokenNotStringify(url, "POST", { status: "ready to order" });
+      if (data);
+      return data
+    }
+    catch (err) {
+      // setIsSubmitted(false);
+      console.log(err);
+    }
+  };
+  const doApiAddOrderToTable = async (tableId, orderId) => {
+    try {
+      // console.log(orderId)
+      const url = `${API_URL}/tables/editOrderID/${tableId}/${orderId}`;
+      const { data } = await doApiMethodTokenNotStringify(url, "PATCH", { isCatched: true });
+      console.log(data);
+      // if (data) {
+      // }
+    }
+    catch (err) {
+      // setIsSubmitted(false);
+      console.log(err);
+    }
+  };
+const onClickOpenOrder =()=>{
+  if (selectedObjects[0]) {
+console.log(restaurant.tables.filter((table)=>(table._id==selectedObjects[0].id)))
+
+  }
+};
 
   return (
-    <div className="">
-      <h1>FabricJS React Sample</h1>
-      {user?.data?.worker?.jobs.includes("manager") &&
-        <div className="  flex justify-center ">
-          <div>
-            {user?.data?.worker?.jobs.includes("manager") && editMode ?
-              <button onClick={() => { customerMode() }} className=' border-4 rounded-xl p-2' >set</button>
-              :
-              <button onClick={() => { managerMode() }} className=' border-4 rounded-xl p-2' >edit</button>}
-          </div>
+    
 
-          {editMode && <CanvasControl onDownloadJSON={onDownloadJSON} editor={editor} setCanvasHeight={setCanvasHeight} setCanvasWidth={setCanvasWidth} canvasHeight={canvasHeight} canvasWidth={canvasWidth} />
-          }
-        </div>}
+    <div className="container mx-auto">
+      <div className=" flex justify-center">
+        <h1>FabricJS React Sample</h1>
 
-
-
-      <div className="flex justify-center">
-
-        <FabricJSCanvas onReady={onReady} />
       </div>
+
+
+
+      <div className="flex justify-evenly ">
+        <div>
+          {user?.data?.worker?.jobs.includes("manager") &&
+            <div className="  flex-col justify-center  items-center p-2 ">
+              <div className=" mx-2">
+                {editMode ?
+                  <button onClick={() => { customerMode() }} className='  border-4 rounded-xl p-2' >set</button>
+                  :
+                  <button onClick={() => { managerMode() }} className=' border-4 rounded-xl p-2' >edit</button>}
+              </div>
+
+              {editMode && <CanvasControl onDownloadJSON={onDownloadJSON} editor={editor} setCanvasHeight={setCanvasHeight} setCanvasWidth={setCanvasWidth} canvasHeight={canvasHeight} canvasWidth={canvasWidth} />
+              }
+
+            </div>}
+          {!editMode &&
+            <div className="border-4 my-2 p-2 flex-col">
+              <button className="border-2 re" onClick={() => { onClickNewOrder() }}>
+                open new order
+              </button>
+              <button className="border-2 re" onClick={() => { onClickOpenOrder()}}>
+                open order
+              </button>
+            </div>}
+        </div>
+        <div> <FabricJSCanvas onReady={onReady} /></div>
+      </div>
+
+
     </div>
   );
 }
