@@ -7,6 +7,8 @@ import { LockClosedIcon } from '@heroicons/react/20/solid'
 import {
     API_URL, doApiMethod, regPassword
 } from '../../services/servise';
+import InputPasswordLinked from '../ui/inputs/groupLinked/inputPasswordLinked';
+import InputConfirmPassword from '../ui/inputs/groupLinked/inputConfirmPassword';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -54,38 +56,22 @@ const ResetPassword = () => {
                 <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">
                     <div className="-space-y-px rounded-md shadow-sm">
 
-                        <div>
-                            <label htmlFor="password" className="sr-only">
-                                Password
-                            </label>
-                            <input {...register('newPassword', { required: { value: true, pattern: regPassword, message: 'password is requried' }, minLength: { value: 6, message: "password! Between 6-16 chars Must contain 1 letter and 1 sign." } })}
-                                id="newPassword"
-                                name="newPassword"
-                                type="password"
-                                autoComplete="current-password"
+                        <InputPasswordLinked
+                            label={" Password "}
+                            register={register}
+                            errors={errors}
+                            className={"relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"}
+                        />
 
-                                className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                placeholder="Password" />
-                        </div>
-                        {errors.newPassword && errors.newPassword.type == 'required' && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>{errors?.newPassword?.message}</p>}
-                        {errors.newPassword && errors.newPassword.type == 'minLength' && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1'>{errors?.newPassword?.message}</p>}
-                        <div>
-                            <label htmlFor="password" className="sr-only">
-                                confirm Password
-                            </label>
-                            <input {...register('confirmPassword', { required: true, validate: (value) => { return value == getValues('newPassword') } })}
-                                id="confirmPassword"
-                                name="confirmPassword"
-                                type="password"
-                                autoComplete="current-confirmPassword"
-
-                                className={classNames(errors.confirmPassword ? "relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    :
-                                    "relative block w-full appearance-none  rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")} placeholder="Confirm password"
-                            />
-
-                        </div>
-                        {errors.confirmPassword && <p className='text-white font-bold bg-red-800 text-center  border-gray-300  py-1  rounded-b-md'>passwords not match!</p>}
+                        <InputConfirmPassword
+                            getValues={getValues}
+                            label={"confirm Password"}
+                            register={register}
+                            errors={errors}
+                            className={classNames(errors.confirmPassword ? "relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                :
+                                "relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
+                        />
                     </div>
                     <div>
                         {!isSubmitted ?

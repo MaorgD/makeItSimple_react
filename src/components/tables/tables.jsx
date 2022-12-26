@@ -29,8 +29,8 @@ export default function Tables() {
   useEffect(() => {
     // console.log(onReady)
     if (editor && restaurant && firstIn) {
-      if (restaurant.tablesCanvas) {
-
+      if (restaurant.tablesCanvas.canvas) {
+        // console.log(restaurant.tablesCanvas) 
         onUploadJson(restaurant.tablesCanvas)
         setFirstIn(false)
       }

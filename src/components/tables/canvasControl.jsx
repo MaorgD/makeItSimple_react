@@ -181,7 +181,7 @@ const CanvasControl = (props) => {
 
 
     return (
-        <div className='border-4 p-2 rounded-md  shadow-2xl bg-blue-100 '>
+        <div className='border-4 p-2 rounded-md  shadow-2xl bg-violet-200 mt-3'>
             <div className='  columns-1  space-y-3  ' >
                 <div className=' flex justify-evenly  w-full '>
                     <button className='border-4 rounded-xl p-2 bg-red-500' onClick={removeObjectFromCanvas}>Remove</button>
@@ -190,12 +190,12 @@ const CanvasControl = (props) => {
                 </div>
                 <div className='w-full flex justify-center items-center'>
 
-                    <label >number of seats :</label>
+                    <label >Number of seats :</label>
                     <input className='border-2 rounded-md m-1 ' ref={seatsRef} type={"number"} />
                 </div>
                 <div className='w-full flex justify-center items-center'>
 
-                    <label >table number :</label>
+                    <label >Table number :</label>
                     <input className='border-2 rounded-md m-1' ref={tableNumsRef} type={"text"} />
                 </div>
                 <div className='flex justify-evenly '>

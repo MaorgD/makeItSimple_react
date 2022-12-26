@@ -13,6 +13,7 @@ import InputStreetAddress from '../ui/inputs/groupSpace/inputStreetAddress';
 import InputZipCode from '../ui/inputs/groupSpace/inputzipcode';
 import SelectCountrySpaced from '../ui/inputs/groupSpace/selectCountrySpaced';
 import SelectCitySpaced from '../ui/inputs/groupSpace/selectCitySpaced';
+import InputInfo from '../ui/inputs/groupSpace/inputInfo';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -98,69 +99,10 @@ const NewRestaurant = () => {
                                     <SelectCountrySpaced label={"Country"} register={register} setSelectedCountry={setSelectedCountry} countries={countries} countryRef={countryRef} />
                                 }
 
-                                {/* 
-                                <div className="col-span-6 sm:col-span-3">
-                                    <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                                        Country
-                                    </label>
-
-                                    <select ref={countryRef} onChange={() => { setSelectedCountry(countryRef.current.value); }}
-                                        {...register('address[country]',
-                                            { required: true })}
-                                        id="country"
-                                        name="address[country]"
-                                        className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    >;
-                                        <option value={"Israel"} key={0} className="capitalize">Israel </option>
-
-                                        {countries
-                                            ?.filter((country) => country !== "Israel")
-                                            .map((country, i) => (
-
-                                                <option value={country} key={i + 1} className="capitalize">
-                                                    {country}
-                                                </option>
-
-
-                                            ))}
-
-
-                                    </select>
-                                </div> */}
-
-
-                                {/* <SelectCountry label={" Country "} register={register} errors={errors} ref={countryRef}
-                                 setSelectedCountry={setSelectedCountry} countries={countries} /> */}
-
-
-
-                                {/* 
-                                <div className="col-span-6 sm:col-span-6 lg:col-span-3">
-                                    <label htmlFor="city" className="block text-sm font-medium text-gray-700">
-                                        City
-                                    </label>
-
-                                    <select ref={cityRef}  onChange={() => { setSelectedCity(cityRef.current.value) }}
-                                        {...register('address[city]',
-                                            {
-                                                required: { value: true },
-                                            })}
-                                        id="city"
-                                        name="address[city]"
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    >
-                                        <option className="capitalize">Select City</option>
-
-                                        {cities?.map((city, i) => (
-                                            <option value={city} key={i + 1} className="capitalize">
-                                                {city}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div> */}
 
                                 {cities && <SelectCitySpaced label={"City"} register={register}
-                                    setSelectedCity={setSelectedCity} selectedCity={selectedCity} cities={cities} countryRef={countryRef} />}
+                                    setSelectedCity={setSelectedCity} selectedCity={selectedCity} cities={cities} countryRef={countryRef} />
+                                }
 
                                 <InputStreetAddress label={" Street address "} register={register} errors={errors} />
 
@@ -172,8 +114,7 @@ const NewRestaurant = () => {
                                     <input {...register('info', { required: true })}
                                         type="text"
                                         name="info"
-                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                    />
+                                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
                                 </div>
                             </div>
                         </div>
