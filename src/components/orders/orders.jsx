@@ -17,7 +17,8 @@ const Orders = () => {
     const [creator, setCreator] = useState("both");
     const [orderType, setOrderType] = useState("both");
     const [active, setActive] = useState("b");
-    const [sortType, setSortType] = useState("all type");
+    const [sortType, setSortType] = useState("createdAt");
+    const [isReverse, setIsReverse] = useState("yes");
     // const [ordersCoutmer, setOrdersOfCoutmer] = useState([]);
     // const [isSelecte, setIsSelecte] = useState(false);
 
@@ -32,15 +33,15 @@ const Orders = () => {
         console.log(creator)
         console.log(orderType)
         console.log(active)
-        // console.log(sortType)
+        console.log(sortType)
         doApiGetAllOrders()
 
-    }, [creator, orderType, active])
+    }, [creator, orderType, active,sortType,isReverse])
 
 
     const doApiGetAllOrders = async () => {
         try {
-            let url = `${API_URL}/orders/${localStorage.getItem(RESTAURNAT_ID)}?active=${active}&ownerType=${creator}&orderType=${orderType}`
+            let url = `${API_URL}/orders/${localStorage.getItem(RESTAURNAT_ID)}?active=${active}&ownerType=${creator}&orderType=${orderType}&sort=${sortType}&reverse=${isReverse}`
             // let urlGet = API_URL + '/orders/' + localStorage.getItem(RESTAURNAT_ID);
             const { data } = await doApiTukenGet(url)
             console.log(data)
@@ -64,7 +65,7 @@ const Orders = () => {
                 {/* <h5 className="m-5 text-center text-3xl font-bold tracking-tight text-gray-900">
                     ORDERS :
                 </h5> */}
-                {<OrdersController allOrders={allOrders} setDisplayOrders={setDisplayOrders} setSortType={setSortType} setActive={setActive} setOrderType={setOrderType} setCreator={setCreator} />}
+                {<OrdersController allOrders={allOrders} setDisplayOrders={setDisplayOrders} setSortType={setSortType} setActive={setActive} setOrderType={setOrderType} setCreator={setCreator} setIsReverse={setIsReverse}  />}
 
 
                 <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8 my-3">

@@ -8,6 +8,7 @@ const OrdersController = (props) => {
     const setOrderType = props.setOrderType
     const setActive = props.setActive
     const setSortType = props.setSortType
+    const setIsReverse = props.setIsReverse
 
     const getAllactiveOrders = async () => {
         // console.log(allOrders)
@@ -78,7 +79,7 @@ const OrdersController = (props) => {
                     </div>
                     <div>
 
-                        <select onChange={(e) => setCreator(e.target.value) } >
+                        <select onChange={(e) => setCreator(e.target.value)} >
                             <option value={"both"}>all</option>
                             <option value={"worker"}>worker</option>
                             <option value={"customer"}>custumer</option>
@@ -122,11 +123,21 @@ const OrdersController = (props) => {
                     </div>
                     <div>
 
-                        <select onChange={(e) => setActive(e.target.value)}>
-//                <option>Final price</option>
-//                 <option>Date created</option>
-//                 <option>Updated</option>
-//             </select>
+                        <select onChange={(e) => setSortType(e.target.value)}>
+                            <option value={"createdAt"}>Date created</option>
+                            <option value={"finalPrice"} >Final price</option>
+                            <option value={"updatedAt"}>Updated</option>
+                            <option value={"discount"}>Discount</option>
+                        </select>
+                        <div>
+
+                            <label htmlFor="">Reverse</label>
+                        </div>
+                        <select onChange={(e) => setIsReverse(e.target.value)}>
+                            <option value={"yes"}>yes</option>
+                            <option value={"no"} >no</option>
+
+                        </select>
                     </div>
                 </div>
             </div>
@@ -134,51 +145,10 @@ const OrdersController = (props) => {
 
         </div>
 
-        //         <div>
-        //             <label htmlFor="">Ordr Owner Type</label>
-        //             <select onChange={(e) => setCreator(e.target.value)} >
-        //                 <option>all</option>
-        //                 <option>custumer</option>
-        //                 <option>worker</option>
-        //             </select>
-        //             <label htmlFor="">Order Type</label>
-        //             <select onChange={(e) => setType(e.target.value)}>
-        //                 <option>all</option>
-        //                 <option>T.A</option>
-        //                 <option>delivery</option>
-        //                 <option>table</option>
-        //             </select>
-        //             <label htmlFor="">Active</label>
-        //             <select onChange={(e) => setActive(e.target.value)} >
-        //                 <option>all</option>
-        //                 <option>Active</option>
-        //                 <option>Not Active</option>
-        //             </select>
-        //             <label htmlFor="">Sort By</label>
-        //             <select onChange={(e) => setSortType(e.target.value)}>
-        //                 <option>Final price</option>
-        //                 <option>Date created</option>
-        //                 <option>Updated</option>
-        //             </select>
-        // </div>
+
     )
 }
 
 export default OrdersController
 
 
-{/* <button className='bg-red-500 rounded-lg ml-3 p-3 '
-onClick={() => { getAllactiveOrders() }}>actives
-
-</button>
-
-<button className='bg-red-500 rounded-lg ml-3 p-3 '
-onClick={() => { getOrderFilterByCoutmer() }}>coutmer
-
-</button>
-
-
-<button className='bg-red-500 rounded-lg ml-3 p-3 '
-onClick={() => { getOrderFilterByWorker() }}>worker
-
-</button> */}

@@ -16,9 +16,9 @@ const ItemOrder = (props) => {
             <div onClick={openItem}
                 key={item._id} className="group">
                 <div style={{
-                    backgroundColor: item.isTA == true ? 'lightyellow' : '',
-                    backgroundColor: item.byCustumer.isDelivery == true ? 'lightpink' : '',
-                    backgroundColor: item.byCustumer.isDelivery == false && item.isTA == false ? 'lightblue' : '',
+                    backgroundColor: item.isTA == true ? 'lightsalmon' : '',
+                    backgroundColor: item.byCustumer.isDelivery == true ? 'lightcoral' : '',
+                    backgroundColor: item.byCustumer.isDelivery == false && item.isTA == false ? ' lightpink' : '',
                 }} className="p-2 w-full  rounded-lg bg-gray-200 ">
 
                     <h3 className=" text-sm text-gray-700 text-center pb-2">{item.status}</h3>
