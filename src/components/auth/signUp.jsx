@@ -4,10 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner'
 import { useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
-import {
-    API_URL, doApiMethodSignUpLogin,
-    regEmail, regPassword, regPhone
-} from '../../services/servise';
+import { API_URL, doApiMethodSignUpLogin} from '../../services/servise';
 import InputEmailLinked from '../ui/inputs/groupLinked/inputEmailLinked';
 import InputFirstName from '../ui/inputs/groupLinked/inputFirstName';
 import InputLastName from '../ui/inputs/groupLinked/InputLastName';
@@ -37,12 +34,10 @@ const SignUp = () => {
         try {
             const url = API_URL + '/users/manager';
             const { data } = await doApiMethodSignUpLogin(url, "POST", _dataBody);
-            console.log(data);
             if (data.email) {
                 nav(`/messages/?name=${data.fullName.firstName}`)
             }
         } catch (err) {
-            console.log(err.response);
             alert(err.response.data.msg || err.response.data[0].message)
             setIsSubmitted(false);
         }

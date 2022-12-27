@@ -4,7 +4,6 @@ import { onClickHideAddItem } from '../../redux/featchers/toggleSlice'
 import PopUPModel from '../ui/popUpModel'
 import { useForm } from 'react-hook-form'
 import { API_URL, doApiMethodTokenNotStringify, RESTAURNAT_ID } from '../../services/servise'
-// import { useNavigate, useParams } from 'react-router-dom'
 import { uploadImage } from '../../helpers/imageupload'
 import { getAllCategories } from '../../helpers/getMenuCategories'
 import InputName from '../ui/inputs/groupSpace/inputName'
@@ -53,7 +52,6 @@ const AddItemMenu = (props) => {
         }
         _dataBody.price = Number(_dataBody.price)
         _dataBody.calories = Number(_dataBody.calories)
-        console.log(_dataBody)
         doApi(_dataBody)
         dispatch(onClickHideAddItem())
     }
@@ -63,8 +61,7 @@ const AddItemMenu = (props) => {
         try {
             _dataBody.img = imageSelected ? await uploadImage(imageSelected) : null;
             const data = await doApiMethodTokenNotStringify(url, "POST", _dataBody);
-            console.log(data);
-            if (data) {
+             if (data) {
                 window.location.reload(false);
             } else {
                 alert(data)

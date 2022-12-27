@@ -9,17 +9,22 @@ const ItemOrder = (props) => {
     const openItem = () => {
         dispatch(onClickShowOrder({ item: item }));
     }
+
+    const divColor = () => {
+        if (item.isTA)
+            return "lightcoral"
+
+        else if (item.byCustumer.isDelivery == false && item.isTA == false)
+            return "lightpink"
+
+        else if (item.byCustumer.isDelivery == true)
+            return "lightsteelblue"
+    };
     return (
-
         <>
-
-            <div onClick={openItem}
+               <div onClick={openItem}
                 key={item._id} className="group">
-                <div style={{
-                    backgroundColor: item.isTA == true ? 'lightsalmon' : '',
-                    backgroundColor: item.byCustumer.isDelivery == true ? 'lightcoral' : '',
-                    backgroundColor: item.byCustumer.isDelivery == false && item.isTA == false ? ' lightpink' : '',
-                }} className="p-2 w-full  rounded-lg bg-gray-200 ">
+                <div style={{ backgroundColor: divColor() }} className="p-2 w-full  rounded-lg  ">
 
                     <h3 className=" text-sm text-gray-700 text-center pb-2">{item.status}</h3>
                     <p className=" text-lg font-medium text-gray-900">{item.finalPrice}</p>
@@ -32,3 +37,4 @@ const ItemOrder = (props) => {
 }
 
 export default ItemOrder
+

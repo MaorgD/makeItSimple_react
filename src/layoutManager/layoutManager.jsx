@@ -5,7 +5,6 @@ import {navigationManager} from '../services/navigation'
 
 
 const LayoutManager = () => {
-// console.log(navigationManager)
   return (
     <div>
       <Header navigation={navigationManager} />

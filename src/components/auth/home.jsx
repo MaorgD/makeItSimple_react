@@ -33,11 +33,9 @@ const Home = () => {
                 </svg>
             </div>
             <div className="px-6 pt-6 lg:px-8">
-                {/* start nav */}
                 <div>
                     <Nav />
                 </div>
-                {/* end nav */}
             </div>
             <main>
                 <div className="relative px-6 lg:px-8">
@@ -71,15 +69,6 @@ const Home = () => {
                                             &rarr;
                                         </span>
                                     </Link>
-                                    {/* <a
-                                        href="#"
-                                        className="inline-block rounded-lg px-4 py-1.5 text-base font-semibold leading-7 text-gray-900 ring-1 ring-gray-900/10 hover:ring-gray-900/20"
-                                    >
-                                        Live demo
-                                        <span className="text-gray-400" aria-hidden="true">
-                                            &rarr;
-                                        </span>
-                                    </a> */}
                                 </div>
                             </div>
                             <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">

@@ -13,23 +13,7 @@ export default function Header(props) {
   const nav = useNavigate();
 
   const { user } = useSelector(state => state.userSlice)
-  // console.log(user.data.worker);
-
-
-  // const onLogOut = () => {
-  //    del token
-  //   if (window.confirm("Are you sure you want to logout ?")) {
-  //     localStorage.removeItem(TOKEN_NAME)
-  //     localStorage.removeItem(RESTAURNAT_ID)
-
-  //     localStorage.removeItem(TOKEN_ROLE)
-  //     localStorage.removeItem(TOKEN_ID)
-  //     localStorage.removeItem(TOKEN_JOBS)
-
-  //     pass to log in page
-  //     nav("/");
-  //   }
-  // }
+  
 
   return (
     <Disclosure as="nav" className="bg-gray-600">
@@ -63,20 +47,7 @@ export default function Header(props) {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {/* {navigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.to}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
-                        )}
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </Link>
-                    ))} 
-                    */}
+          
                     {user?.data?.worker?.jobs &&
                       props.navigation.map((item) => (
                         <Link

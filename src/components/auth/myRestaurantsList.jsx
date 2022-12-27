@@ -32,14 +32,10 @@ const MyRestaurantsList = () => {
             }
 
             try {
-
-                console.log(user);
                 let { data } = await doApiTukenGet(url);
                 setAr(data);
-                console.log(data)
             }
             catch (err) {
-                console.log(err)
                 alert("there problem")
             }
         }

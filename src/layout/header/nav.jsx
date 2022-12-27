@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link, useNavigate } from "react-router-dom"
-import { TOKEN_NAME, RESTAURNAT_ID } from '../../services/servise'
-import { useDispatch } from 'react-redux';
-import { removeInfo } from '../../redux/featchers/restaurantSlice';
+import { Link } from "react-router-dom"
+import { TOKEN_NAME } from '../../services/servise'
 const navigation = [
     { name: 'App Page', href: 'App' },
     { name: 'Features', href: '#' },
@@ -12,18 +10,8 @@ const navigation = [
     { name: 'Company', href: '#' },
 ]
 const Nav = () => {
-    const dispatch = useDispatch();
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const nav = useNavigate();
-    // const onLogOut = () => {
-    //     if (window.confirm("Are you sure you want to logout ?")) {
-    //         localStorage.removeItem(TOKEN_NAME)
-    //         localStorage.removeItem(RESTAURNAT_ID)
-    //         dispatch(removeInfo());
-    //         nav("/");
-    //     }
-    // }
 
     return (
         <div>

@@ -6,11 +6,10 @@ import PopUPModel from '../ui/popUpModel'
 
 const FullItemMenu = (props) => {
     const { user } = useSelector((state) => state.userSlice);
-
     const dispatch = useDispatch()
     const item = props.item
-    // console.log(user)
-    const [isEditMode, setIsEditMode] = useState(false)
+    // משתמשים בסטייט?
+    // const [isEditMode, setIsEditMode] = useState(false)
     const closeItem = () => {
         dispatch(onClickHide())
 
@@ -21,7 +20,6 @@ const FullItemMenu = (props) => {
 
     }
     const onClickDelete = () => {
-        // dispatch(onClickShowEditItem())
         if (window.confirm(`are you sure you want to delete ${item.name}?`))
             doApiDelete()
 
@@ -29,8 +27,6 @@ const FullItemMenu = (props) => {
     const doApiDelete = async () => {
         const url = `${API_URL}/menus/remove/${localStorage.getItem(RESTAURNAT_ID)}/${props.item._id}`;
         try {
-
-            console.log(url);
             const data = await doApiMethodTokenNotStringify(url, "PATCH",);
             if (data) {
                 window.location.reload(false);

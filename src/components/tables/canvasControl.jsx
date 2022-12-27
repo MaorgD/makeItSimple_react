@@ -56,7 +56,6 @@ const CanvasControl = (props) => {
 
             })
             editor.canvas.add(g);
-            // console.log(g.id)
 
         }
         console.log("table number", tableNumsRef.current.value)
@@ -131,7 +130,6 @@ const CanvasControl = (props) => {
             }
         }
         catch (err) {
-            console.log(err);
         }
     };
     const doApiRemove = async (_id) => {
@@ -147,12 +145,10 @@ const CanvasControl = (props) => {
             }
         }
         catch (err) {
-            console.log(err);
         }
     };
 
     const removeObjectFromCanvas = () => {
-        console.log(editor.canvas.getActiveObject())
         doApiRemove(editor.canvas.getActiveObject().id)
         editor.canvas.remove(editor.canvas.getActiveObject());
         onSave()
@@ -163,14 +159,12 @@ const CanvasControl = (props) => {
         if (editor) {
             editor.canvas.setWidth(width)
             props.setCanvasWidth(width)
-            // fabricCanvas.renderAll.bind(fabricCanvas);
         }
     }
     const changeCanvasheight = (height) => {
         if (editor) {
             editor.canvas.setHeight(height)
             props.setCanvasHeight(height)
-            // fabricCanvas.renderAll.bind(fabricCanvas);
         }
     }
     const onSave = () => {
@@ -178,7 +172,6 @@ const CanvasControl = (props) => {
         props.onDownloadJSON()
 
     }
-
 
     return (
         <div className='border-4 p-2 rounded-md  shadow-2xl bg-violet-200 mt-3'>

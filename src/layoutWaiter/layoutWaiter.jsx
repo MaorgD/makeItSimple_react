@@ -5,7 +5,6 @@ import {navigationWaiter} from '../services/navigation'
 
 
 const LayoutWaiter = () => {
-console.log(navigationWaiter)
   return (
     <div>
       <Header navigation={navigationWaiter} />

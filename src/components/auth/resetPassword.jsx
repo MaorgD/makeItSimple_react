@@ -4,9 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner'
 import { useState } from 'react';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
-import {
-    API_URL, doApiMethod, regPassword
-} from '../../services/servise';
+import { API_URL, doApiMethod} from '../../services/servise';
 import InputPasswordLinked from '../ui/inputs/groupLinked/inputPasswordLinked';
 import InputConfirmPassword from '../ui/inputs/groupLinked/inputConfirmPassword';
 
@@ -23,7 +21,6 @@ const ResetPassword = () => {
 
     const onSub = (_dataBody) => {
         setIsSubmitted(true);
-        console.log(_dataBody)
         delete _dataBody.password2
         doApi(_dataBody)
     }
@@ -34,18 +31,15 @@ const ResetPassword = () => {
             if (params.userId && params.uniqueString) {
                 _dataBody.userId = params.userId;
                 _dataBody.uniqueString = params.uniqueString;
-                console.log(_dataBody)
 
                 const url = API_URL + '/users/resetPassword';
                 const { data } = await doApiMethod(url, "POST", _dataBody);
                 if (data) {
                     nav('/login')
                 }
-                console.log(data);
             }
 
         } catch (err) {
-            console.log(err.response);
             alert(err.response.data.msg || err.response.data[0].message)
             setIsSubmitted(false);
         }

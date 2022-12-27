@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { onClickHideEditItem, onClickreturninfo } from '../../redux/featchers/toggleSlice';
 import PopUPModel from '../ui/popUpModel';
 import { useForm } from 'react-hook-form';
-import { API_URL, doApiMethodTokenNotStringify, doApiMethodTokenPatch, RESTAURNAT_ID } from '../../services/servise';
-// import { useNavigate, useParams } from 'react-router-dom';
+import { API_URL, doApiMethodTokenPatch } from '../../services/servise';
 import { uploadImage } from '../../helpers/imageupload';
 import { getAllCategories } from '../../helpers/getMenuCategories';
 import InputName from '../ui/inputs/groupSpace/inputName';
@@ -31,7 +30,6 @@ const EditItemMenu = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [imageSelected, setImageSelected] = useState(null);
     const [isChengeCategory, setIsChengeCategory] = useState(false);
-    console.log(props.item)
     useEffect(() => {
         if (restaurant) {
             setCategories(getAllCategories(restaurant).filter(category => category != props.item.category))
@@ -53,7 +51,6 @@ const EditItemMenu = (props) => {
         }
         _dataBody.price = Number(_dataBody.price)
         _dataBody.calories = Number(_dataBody.calories)
-        console.log(_dataBody)
         if (window.confirm(`Are you sure you want to save edit at ${props.item.name} ?`)) {
             doApiEdit(_dataBody);
             dispatch(onClickHideEditItem())
@@ -66,7 +63,6 @@ const EditItemMenu = (props) => {
 
             _dataBody.img = imageSelected ? await uploadImage(imageSelected) : props.item.img;
             const data = await doApiMethodTokenPatch(url, "PATCH", _dataBody);
-            // console.log(data);
             if (data) {
                 window.location.reload(false);
             } else {

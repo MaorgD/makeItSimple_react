@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
-import { API_URL, doApiMethodFillDetales, regPassword, regPhone } from '../../services/servise';
+import { API_URL, doApiMethodFillDetales } from '../../services/servise';
 import InputFirstName from '../ui/inputs/groupLinked/inputFirstName';
 import InputLastName from '../ui/inputs/groupLinked/InputLastName';
 import InputPinCode from '../ui/inputs/groupLinked/inputPinCode';
@@ -21,7 +21,6 @@ const WorkerFill = () => {
     let { register, handleSubmit, getValues, formState: { errors } } = useForm();
 
     const onSub = (_dataBody) => {
-        // console.log(_dataBody);
         delete _dataBody.confirmPassword
         setfillDetales(true);
         doApi(_dataBody)
@@ -31,7 +30,6 @@ const WorkerFill = () => {
         const url = API_URL + '/users/worker/' + params.userId;
         try {
             const { data } = await doApiMethodFillDetales(url, "PATCH", _dataBody);
-            console.log(data);
             if (data) {
                 nav("/login")
             } else {

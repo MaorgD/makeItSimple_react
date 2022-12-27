@@ -1,23 +1,21 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
-import { useDispatch } from 'react-redux';
-import { saveInfo } from '../../redux/featchers/restaurantSlice';
-import { API_URL, regEmail, doApiMethod } from '../../services/servise';
+import { API_URL, doApiMethod } from '../../services/servise';
 import InputEmail from '../ui/inputs/groupSpace/inputEmail';
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
+// function classNames(...classes) {
+//     return classes.filter(Boolean).join(' ')
+// }
+
 const RequestResetPass = () => {
     let { register, handleSubmit, formState: { errors } } = useForm();
     const nav = useNavigate()
     const [isSubmitted, setIsSubmitted] = useState(false)
 
     const onSub = (_dataBody) => {
-        // console.log(_dataBody);
         setIsSubmitted(true);
         doApi(_dataBody)
     }

@@ -6,7 +6,6 @@ import PopUPModel from '../ui/popUpModel'
 const FullItemOrder = (props) => {
     const dispatch = useDispatch()
     const item = props.item
-    // console.log(item)
     const openItem = () => {
         dispatch(onClickHideOrder())
     }
@@ -50,7 +49,6 @@ const FullItemOrder = (props) => {
                                             <td className="p-2 border-2 border-black ">{orderItem.note}</td>
                                             <td className="p-2 border-2 border-black ">{orderItem.itemMenuId.price}</td>
                                         </tr>
-                                        // <p key={orderItem.itemMenuId._id} className=" xl:text-2xl font-medium text-gray-900"> {orderItem.itemMenuId.name}</p>
                                     ))
 
                                 }

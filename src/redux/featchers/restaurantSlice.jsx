@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { API_URL, doApiTukenGet, RESTAURNAT_ID } from "../../services/servise"
 
-
-
 export const getRestaurantInfo = createAsyncThunk(
     "restaurant,getRestaurantInfo", async (dispatch, getState) => {
         if (localStorage.getItem(RESTAURNAT_ID)) {

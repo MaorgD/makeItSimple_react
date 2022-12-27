@@ -5,7 +5,6 @@ import {navigationChef} from '../services/navigation'
 
 
 const LayoutChef = () => {
-console.log(navigationChef)
   return (
     <div>
       <Header navigation={navigationChef} />

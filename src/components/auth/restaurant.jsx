@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { getRestaurantInfo, saveResrtaurant } from '../../redux/featchers/restaurantSlice';
+import { useDispatch } from 'react-redux';
+import { getRestaurantInfo } from '../../redux/featchers/restaurantSlice';
 import { RESTAURNAT_ID } from '../../services/servise'
 
 const Restaurant = (props) => {
@@ -11,7 +11,6 @@ const Restaurant = (props) => {
 
     let item = props.item;
     const onClickResta = () => {
-        // dispatch(saveResrtaurant({ restaurantId: item._id }));
         localStorage.setItem(RESTAURNAT_ID, item._id)
         dispatch(getRestaurantInfo())
 

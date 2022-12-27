@@ -3,21 +3,19 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
-import { API_URL, regEmail, doApiMethodTokenNotStringify, regPhone } from '../../services/servise';
+import { API_URL, doApiMethodTokenNotStringify } from '../../services/servise';
 import { getCountries, getCities } from '../../helpers/fillCountry'
 import InputName from '../ui/inputs/groupSpace/inputName';
 import InputPhone from '../ui/inputs/groupSpace/inputPhone';
 import InputEmail from '../ui/inputs/groupSpace/inputEmail';
-import SelectCountry from '../ui/inputs/groupSpace/selectCountry';
 import InputStreetAddress from '../ui/inputs/groupSpace/inputStreetAddress';
 import InputZipCode from '../ui/inputs/groupSpace/inputzipcode';
 import SelectCountrySpaced from '../ui/inputs/groupSpace/selectCountrySpaced';
 import SelectCitySpaced from '../ui/inputs/groupSpace/selectCitySpaced';
-import InputInfo from '../ui/inputs/groupSpace/inputInfo';
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
+// function classNames(...classes) {
+//     return classes.filter(Boolean).join(' ')
+// }
 const NewRestaurant = () => {
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState("Israel");
@@ -25,26 +23,22 @@ const NewRestaurant = () => {
     const [countries, setCountries] = useState([]);
     const [cities, setCities] = useState([]);
     const countryRef = useRef();
-    const cityRef = useRef();
     const nav = useNavigate()
     let { register, handleSubmit, formState: { errors } } = useForm();
 
     useEffect(() => {
         getAllCountries()
-        console.log("Country")
 
     }, [cities]);
 
     useEffect(() => {
         getAllCities(selectedCountry)
-        console.log("selectedCountry")
 
     }, [selectedCountry])
 
     const getAllCountries = async () => {
         let data = await getCountries();
         let countriesName = await data?.map((country) => country.country);
-        console.log(countriesName)
         setCountries(countriesName);
     };
 
@@ -60,18 +54,15 @@ const NewRestaurant = () => {
         try {
             const url = API_URL + '/restaurants/create';
             const { data } = await doApiMethodTokenNotStringify(url, "POST", _dataBody);
-            console.log(data);
             if (data) {
                 nav(`/manager`)
             }
         }
         catch (err) {
             setIsSubmitted(false);
-            // console.log(err);
         }
     };
     const onSub = (_dataBody) => {
-        console.log(_dataBody);
         if (_dataBody.address.city != "none") {
 
             setIsSubmitted(true);

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { fabric } from "fabric";
 import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
 import CanvasControl from "./canvasControl";
-// import myjson from './canvas(2).json'
 import { addLineX, addLineY, checkBoudningBox, checkBoundingOnScale, delLines, snapToGrid } from "../../services/tablesService";
-import { API_URL, RESTAURNAT_ID, doApiTukenGet, doApiMethodTokenNotStringify, doApiMethodToken, doApiMethodTokenPatch } from "../../services/servise";
-import { useSelector, useDispatch } from 'react-redux';
+import { API_URL, RESTAURNAT_ID, doApiTukenGet, doApiMethodTokenNotStringify, doApiMethodTokenPatch } from "../../services/servise";
+import { useSelector } from 'react-redux';
 
 export default function Tables() {
   const { user } = useSelector((state) => state.userSlice);
@@ -20,17 +18,13 @@ export default function Tables() {
 
   useEffect(() => {
     if (editor) {
-      // onUploadJson(restaurant.tablesCanvas)
-
       initcanvas()
     }
 
   }, [editor, restaurant?.tablesCanvas])
   useEffect(() => {
-    // console.log(onReady)
     if (editor && restaurant && firstIn) {
       if (restaurant.tablesCanvas.canvas) {
-        // console.log(restaurant.tablesCanvas) 
         onUploadJson(restaurant.tablesCanvas)
         setFirstIn(false)
       }
@@ -72,9 +66,6 @@ export default function Tables() {
       o.hasControls = false
       o.lockMovementX = true
       o.lockMovementY = true
-      // if (o.type === 'chair' || o.type === 'bar' || o.type === 'wall') {
-      //   o.selectable = false
-      // }
       o.borderColor = '#38A62E'
       o.borderScaleFactor = 2.5
     });
@@ -89,9 +80,6 @@ export default function Tables() {
       o.hasControls = true
       o.lockMovementX = false
       o.lockMovementY = false
-      // if (o.type === 'chair' || o.type === 'bar' || o.type === 'wall') {
-      //   o.selectable = true
-      // }
       o.borderColor = 'rgba(102, 153, 255, 0.75)'
       o.borderScaleFactor = 1
     })
@@ -111,15 +99,13 @@ export default function Tables() {
     try {
       const url = API_URL + "/restaurants/getCanvas/" + localStorage.getItem(RESTAURNAT_ID)
       const { data } = await doApiTukenGet(url)
-      console.log(data)
-
       if (data.canvas) {
         onUploadJson(data)
       }
 
     } catch (err) {
-      console.log(err)
-    }
+
+        }
 
 
   }
@@ -143,22 +129,18 @@ export default function Tables() {
     const mycanvas = editor.canvas;
     // Generate a JSON string representing the canvas contents
     const json = JSON.stringify(mycanvas.toObject(['id'], true));
-    // console.log(json);
     try {
       const url = API_URL + "/restaurants/setCanvas/" + localStorage.getItem(RESTAURNAT_ID)
 
-      // console.log(b)
       const data = await doApiMethodTokenPatch(url, "PATCH", {
         canvas: json,
         height: canvasHeight.toString(),
         width: canvasWidth.toString()
 
       })
-      console.log(data)
 
 
     } catch (err) {
-      console.log(err)
 
     }
     initcanvas();
@@ -167,10 +149,10 @@ export default function Tables() {
   const onClickNewOrder = async () => {
     if (selectedObjects[0]) {
       let orderId = await doApiNewOrder()
-      // console.log(orderId._id)
       await doApiAddOrderToTable(selectedObjects[0].id, orderId._id)
 
       if (orderId) {
+
       }
 
     }
@@ -185,18 +167,14 @@ export default function Tables() {
       return data
     }
     catch (err) {
-      // setIsSubmitted(false);
-      console.log(err);
+
     }
   };
   const doApiAddOrderToTable = async (tableId, orderId) => {
     try {
-      // console.log(orderId)
       const url = `${API_URL}/tables/editOrderID/${tableId}/${orderId}`;
       const { data } = await doApiMethodTokenNotStringify(url, "PATCH", { isCatched: true });
-      console.log(data);
-      // if (data) {
-      // }
+      
     }
     catch (err) {
       // setIsSubmitted(false);

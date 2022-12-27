@@ -12,7 +12,6 @@ const SelectCitySpaced = (props) => {
 
 
     const cityRef = useRef();
-    console.log(selectedCity)
 
     return (
         <>
