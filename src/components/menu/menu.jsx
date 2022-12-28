@@ -76,7 +76,7 @@ const Menu = (props) => {
     <>
       <div className="bg-white">
         <div className=" mx-auto max-w-2xl  px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 justify-center">
-          <div className=' mt-2 flex justify-center '>
+          <div className=' mb-3 flex justify-center '>
             {user?.data?.worker?.jobs.includes("manager")&&!props?.fromTable
               &&
               <button onClick={() => { openAddItem() }}
@@ -87,12 +87,12 @@ const Menu = (props) => {
             }
           </div>
 
-          <div className=''>
+          <div className='mb-2'>
 
             {categories && <MySlider arr={categories} setFunc={setMenuItem} typ={"CategoryInMenu"} />}
           </div>
 
-          <div className=''>
+          <div className='mb-4'>
 
             {subCategories && <MySlider arr={subCategories} setFunc={setMenuItemByCat} typ={"SubCategoryInMenu"} />}
           </div>

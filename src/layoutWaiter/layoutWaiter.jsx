@@ -6,10 +6,10 @@ import {navigationWaiter} from '../services/navigation'
 
 const LayoutWaiter = () => {
   return (
-    <div>
+    <>
       <Header navigation={navigationWaiter} />
       <Outlet />
-    </div>
+    </>
   )
 }
 

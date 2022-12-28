@@ -150,7 +150,7 @@ export default function Tables() {
   const onClickNewOrder = async () => {
     if (selectedObjects[0]) {
       let table = restaurant.tables.filter((table) => (table._id == selectedObjects[0].id))
-      if (table[0].isCatched == false) {
+      if (table[0]?.isCatched == false) {
 
         let orderId = await doApiNewOrder()
         await doApiAddOrderToTable(selectedObjects[0].id, orderId._id)
@@ -214,7 +214,7 @@ export default function Tables() {
 
 
 
-      <div className="flex justify-evenly ">
+      <div className="flex flex-col  items-center ">
         <div>
           {user?.data?.worker?.jobs.includes("manager") &&
             <div className="  flex-col justify-center  items-center p-2 ">
@@ -223,6 +223,8 @@ export default function Tables() {
                   <button onClick={() => {
                     onDownloadJSON();
                     customerMode()
+                    window.location.reload(false);
+
                   }} className='  border-4 rounded-xl p-2' >set</button>
                   :
                   <button onClick={() => { managerMode() }} className=' border-4 rounded-xl p-2' >edit</button>}
@@ -233,7 +235,7 @@ export default function Tables() {
 
             </div>}
           {!editMode &&
-            <div className="border-4 my-2 p-2 flex-col">
+            <div className="border-4 my-2 p-2 ">
               <button className="border-2 re" onClick={() => { onClickNewOrder() }}>
                 open new order
               </button>

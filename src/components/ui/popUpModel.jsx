@@ -22,9 +22,8 @@ const PopUpOverlay = ({ action, children }) => {
   const [over, setOver] = useState(false);
   const dispatch = useDispatch();
   return (
-      <div className="data">
     <div className={classes.model}>
-        {/* <h2
+      {/* <h2
           className=" exit w-full md:hidden flex justify-end "
           onMouseOver={() => setOver(true)}
           onMouseLeave={() => setOver(false)}
@@ -38,8 +37,8 @@ const PopUpOverlay = ({ action, children }) => {
             <ExitNoFill className="icon" width={32} height={32} />
           )}
         </h2> */}
-        <div>{children}</div>
-      </div>
+
+      <div className="overflow-y-auto max-h-[1000px]  scroll-smooth scrollbar">{children}</div>
     </div>
   );
 };
