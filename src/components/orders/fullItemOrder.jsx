@@ -45,9 +45,9 @@ const FullItemOrder = (props) => {
                                 {item.orderItems[0] &&
                                     item.orderItems.map((orderItem) => (
                                         <tr key={orderItem._id}>
-                                            <td className="p-2 border-2 border-black ">{orderItem.itemMenuId.name}</td>
-                                            <td className="p-2 border-2 border-black ">{orderItem.note}</td>
-                                            <td className="p-2 border-2 border-black ">{orderItem.itemMenuId.price}</td>
+                                            <td className="p-2 border-2 border-black ">{orderItem?.itemMenuId?.name}</td>
+                                            <td className="p-2 border-2 border-black ">{orderItem?.note}</td>
+                                            <td className="p-2 border-2 border-black ">{orderItem?.itemMenuId?.price}</td>
                                         </tr>
                                     ))
 

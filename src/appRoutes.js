@@ -12,6 +12,7 @@ import FullItemMenu from './components/menu/fullItemMenu'
 import FullItemOrder from './components/orders/fullItemOrder'
 import AddItemMenu from './components/menu/addItemMenu'
 import EditItemMenu from './components/menu/editItemMenu'
+import FullTableItem from './components/tables/fullTableItem'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
 const ResetPassword = React.lazy(() => import('./components/auth/resetPassword'));
@@ -40,7 +41,9 @@ const AppRoutes = () => {
     let { showadditem } = useSelector((state) => state.toggleSlice);
     let { showorderiteminfo } = useSelector((state) => state.toggleSlice);
     let { showEditItem } = useSelector((state) => state.toggleSlice);
+    let { showTableItem } = useSelector((state) => state.toggleSlice);
     let { item } = useSelector((state) => state.toggleSlice);
+    let { TableItem } = useSelector((state) => state.toggleSlice);
     // console.log(showiteminfo);
     // console.log(item);
     useEffect(() => {
@@ -117,6 +120,7 @@ const AppRoutes = () => {
                 {showorderiteminfo ? <FullItemOrder key={item._id} item={item} /> : null}
                 {showadditem ? <AddItemMenu /> : null}
                 {showEditItem ? <EditItemMenu item={item} /> : null}
+                {showTableItem ? <FullTableItem item={TableItem} /> : null}
             </Router>
         </Suspense>
     )

@@ -5,7 +5,7 @@ import { onClickAddItem } from '../../redux/featchers/toggleSlice'
 import MySlider from "../ui/slider/mySlider"
 import { getAllCategories } from '../../helpers/getMenuCategories';
 
-const Menu = () => {
+const Menu = (props) => {
   const { restaurant } = useSelector((state) => state.restaurantSlice);
   const { user } = useSelector((state) => state.userSlice);
   const dispatch = useDispatch();
@@ -75,9 +75,9 @@ const Menu = () => {
   return (
     <>
       <div className="bg-white">
-        <div className=" mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 justify-center">
+        <div className=" mx-auto max-w-2xl  px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 justify-center">
           <div className=' mt-2 flex justify-center '>
-            {user?.data?.worker?.jobs.includes("manager")
+            {user?.data?.worker?.jobs.includes("manager")&&!props?.fromTable
               &&
               <button onClick={() => { openAddItem() }}
                 className="rounded-full border mr-4 border-transparent bg-indigo-300 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -87,12 +87,12 @@ const Menu = () => {
             }
           </div>
 
-          <div className='m-5'>
+          <div className=''>
 
             {categories && <MySlider arr={categories} setFunc={setMenuItem} typ={"CategoryInMenu"} />}
           </div>
 
-          <div className='m-5'>
+          <div className=''>
 
             {subCategories && <MySlider arr={subCategories} setFunc={setMenuItemByCat} typ={"SubCategoryInMenu"} />}
           </div>
@@ -100,7 +100,7 @@ const Menu = () => {
           {<div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
             {
               isSelecte && itesmOfCat.map((item) => (
-                <ItemMenu key={item._id} item={item} />
+                <ItemMenu key={item._id} fromTable={props?.fromTable} item={item} />
               ))}
 
           </div>}

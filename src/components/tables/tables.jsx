@@ -3,10 +3,12 @@ import { FabricJSCanvas, useFabricJSEditor } from "fabricjs-react";
 import CanvasControl from "./canvasControl";
 import { addLineX, addLineY, checkBoudningBox, checkBoundingOnScale, delLines, snapToGrid } from "../../services/tablesService";
 import { API_URL, RESTAURNAT_ID, doApiTukenGet, doApiMethodTokenNotStringify, doApiMethodTokenPatch } from "../../services/servise";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { onClickShowTableInfo } from '../../redux/featchers/toggleSlice'
 
 export default function Tables() {
   const { user } = useSelector((state) => state.userSlice);
+  const dispatch = useDispatch();
 
   const [editMode, setEditMode] = useState(false)
   const [firstIn, setFirstIn] = useState(true)
@@ -61,7 +63,6 @@ export default function Tables() {
 
 
   const customerMode = () => {
-    onDownloadJSON();
     editor.canvas.getObjects().map(o => {
       o.hasControls = false
       o.lockMovementX = true
@@ -105,7 +106,7 @@ export default function Tables() {
 
     } catch (err) {
 
-        }
+    }
 
 
   }
@@ -148,13 +149,17 @@ export default function Tables() {
   }
   const onClickNewOrder = async () => {
     if (selectedObjects[0]) {
-      let orderId = await doApiNewOrder()
-      await doApiAddOrderToTable(selectedObjects[0].id, orderId._id)
+      let table = restaurant.tables.filter((table) => (table._id == selectedObjects[0].id))
+      if (table[0].isCatched == false) {
 
-      if (orderId) {
+        let orderId = await doApiNewOrder()
+        await doApiAddOrderToTable(selectedObjects[0].id, orderId._id)
+
+        if (orderId) {
+          console.log(orderId)
+        }
 
       }
-
     }
 
   };
@@ -173,23 +178,33 @@ export default function Tables() {
   const doApiAddOrderToTable = async (tableId, orderId) => {
     try {
       const url = `${API_URL}/tables/editOrderID/${tableId}/${orderId}`;
-      const { data } = await doApiMethodTokenNotStringify(url, "PATCH", { isCatched: true });
-      
+      const { data } = await doApiMethodTokenNotStringify(url, "PATCH", { isCatched: true, status: "full" });
+
     }
     catch (err) {
       // setIsSubmitted(false);
       console.log(err);
     }
   };
-const onClickOpenOrder =()=>{
-  if (selectedObjects[0]) {
-console.log(restaurant.tables.filter((table)=>(table._id==selectedObjects[0].id)))
 
-  }
-};
+  const onClickOpenOrder = async () => {
+    if (selectedObjects[0]) {
+      // let table = restaurant.tables.filter((table) => (table._id == selectedObjects[0].id))
+      try {
+        let url = API_URL + "/tables/" + selectedObjects[0].id
+        const { data } = await doApiTukenGet(url);
+        // console.log(data);
+        if (data)
+          dispatch(onClickShowTableInfo({ TableItem: data }))
+      }
+      catch (err) {
+        console.log(err);
+      }
+    }
+  };
 
   return (
-    
+
 
     <div className="container mx-auto">
       <div className=" flex justify-center">
@@ -205,7 +220,10 @@ console.log(restaurant.tables.filter((table)=>(table._id==selectedObjects[0].id)
             <div className="  flex-col justify-center  items-center p-2 ">
               <div className=" mx-2">
                 {editMode ?
-                  <button onClick={() => { customerMode() }} className='  border-4 rounded-xl p-2' >set</button>
+                  <button onClick={() => {
+                    onDownloadJSON();
+                    customerMode()
+                  }} className='  border-4 rounded-xl p-2' >set</button>
                   :
                   <button onClick={() => { managerMode() }} className=' border-4 rounded-xl p-2' >edit</button>}
               </div>
@@ -219,7 +237,7 @@ console.log(restaurant.tables.filter((table)=>(table._id==selectedObjects[0].id)
               <button className="border-2 re" onClick={() => { onClickNewOrder() }}>
                 open new order
               </button>
-              <button className="border-2 re" onClick={() => { onClickOpenOrder()}}>
+              <button className="border-2 re" onClick={() => { onClickOpenOrder() }}>
                 open order
               </button>
             </div>}

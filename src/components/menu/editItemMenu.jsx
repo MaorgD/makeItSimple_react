@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { onClickHideEditItem, onClickreturninfo } from '../../redux/featchers/toggleSlice';
+import { onClickHideEditItem, onClickReturnInfo } from '../../redux/featchers/toggleSlice';
 import PopUPModel from '../ui/popUpModel';
 import { useForm } from 'react-hook-form';
 import { API_URL, doApiMethodTokenPatch } from '../../services/servise';
@@ -92,7 +92,7 @@ const EditItemMenu = (props) => {
         dispatch(onClickHideEditItem())
     }
     const returnItemInfo = () => {
-        dispatch(onClickreturninfo())
+        dispatch(onClickReturnInfo())
     }
     return (
         <PopUPModel>
