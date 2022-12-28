@@ -51,7 +51,7 @@ const OrdersController = (props) => {
 
     return (
 
-        <div className='border-4 p-2 rounded-md  shadow-2xl bg-violet-200 m-3 py-6'>
+        <div className='border-4 rounded-md  shadow-2xl bg-violet-200 mb-6 pb-6 py-3'>
             <h2 className="m-5 text-center text-xl font-bold tracking-tight text-gray-900">
                 ORDERS :
             </h2>
@@ -59,12 +59,12 @@ const OrdersController = (props) => {
 
 
                 <div className='flex-col '>
-                    <div className='mb-3 pl-6'>
+                    <div className='mb-3 pl-6 '>
                         <label htmlFor='owner_diabled' >Owner</label>
                     </div>
                     <div>
 
-                        <select onChange={(e) => setCreator(e.target.value)} id="owner_diabled" class="block py-2.5 mx-2 w-full text-sm text-black
+                        <select onChange={(e) => setCreator(e.target.value)} id="owner_diabled" className="block py-2.5 mx-2 w-full text-sm text-black
                          bg-transparent border-0 border-b-2 border-black 
                          appearance-none
                          focus:outline-none focus:ring-0 focus:border-gray-700 peer " >
@@ -84,7 +84,7 @@ const OrdersController = (props) => {
                     </div>
                     <div>
 
-                        <select onChange={(e) => setOrderType(e.target.value)} id="type_diabled" class="block py-2.5 mx-1  w-full text-sm text-black
+                        <select onChange={(e) => setOrderType(e.target.value)} id="type_diabled" className="block py-2.5 mx-1  w-full text-sm text-black
                          bg-transparent border-0 border-b-2 border-black 
                          appearance-none
                          focus:outline-none focus:ring-0 focus:border-gray-700 peer " >
@@ -104,7 +104,7 @@ const OrdersController = (props) => {
                     </div>
                     <div>
 
-                        <select onChange={(e) => setActive(e.target.value)} id="active_diabled" class="block py-2.5 mx-1  w-full text-sm text-black
+                        <select onChange={(e) => setActive(e.target.value)} id="active_diabled" className="block py-2.5 mx-1  w-full text-sm text-black
                          bg-transparent border-0 border-b-2 border-black 
                          appearance-none
                          focus:outline-none focus:ring-0 focus:border-gray-700 peer ">
@@ -122,7 +122,7 @@ const OrdersController = (props) => {
                     </div>
                     <div>
 
-                        <select onChange={(e) => setSortType(e.target.value)} id="srot_diabled" class="block py-2.5 mx-1  w-full text-sm text-black
+                        <select onChange={(e) => setSortType(e.target.value)} id="srot_diabled" className="block py-2.5 mx-1  w-full text-sm text-black
                          bg-transparent border-0 border-b-2 border-black 
                          appearance-none
                          focus:outline-none focus:ring-0 focus:border-gray-700 peer ">
@@ -142,7 +142,7 @@ const OrdersController = (props) => {
                     </div>
                     <div>
 
-                        <select onChange={(e) => setIsReverse(e.target.value)} id="reverse_diabled" class="block py-2.5 mx-1  w-full text-sm text-black
+                        <select onChange={(e) => setIsReverse(e.target.value)} id="reverse_diabled" className="block py-2.5 mx-1  w-full text-sm text-black
                          bg-transparent border-0 border-b-2 border-black 
                          appearance-none
                          focus:outline-none focus:ring-0 focus:border-gray-700 peer ">

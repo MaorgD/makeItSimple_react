@@ -20,7 +20,6 @@ const MyRestaurantsList = () => {
     const doApi = async () => {
         if (user) {
             let url;
-
             if (user?.data?.worker?.jobs.includes("manager")){
                 setIsManager(true)
                 url = API_URL + '/restaurants/myrestaurants/';
@@ -28,15 +27,19 @@ const MyRestaurantsList = () => {
             else{
                 setIsManager(false)
 
-                url = API_URL + '/restaurants//myworks';
+                url = API_URL + '/restaurants/myworks';
             }
 
             try {
-                let { data } = await doApiTukenGet(url);
+                let  {data}  = await doApiTukenGet(url);
                 setAr(data);
+                // console.log(data)
+
             }
             catch (err) {
-                alert("there problem")
+                // alert("there problem")
+                console.log(err)
+                
             }
         }
     }

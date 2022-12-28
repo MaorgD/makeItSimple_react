@@ -10,6 +10,7 @@ const Restaurant = (props) => {
     const dispatch = useDispatch();
 
     let item = props.item;
+    console.log(item);
     const onClickResta = () => {
         localStorage.setItem(RESTAURNAT_ID, item._id)
         dispatch(getRestaurantInfo())
