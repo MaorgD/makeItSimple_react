@@ -6,6 +6,8 @@ const InputPasswordLinked = (props) => {
     const register = props.register
     const label = props.label
     const className = props.className
+    const defaultValue = props.defaultValue
+
 
     return (
         <>
@@ -13,7 +15,8 @@ const InputPasswordLinked = (props) => {
                 <label htmlFor="password" className="sr-only">
                     {label}
                 </label>
-                <input {...register('password', { required: { value: true, pattern: regPassword, message: 'Password is requried' }, minLength: { value: 6, message: "Password between 6-16 chars Must contain 1 letter and 1 sign." }, maxLength: { value: 16, message: "Password between 6-16 chars - 16 max !" } })}
+                <input defaultValue={defaultValue} 
+                {...register('password', { required: { value: true, pattern: regPassword, message: 'Password is requried' }, minLength: { value: 6, message: "Password between 6-16 chars Must contain 1 letter and 1 sign." }, maxLength: { value: 16, message: "Password between 6-16 chars - 16 max !" } })}
                     id="password"
                     name="password"
                     type="password"

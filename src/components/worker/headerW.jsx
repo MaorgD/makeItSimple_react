@@ -49,7 +49,7 @@ export default function Header(props) {
                   <div className="flex space-x-4">
           
                     {user?.data?.worker?.jobs &&
-                      props.navigation.map((item) => (
+                      props.navigation?.mainNav?.map((item) => (
                         <Link
                           key={item.name}
                           to={item.to}
@@ -77,9 +77,9 @@ export default function Header(props) {
 
                 {/* לסדר את הלינקים למקומות נכונים במקום # */}
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
+                <Menu   as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button  className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
@@ -97,32 +97,24 @@ export default function Header(props) {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
+                   
+                    <Menu.Items  className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                     
+                    {user?.data?.worker?.jobs &&
+                      props.navigation?.secenderyNav?.map((item) => (
+                        <Menu.Item key={item.name} >
                         {({ active }) => (
                           <Link
-                            to={"#"}
+                            to={item.to}
+                            key={item.name}
+
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
-                            Your Profile
+                            {item.name}
                           </Link>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            to={"#"}
-                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                          >
-                            Settings
-                          </Link>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link to={"/Logout"} className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')} >Log out</Link>
-                        )}
-                      </Menu.Item>
+                      ))}
                     </Menu.Items>
                   </Transition>
                 </Menu>
@@ -133,18 +125,21 @@ export default function Header(props) {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {props.navigation.map((item) => (
+              { user?.data?.worker?.jobs &&
+              props.navigation?.mainNav?.map((item) => (
                 <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
+                key={item.name}
                   className={classNames(
                     item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                     'block px-3 py-2 rounded-md text-base font-medium'
                   )}
                   aria-current={item.current ? 'page' : undefined}
                 >
-                  {item.name}
+                  <Link
+                   to={item.to}
+                   key={item.name}>
+                    {item.name}
+                  </Link>
                 </Disclosure.Button>
               ))}
             </div>

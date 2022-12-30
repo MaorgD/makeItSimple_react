@@ -44,7 +44,7 @@ const FullItemMenu = (props) => {
         <PopUPModel>
 
             <>
-                <div key={item._id} className="rounded-lg">
+                <div key={item._id} className="rounded-lg w-full">
                     <button onClick={closeItem}>X</button>
 
                     <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-4">

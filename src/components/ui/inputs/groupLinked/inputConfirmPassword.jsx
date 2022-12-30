@@ -6,6 +6,8 @@ const InputConfirmPassword = (props) => {
     const label = props.label
     const className = props.className
     const getValues = props.getValues
+    const defaultValue = props.defaultValue
+
 
        
 
@@ -15,7 +17,8 @@ const InputConfirmPassword = (props) => {
                 <label htmlFor="password" className="sr-only">
                     {label}
                 </label>
-                <input {...register('confirmPassword', { required: true, validate: (value) => { return value == getValues('password') } })}
+                <input defaultValue={defaultValue}
+                 {...register('confirmPassword', { required: true, validate: (value) => { return value == getValues('password') } })}
                     id="confirmPassword"
                     name="confirmPassword"
                     type="password"

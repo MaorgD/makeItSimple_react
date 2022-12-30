@@ -74,8 +74,8 @@ const Menu = (props) => {
 
   return (
     <>
-      <div className="bg-white">
-        <div className=" mx-auto max-w-2xl  px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 justify-center">
+      {/* <div className="bg-white">
+        <div className=" mx-auto max-w-2xl  px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 justify-center"> */}
           <div className=' mb-3 flex justify-center '>
             {user?.data?.worker?.jobs.includes("manager")&&!props?.fromTable
               &&
@@ -97,7 +97,7 @@ const Menu = (props) => {
             {subCategories && <MySlider arr={subCategories} setFunc={setMenuItemByCat} typ={"SubCategoryInMenu"} />}
           </div>
 
-          {<div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {<div className="grid grid-cols-1 gap-y-10 gap-x-6  sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xl:gap-x-8">
             {
               isSelecte && itesmOfCat.map((item) => (
                 <ItemMenu key={item._id} fromTable={props?.fromTable} item={item} />
@@ -106,8 +106,8 @@ const Menu = (props) => {
           </div>}
 
 
-        </div>
-      </div>
+        {/* </div>
+      </div> */}
 
 
     </>

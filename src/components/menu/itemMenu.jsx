@@ -13,8 +13,8 @@ const ItemMenu = (props) => {
     return (
 
         <>
-            <div onClick={() => { openItem() }} key={item._id} className="group">
-                <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+            <div onClick={() => { openItem() }} key={item._id} className="group ">
+                <div className="aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-4 xl:aspect-h-4">
                     <img
                         src={item.img}
                         alt={item.img}

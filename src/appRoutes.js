@@ -13,6 +13,7 @@ import FullItemOrder from './components/orders/fullItemOrder'
 import AddItemMenu from './components/menu/addItemMenu'
 import EditItemMenu from './components/menu/editItemMenu'
 import FullTableItem from './components/tables/fullTableItem'
+import MyInfo from './components/worker/myInfo'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
 const ResetPassword = React.lazy(() => import('./components/auth/resetPassword'));
@@ -89,6 +90,7 @@ const AppRoutes = () => {
                             <Route path='/manager/orders' element={< Orders />} />
                             <Route path='/manager/menu' element={< Menu />} />
                             <Route path='/manager/tables' element={< Tables />} />
+                            <Route path='/manager/myInfo' element={< MyInfo />} />
 
 
 
@@ -97,7 +99,9 @@ const AppRoutes = () => {
                         </Route>
 
                         <Route path='/chef' element={<LayoutChef />}>
-
+                        <Route path='/chef/menu' element={< Menu />} />
+                            <Route path='/chef/tables' element={< Tables />} />
+                            <Route path='/chef/myInfo' element={< MyInfo />} />
                             {/* Outlet */}
 
                         </Route>
@@ -106,6 +110,8 @@ const AppRoutes = () => {
                         <Route path='/waiter/orders' element={< Orders />} />
                             <Route path='/waiter/menu' element={< Menu />} />
                             <Route path='/waiter/tables' element={< Tables />} />
+                            <Route path='/waiter/myInfo' element={< MyInfo />} />
+
                             {/* Outlet */}
 
                         </Route>

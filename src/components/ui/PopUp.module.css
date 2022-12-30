@@ -22,24 +22,35 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   z-index: 30;
   animation: slide-down 600ms ease-in-out forwards;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+
+
 }
 
- 
+
 
 .model .h2 {
   display: none;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1300px) {
   .model {
     width: 65%;
     left: 20%;
   }
 }
 
+@media (max-width: 1024px) {
+  .model {
+    width: 75%;
+    left: 20%;
+  }
+}
+
 @media (max-width: 768px) {
   .model {
-    max-height: 100vh;
+    max-height: 80%;
     top: 5%;
     left: 7%;
     width: 85%;
@@ -67,11 +78,12 @@
 
 @media (max-width: 500px) {
   .model {
-    max-height: 100vh;
-    top: 5%;
+    max-height: 80%;
+    top: 1%;
     left: 0%;
     width: 100%;
     padding: 0;
+
   }
 
   .model .h2 {
@@ -103,4 +115,24 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.model::-webkit-scrollbar {
+  width: 20px;
+  height: 20px;
+}
+
+.model::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #f7f4ed;
+}
+
+.model::-webkit-scrollbar-thumb {
+  background: #e0cbcb;
+  border-radius: 100vh;
+  border: 3px solid #f6f7ed;
+}
+
+.model::-webkit-scrollbar-thumb:hover {
+  background: #c0a0b9;
 }

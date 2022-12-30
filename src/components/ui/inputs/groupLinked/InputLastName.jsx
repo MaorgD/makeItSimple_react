@@ -5,13 +5,15 @@ const InputLastName = (props) => {
     const register = props.register
     const label = props.label
     const className = props.className
+    const defaultValue = props.defaultValue
 
     return (
         <>
             <div>
                 <label htmlFor="lastName" className="sr-only">
                 {label}                      </label>
-                <input {...register('fullName[lastName]', { required: { value: true, message: 'last name is requried' }, minLength: { value: 2, message: "last name must be at least 2 characters" } })}
+                <input   defaultValue={defaultValue}
+                {...register('fullName[lastName]', { required: { value: true, message: 'last name is requried' }, minLength: { value: 2, message: "last name must be at least 2 characters" } })}
                     id=" lastName"
                     name="fullName[lastName]"
                     type="text"

@@ -66,9 +66,8 @@ const FullTableItem = (props) => {
 
                         </div>}
                     {item.isCatched&&<Menu fromTable={true}/>}
-                    {user?.data?.worker?.jobs.includes("manager") ||
-                        user?.data?.worker?.jobs.includes("waiter") &&
-                        item.isCatched&&
+                    {(user?.data?.worker?.jobs.includes("manager") ||
+                        user?.data?.worker?.jobs.includes("waiter")) &&
                         <div className=" px-4 py-3  sm:px-6 flex justify-center">
                             <button onClick={() => { console.log("add to order") }}
                                 type='button'

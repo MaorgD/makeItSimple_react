@@ -7,28 +7,27 @@ const SelectCitySpaced = (props) => {
     const label = props.label
     const setSelectedCity = props.setSelectedCity
     const cities = props.cities
-    const ref = props.ref
-    const selectedCity = props.selectedCity
-
-
-    const cityRef = useRef();
-    console.log(selectedCity)
+    const ref = props.cityRef
+    const classNameStyle = props.classNameStyle
+    const labelStyle = props.labelStyle ? props.labelStyle : "block text-sm font-medium text-gray-700"
+    const defaultValue = props.defaultValue
 
     return (
         <>
             <div className="col-span-6 sm:col-span-6 lg:col-span-3">
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="city" className={labelStyle}>
                     {label}
                 </label>
 
-                <select ref={ref} onChange={() => { setSelectedCity(cityRef.current.value) }}
-                    {...register('address[city]' )}
+                <select ref={ref} onChange={() => { setSelectedCity(ref.current.value) }}
+
                     id="city"
                     name="address[city]"
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className={classNameStyle}
                 >
-                    <option className="capitalize" value={"none"}>selecte City</option>
-
+                    {defaultValue && <option value={defaultValue} key={0} className="capitalize">
+                        {defaultValue}
+                    </option>}
                     {cities?.map((city, i) => (
                         <option value={city} key={i + 1} className="capitalize">
                             {city}

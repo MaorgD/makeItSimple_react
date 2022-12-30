@@ -6,6 +6,10 @@ const InputPhoneLinked = (props) => {
     const register = props.register
     const label = props.label
     const className = props.className
+    const defaultValue = props.defaultValue
+
+    // console.log(defaultValue)
+
 
     return (
         <>
@@ -13,7 +17,7 @@ const InputPhoneLinked = (props) => {
                 <label className="sr-only">
                     {label}
                 </label>
-                <input
+                <input defaultValue={defaultValue}
                     {...register('phone', { required: { value: true, message: 'Phone is requried' }, pattern: regPhone, minLength: { value: 10, message: "Phone must be at least 10 characters" }, maxLength: { value: 15, message: "Phone cant be no more 15 characters" } })}
                     type="text"
                     name="phone"

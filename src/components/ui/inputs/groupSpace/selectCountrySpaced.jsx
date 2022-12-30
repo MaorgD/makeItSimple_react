@@ -7,26 +7,31 @@ const SelectCountrySpaced = (props) => {
     const label = props.label
     const setSelectedCountry = props.setSelectedCountry
     const countries = props.countries
-    const ref = props.ref
+    const Ref = props.countryRef
+    const classNameStyle = props.classNameStyle
+    const labelStyle = props.labelStyle ? props.labelStyle : "block text-sm font-medium text-gray-700"
+    const defaultValue = props.defaultValue ? props.defaultValue : "Israel"
 
 
-    const countryRef = useRef();
-   
+
+
     return (
         <>
             <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="country" className={labelStyle}>
                     {label}
                 </label>
 
-                <select ref={ref} onChange={() => { setSelectedCountry(countryRef.current.value); }}
-                    {...register('address[country]',
-                        { required: true })}
+                <select ref={Ref} onChange={() => {
+
+                    setSelectedCountry(Ref.current.value);
+                }}
+
                     id="country"
                     name="address[country]"
-                    className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                    className={classNameStyle}
                 >;
-                    <option value={"Israel"} key={0} className="capitalize">Israel </option>
+                    <option value={defaultValue} key={0} className="capitalize">{defaultValue} </option>
 
                     {countries
                         ?.filter((country) => country !== "Israel")

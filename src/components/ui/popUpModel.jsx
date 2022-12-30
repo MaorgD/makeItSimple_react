@@ -38,7 +38,7 @@ const PopUpOverlay = ({ action, children }) => {
           )}
         </h2> */}
 
-      <div className="overflow-y-auto max-h-[1000px]  scroll-smooth scrollbar">{children}</div>
+      <div className="">{children}</div>
     </div>
   );
 };

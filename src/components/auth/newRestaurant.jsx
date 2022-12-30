@@ -3,19 +3,19 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
-import { API_URL, doApiMethodTokenNotStringify } from '../../services/servise';
+import { API_URL, doApiMethodTokenNotStringify, RESTAURNAT_ID, TOKEN_NAME } from '../../services/servise';
 import { getCountries, getCities } from '../../helpers/fillCountry'
 import InputName from '../ui/inputs/groupSpace/inputName';
 import InputPhone from '../ui/inputs/groupSpace/inputPhone';
 import InputEmail from '../ui/inputs/groupSpace/inputEmail';
 import InputStreetAddress from '../ui/inputs/groupSpace/inputStreetAddress';
-import InputZipCode from '../ui/inputs/groupSpace/inputzipcode';
+import InputStreetNumber from '../ui/inputs/groupSpace/inputStreetNumber';
 import SelectCountrySpaced from '../ui/inputs/groupSpace/selectCountrySpaced';
 import SelectCitySpaced from '../ui/inputs/groupSpace/selectCitySpaced';
 
-// function classNames(...classes) {
-//     return classes.filter(Boolean).join(' ')
-// }
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
 const NewRestaurant = () => {
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState("Israel");
@@ -23,15 +23,17 @@ const NewRestaurant = () => {
     const [countries, setCountries] = useState([]);
     const [cities, setCities] = useState([]);
     const countryRef = useRef();
+    const cityRef = useRef();
     const nav = useNavigate()
     let { register, handleSubmit, formState: { errors } } = useForm();
 
     useEffect(() => {
         getAllCountries()
 
-    }, [cities]);
+    }, []);
 
     useEffect(() => {
+        // console.log(selectedCountry)
         getAllCities(selectedCountry)
 
     }, [selectedCountry])
@@ -54,7 +56,9 @@ const NewRestaurant = () => {
         try {
             const url = API_URL + '/restaurants/create';
             const { data } = await doApiMethodTokenNotStringify(url, "POST", _dataBody);
+            console.log(data)
             if (data) {
+                localStorage.setItem(RESTAURNAT_ID, data._id)
                 nav(`/manager`)
             }
         }
@@ -63,11 +67,13 @@ const NewRestaurant = () => {
         }
     };
     const onSub = (_dataBody) => {
-        if (_dataBody.address.city != "none") {
+        _dataBody.address.country = selectedCountry
+        _dataBody.address.city = selectedCity
+        console.log(_dataBody)
 
-            setIsSubmitted(true);
-            doApi(_dataBody)
-        }
+        setIsSubmitted(true);
+        doApi(_dataBody)
+
     };
     return (
         <>
@@ -87,22 +93,34 @@ const NewRestaurant = () => {
                                 <InputEmail label={" Email address "} register={register} errors={errors} />
 
                                 {countries &&
-                                    <SelectCountrySpaced label={"Country"} register={register} setSelectedCountry={setSelectedCountry} countries={countries} countryRef={countryRef} />
+                                    <SelectCountrySpaced label={"Country"} classNameStyle="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" register={register} setSelectedCountry={setSelectedCountry} countries={countries} countryRef={countryRef} />
                                 }
 
 
-                                {cities && <SelectCitySpaced label={"City"} register={register}
-                                    setSelectedCity={setSelectedCity} selectedCity={selectedCity} cities={cities} countryRef={countryRef} />
+                                {cities && <SelectCitySpaced label={"City"} classNameStyle="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" register={register}
+                                    setSelectedCity={setSelectedCity} selectedCity={selectedCity} cities={cities} cityRef={cityRef} />
                                 }
 
-                                <InputStreetAddress label={" Street address "} register={register} errors={errors} />
+                                <InputStreetAddress label={" Street address "}
+                                    classNameStyle={classNames(errors?.address?.Street ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                        :
+                                        "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
+                                    register={register}
+                                    errors={errors} />
 
-                                <InputZipCode label={"ZIP / Postal code"} register={register} errors={errors} />
+
+
+                                <InputStreetNumber label={"addres number"}
+                                    classNameStyle={classNames(errors?.address?.num ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                        :
+                                        "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
+                                    register={register}
+                                    errors={errors} />
 
                                 <div className="col-span-6">
                                     <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
                                         info                                    </label>
-                                    <input {...register('info', { required: true })}
+                                    <input {...register('info')}
                                         type="text"
                                         name="info"
                                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
