@@ -6,6 +6,7 @@ import PopUPModel from '../ui/popUpModel'
 const FullItemOrder = (props) => {
     const dispatch = useDispatch()
     const item = props.item
+    console.log(item)
     const openItem = () => {
         dispatch(onClickHideOrder())
     }
@@ -25,9 +26,9 @@ const FullItemOrder = (props) => {
 
                     </div>
                     {item.orderItems[0] &&<div className="  p-2 rounded-lg bg-gray-200 ">
-                        <table className='table table-auto text-center'>
+                        <table  className='table table-auto text-center'>
                             <thead className=" border-2 border-black ">
-                                <tr >
+                                <tr  >
                                     <th className=" p-2" >
                                         name
                                     </th>
@@ -42,16 +43,16 @@ const FullItemOrder = (props) => {
 
                             </thead>
                             <tbody className=" border-2 border-black " >
-                                {item.orderItems[0] &&
-                                    item.orderItems.map((orderItem) => (
+                               
+                                    {item.orderItems.map((orderItem) => (
                                         <tr key={orderItem._id}>
                                             <td className="p-2 border-2 border-black ">{orderItem?.itemMenuId?.name}</td>
                                             <td className="p-2 border-2 border-black ">{orderItem?.note}</td>
                                             <td className="p-2 border-2 border-black ">{orderItem?.itemMenuId?.price}</td>
                                         </tr>
-                                    ))
+                                    ))}
 
-                                }
+                                
                             </tbody >
                         </table>
                     </div>}

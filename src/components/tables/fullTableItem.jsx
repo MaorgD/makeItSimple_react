@@ -65,7 +65,7 @@ const FullTableItem = (props) => {
                             {item.calories > 0 && <p className="mt-1 xl:text-2xl font-medium text-gray-900">Calories : {item.calories}</p>}
 
                         </div>}
-                    {item.isCatched&&<Menu fromTable={true}/>}
+                    {item.isCatched && <Menu fromTable={true} orderID={item.orderID._id} />}
                     {(user?.data?.worker?.jobs.includes("manager") ||
                         user?.data?.worker?.jobs.includes("waiter")) &&
                         <div className=" px-4 py-3  sm:px-6 flex justify-center">

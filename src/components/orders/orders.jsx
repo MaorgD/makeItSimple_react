@@ -31,6 +31,7 @@ const Orders = () => {
 
             if (data)
                 setAllOrders(data)
+                // console.log(data)
             setDisplayOrders(data)
         } catch (err) {
         }

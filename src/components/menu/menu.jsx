@@ -100,7 +100,7 @@ const Menu = (props) => {
           {<div className="grid grid-cols-1 gap-y-10 gap-x-6  sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xl:gap-x-8">
             {
               isSelecte && itesmOfCat.map((item) => (
-                <ItemMenu key={item._id} fromTable={props?.fromTable} item={item} />
+                <ItemMenu key={item._id} fromTable={props?.fromTable} orderID={props?.orderID} item={item} />
               ))}
 
           </div>}
