@@ -3,7 +3,6 @@ import { useRef } from 'react'
 
 
 const SelectCountrySpaced = (props) => {
-    const register = props.register
     const label = props.label
     const setSelectedCountry = props.setSelectedCountry
     const countries = props.countries

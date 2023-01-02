@@ -100,7 +100,7 @@ export const navigationManager = {
     { name: 'Orders', to: '/manager/orders', current: false },
     // { name: 'resturant order', to: '/resturantOrder', current: false },
     // { name: 'app order', to: '/appOrder', current: false },
-    { name: 'Shift  Page', to: '/manager/shift Page', current: false },
+    { name: 'Shift  Page', to: '/manager/shifts', current: false },
     { name: 'Menu', to: '/manager/menu', current: false },
     { name: 'AllWorkZone', to: '/manager/workZones', current: false },
   ],

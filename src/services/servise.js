@@ -9,6 +9,14 @@ export const regEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 export const regPassword = /^(?=.*[0-9])(?=.*[!@#$%^&*.<>])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 export const regPhone = /^[0-9]+$/;
 
+export const jobs = [
+    "manager",
+    "shiftManager",
+    "chef",
+    "waiter",
+    "bartender",
+]
+
 export const doApiGet = async (_url) => {
     try {
         let resp = await axios.get(_url, {

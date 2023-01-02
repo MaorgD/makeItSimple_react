@@ -40,7 +40,7 @@ const Login = () => {
                     nav("/myRestaurantList");
                 }
                 else if (data.jobs.includes("chef"))
-                    nav("/chef");
+                nav("/myRestaurantList");
 
                 else if (data.jobs.includes("waiter"))
                     nav("/myRestaurantList");

@@ -20,7 +20,7 @@ const InputStreetNumber = (props) => {
                 <label className={labelStyle}>
                     {label}                </label>
                 <input defaultValue={defaultValue} {...register('address[num]', { required: { value: true, message: 'street Number is requried' }, minLength: { value: 1, message: "street number must be at least 1 characters" }, maxLength: { value: 5, message: "street number cant be no more 5 characters" } })}
-                    type="text"
+                    type="number"
                     id='num'
                     name="address[num]"
 

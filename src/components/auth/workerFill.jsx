@@ -29,17 +29,20 @@ const WorkerFill = () => {
     const doApi = async (_dataBody) => {
         const url = API_URL + '/users/worker/' + params.userId;
         try {
-            const { data } = await doApiMethodFillDetales(url, "PATCH", _dataBody);
+            const data  = await doApiMethodFillDetales(url, "PATCH", _dataBody);
             if (data) {
+                console.log(data)
+
                 nav("/login")
             } else {
-                alert(data)
+                console.log(data)
             }
         }
         catch (err) {
 
             setfillDetales(false);
-            alert(err.response.data.msg);
+            console.log(err)
+
         }
     }
     return (

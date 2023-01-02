@@ -15,3 +15,11 @@ export const getCities = async (_country) => {
 
 
 }
+// export const getJobs = async (_country) => {
+//    const { data } = await axios.post(
+//       "https://countriesnow.space/api/v0.1/countries/cities",
+//       { "country": _country });
+//    return data.data;
+
+
+// }

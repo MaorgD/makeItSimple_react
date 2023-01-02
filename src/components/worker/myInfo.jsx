@@ -76,11 +76,11 @@ const MyInfo = () => {
                 if (data) {
                     window.location.reload(false);
                 } else {
-                    alert(data)
+                    console.log(data)
                 }
             }
             catch (err) {
-                alert(err);
+                console.log(err);
             }
         }
     };

@@ -13,6 +13,9 @@ import FullItemOrder from './components/orders/fullItemOrder'
 import AddItemMenu from './components/menu/addItemMenu'
 import EditItemMenu from './components/menu/editItemMenu'
 import FullTableItem from './components/tables/fullTableItem'
+import Shifts from './components/shifts/shifts'
+import Workers from './components/shifts/workers'
+import AddWorker from './components/shifts/addWorker'
 // import MyInfo from './components/worker/myInfo'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
@@ -32,7 +35,7 @@ const NewRestaurant = React.lazy(() => import('./components/auth/newRestaurant')
 const Messages = React.lazy(() => import('./components/messages'));
 const Menu = React.lazy(() => import('./components/menu/menu'));
 const Tables = React.lazy(() => import('./components/tables/tables'));
-const RestaurantSettings = React.lazy(() => import('./layoutManager/restaurantSettings'));
+const RestaurantSettings = React.lazy(() => import('./layoutManager/restaurantSettings/restaurantSettings'));
 const MyInfo = React.lazy(() => import('./components/worker/myInfo'));
 
 
@@ -94,6 +97,9 @@ const AppRoutes = () => {
                             <Route path='/manager/tables' element={< Tables />} />
                             <Route path='/manager/myInfo' element={< MyInfo />} />
                             <Route path='/manager/Settings' element={< RestaurantSettings />} />
+                            <Route path='/manager/Shifts' element={< Shifts />} />
+                            <Route path='/manager/workers' element={< Workers />} />
+                            <Route path='/manager/AddWorker' element={<AddWorker  />} />
 
 
 
@@ -102,7 +108,7 @@ const AppRoutes = () => {
                         </Route>
 
                         <Route path='/chef' element={<LayoutChef />}>
-                        <Route path='/chef/menu' element={< Menu />} />
+                            <Route path='/chef/menu' element={< Menu />} />
                             <Route path='/chef/tables' element={< Tables />} />
                             <Route path='/chef/myInfo' element={< MyInfo />} />
                             {/* Outlet */}
@@ -110,7 +116,7 @@ const AppRoutes = () => {
                         </Route>
 
                         <Route path='/waiter' element={<LayoutWaiter />}>
-                        <Route path='/waiter/orders' element={< Orders />} />
+                            <Route path='/waiter/orders' element={< Orders />} />
                             <Route path='/waiter/menu' element={< Menu />} />
                             <Route path='/waiter/tables' element={< Tables />} />
                             <Route path='/waiter/myInfo' element={< MyInfo />} />
