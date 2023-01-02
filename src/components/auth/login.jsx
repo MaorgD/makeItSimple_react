@@ -30,11 +30,15 @@ const Login = () => {
         try {
             const url = API_URL + '/users/login';
             const { data } = await doApiMethodSignUpLogin(url, "POST", _dataBody);
+            console.log(data)
+
             if (data.token) {
                 localStorage.setItem(TOKEN_NAME, data.token);
+                if (data.jobs.includes("manager")){
 
-                if (data.jobs.includes("manager"))
+                    console.log(data)
                     nav("/myRestaurantList");
+                }
                 else if (data.jobs.includes("chef"))
                     nav("/chef");
 

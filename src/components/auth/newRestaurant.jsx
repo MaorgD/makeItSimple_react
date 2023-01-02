@@ -25,7 +25,7 @@ const NewRestaurant = () => {
     const countryRef = useRef();
     const cityRef = useRef();
     const nav = useNavigate()
-    let { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
 
     useEffect(() => {
         getAllCountries()

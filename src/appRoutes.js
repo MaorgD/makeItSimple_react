@@ -13,7 +13,7 @@ import FullItemOrder from './components/orders/fullItemOrder'
 import AddItemMenu from './components/menu/addItemMenu'
 import EditItemMenu from './components/menu/editItemMenu'
 import FullTableItem from './components/tables/fullTableItem'
-import MyInfo from './components/worker/myInfo'
+// import MyInfo from './components/worker/myInfo'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
 const ResetPassword = React.lazy(() => import('./components/auth/resetPassword'));
@@ -32,6 +32,8 @@ const NewRestaurant = React.lazy(() => import('./components/auth/newRestaurant')
 const Messages = React.lazy(() => import('./components/messages'));
 const Menu = React.lazy(() => import('./components/menu/menu'));
 const Tables = React.lazy(() => import('./components/tables/tables'));
+const RestaurantSettings = React.lazy(() => import('./layoutManager/restaurantSettings'));
+const MyInfo = React.lazy(() => import('./components/worker/myInfo'));
 
 
 
@@ -91,6 +93,7 @@ const AppRoutes = () => {
                             <Route path='/manager/menu' element={< Menu />} />
                             <Route path='/manager/tables' element={< Tables />} />
                             <Route path='/manager/myInfo' element={< MyInfo />} />
+                            <Route path='/manager/Settings' element={< RestaurantSettings />} />
 
 
 

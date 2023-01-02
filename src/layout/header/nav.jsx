@@ -4,10 +4,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from "react-router-dom"
 import { TOKEN_NAME } from '../../services/servise'
 const navigation = [
-    { name: 'App Page', href: 'App' },
-    { name: 'Features', href: '#' },
-    { name: 'Marketplace', href: '#' },
-    { name: 'Company', href: '#' },
+    { name: 'About Us', href: '/aboutUs' },
 ]
 const Nav = () => {
 
@@ -19,7 +16,7 @@ const Nav = () => {
                 <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
                     <Link to={'/'} className="-m-1.5 p-1.5">
                         <span className="sr-only">Your Company</span>
-                        <img className="w-24 md:w-28 lg:w-38 p-2" src="https://res.cloudinary.com/dukiq0kql/image/upload/v1668959681/%D7%9E%D7%9E%D7%9E_efwhsl.png" alt="logo" />
+                        <img className="w-24 md:w-28 lg:w-38 p-2" src="https://res.cloudinary.com/dukiq0kql/image/upload/v1672575603/MBstore/%D7%9E%D7%9E%D7%9E_ft1nmn.png" alt="logo" />
                     </Link>
                 </div>
                 <div className="flex lg:hidden">

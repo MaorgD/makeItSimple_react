@@ -34,7 +34,7 @@ const SelectCountrySpaced = (props) => {
                     <option value={defaultValue} key={0} className="capitalize">{defaultValue} </option>
 
                     {countries
-                        ?.filter((country) => country !== "Israel")
+                        ?.filter((country) => country !== defaultValue)
                         .map((country, i) => (
 
                             <option value={country} key={i + 1} className="capitalize">

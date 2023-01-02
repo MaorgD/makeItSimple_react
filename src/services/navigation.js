@@ -107,7 +107,7 @@ export const navigationManager = {
   secenderyNav:
     [
       { name: 'My Info', to: '/manager/myInfo', current: false },
-      { name: 'Settings', to: '/manager/settings', current: false },
+      { name: 'Settings', to: '/manager/Settings', current: false },
       { name: 'Log out', to: '/Logout', current: false },
     ]
 }

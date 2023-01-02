@@ -57,16 +57,20 @@ const MyInfo = () => {
     const onSub = (_dataBody) => {
         setIsSubmitted(true);
         // doApiEditInfo(_dataBody)
+        _dataBody.worker.jobs = user.data.worker.jobs
+        _dataBody.worker.restaurantID = user.data.worker.restaurantID
         if (isChangeAddress) {
+
             _dataBody.address.country = selectedCountry
             _dataBody.address.city = selectedCity
         }
-        console.log(_dataBody)
+        // console.log(_dataBody)
+        doApiEditInfo(_dataBody)
     }
 
     const doApiEditInfo = async (_dataBody) => {
         if (user) {
-            let url = API_URL + '/restaurants/myInfo/' + user.data._id;
+            let url = API_URL + '/users/editUser/' + user.data._id;
             try {
                 const data = await doApiMethodTokenPatch(url, "PATCH", _dataBody);
                 if (data) {
@@ -76,7 +80,7 @@ const MyInfo = () => {
                 }
             }
             catch (err) {
-                alert(err.msg);
+                alert(err);
             }
         }
     };
@@ -92,7 +96,12 @@ const MyInfo = () => {
                     <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
                         See yours detales
                     </h2>
-                    <button onClick={() => { setIsChangeAddress(true) }}>change addres</button>
+                    <button onClick={() => {
+                        if (isChangeAddress)
+                            setIsChangeAddress(false)
+                        else
+                            setIsChangeAddress(true)
+                    }}>change addres</button>
                 </div>
                 {user?.data && <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">
                     <div className="-space-y-px rounded-md shadow-sm">
@@ -122,7 +131,7 @@ const MyInfo = () => {
                         />
 
                         <InputPinCode
-                            label={" Phone "}
+                            label={" pinCode "}
                             register={register}
                             errors={errors}
                             defaultValue={user.data.worker.pin}
