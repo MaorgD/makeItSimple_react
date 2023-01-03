@@ -38,8 +38,8 @@ const register = props.register
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Tag</InputLabel>
+      <FormControl sx={{ width:1}}>
+        <InputLabel id="demo-multiple-checkbox-label">Jobs</InputLabel>
         <Select
                 {...register('worker.jobs')}
                 labelId="demo-multiple-checkbox-label"
@@ -47,7 +47,7 @@ const register = props.register
           multiple
           value={selectedJob}
           onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
+          input={<OutlinedInput label="Jobs" />}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
         >

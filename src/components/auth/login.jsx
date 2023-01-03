@@ -41,6 +41,8 @@ const Login = () => {
                 }
                 else if (data.jobs.includes("chef"))
                 nav("/myRestaurantList");
+                else if (data.jobs.includes("shiftManager"))
+                nav("/myRestaurantList");
 
                 else if (data.jobs.includes("waiter"))
                     nav("/myRestaurantList");

@@ -13,9 +13,7 @@ import FullItemOrder from './components/orders/fullItemOrder'
 import AddItemMenu from './components/menu/addItemMenu'
 import EditItemMenu from './components/menu/editItemMenu'
 import FullTableItem from './components/tables/fullTableItem'
-import Shifts from './components/shifts/shifts'
-import Workers from './components/shifts/workers'
-import AddWorker from './components/shifts/addWorker'
+
 // import MyInfo from './components/worker/myInfo'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
@@ -37,7 +35,9 @@ const Menu = React.lazy(() => import('./components/menu/menu'));
 const Tables = React.lazy(() => import('./components/tables/tables'));
 const RestaurantSettings = React.lazy(() => import('./layoutManager/restaurantSettings/restaurantSettings'));
 const MyInfo = React.lazy(() => import('./components/worker/myInfo'));
-
+const Shifts = React.lazy(() => import('./components/shifts/shifts'));
+const Workers = React.lazy(() => import('./components/shifts/workers'));
+const AddWorker = React.lazy(() => import('./components/shifts/addWorker'));
 
 
 const AppRoutes = () => {

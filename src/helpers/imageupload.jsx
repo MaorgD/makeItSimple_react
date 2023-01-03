@@ -1,4 +1,3 @@
-
 import Axios from 'axios';
 import { API_URL, doApiMethodTokenPatch, RESTAURNAT_ID } from '../services/servise';
 
@@ -31,9 +30,7 @@ export const uploadImageAndAddToGallery = async (file) => {
         formData)
     if(resp.data.url) {
         let url = API_URL + '/restaurants/addimage/' + localStorage.getItem(RESTAURNAT_ID);
-console.log(resp.data.url)
       let data =await doApiMethodTokenPatch(url , "PATCH",{img:resp.data.url})
-      console.log(data)
       return resp.data.url
       
     }

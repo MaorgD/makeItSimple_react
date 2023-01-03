@@ -3,8 +3,10 @@ import { API_URL, doApiMethodTokenNotStringify, doApiMethodTokenPatch } from '..
 
 export default function UserItem(props) {
     let item = props.item;
+    console.log(item);
     let doApi = props.doApi;
-       
+ 
+
     const onActiveClick = async () => {
         let body;
         if (item.active) {
@@ -12,13 +14,12 @@ export default function UserItem(props) {
         } else if (!item.active) {
             body = { active: true };
         }
-        let url =  API_URL+"/users/changeActive/" + item._id;
+        let url = API_URL + "/users/changeActive/" + item._id;
         try {
 
             let data = await doApiMethodTokenNotStringify(url, "PATCH", body)
 
             doApi()
-
         }
         catch (err) {
             alert("There problem, or you try to change superAdmin to user");
@@ -30,7 +31,7 @@ export default function UserItem(props) {
             <td className="border px-4 py-2">{props.index + 1}</td>
             <td className="border px-4 py-2">{item.fullName.firstName + " " + item.fullName.lastName}</td>
             <td className="border px-4 py-2">{item.email}</td>
-            <td className="border px-4 py-2">{item.worker.jobs}</td>
+            <td className="border px-4 py-2">{item.worker.jobs?item.worker.jobs.join(" "):"none"}</td>
             <td className="border px-4 py-2">{item.phone}</td>
 
             <td className="border px-4 py-2">

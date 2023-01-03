@@ -1,11 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-
+import { useSelector } from 'react-redux';
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { useForm } from 'react-hook-form'
 import { ThreeDots } from 'react-loader-spinner'
-
-import InputEmail from '../../components/ui/inputs/groupSpace/inputEmail'
 import InputName from '../../components/ui/inputs/groupSpace/inputName'
 import InputPhone from '../../components/ui/inputs/groupSpace/inputPhone'
 import InputStreetAddress from '../../components/ui/inputs/groupSpace/inputStreetAddress'
@@ -14,7 +11,7 @@ import SelectCitySpaced from '../../components/ui/inputs/groupSpace/selectCitySp
 import SelectCountrySpaced from '../../components/ui/inputs/groupSpace/selectCountrySpaced'
 import Gallery from './gallery'
 import { getCities, getCountries } from '../../helpers/fillCountry';
-import { API_URL, doApiMethodTokenPatch, doApiMethodTokenNotStringify,RESTAURNAT_ID } from '../../services/servise';
+import { API_URL, doApiMethodTokenNotStringify,RESTAURNAT_ID } from '../../services/servise';
 
 const RestaurantSettings = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -28,8 +25,6 @@ const RestaurantSettings = () => {
   const countryRef = useRef();
   const cityRef = useRef();
   const { restaurant } = useSelector((state) => state.restaurantSlice);
-  // console.log(restaurant)
-
 
   useEffect(() => {
     getAllCountries()
@@ -37,10 +32,10 @@ const RestaurantSettings = () => {
   }, []);
 
   useEffect(() => {
-    // console.log(selectedCountry)
     getAllCities(selectedCountry)
 
   }, [selectedCountry])
+
 
   const getAllCountries = async () => {
     let data = await getCountries();
@@ -62,12 +57,10 @@ const RestaurantSettings = () => {
       _dataBody.address.country = selectedCountry
       _dataBody.address.city = selectedCity
     }
-    console.log(_dataBody)
-
     setIsSubmitted(true);
     doApiEditInfo(_dataBody)
-
   };
+
   const doApiEditInfo = async (_dataBody) => {
 
     let url =API_URL+'/restaurants/editRest/' + localStorage.getItem(RESTAURNAT_ID);
@@ -75,8 +68,6 @@ const RestaurantSettings = () => {
       const data = await doApiMethodTokenNotStringify(url, "PATCH", _dataBody);
       if (data) {
         window.location.reload(false);
-      } else {
-        console.log(data)
       }
     }
     catch (err) {

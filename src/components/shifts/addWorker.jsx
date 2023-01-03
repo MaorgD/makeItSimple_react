@@ -9,7 +9,7 @@ import SelectTypeJob from '../ui/inputs/groupSpace/selectTypeJob';
 
 const AddWorker = () => {
     let { register, handleSubmit, formState: { errors } } = useForm();
-    // const nav = useNavigate()
+    const nav = useNavigate()
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [selectedJob, setSelectedJob] = useState([])
 
@@ -24,15 +24,11 @@ const AddWorker = () => {
         try {
             const url = API_URL + '/users/worker/' + localStorage.getItem(RESTAURNAT_ID);
             const data = await doApiMethodTokenNotStringify(url, "POST", _dataBody);
-            // alert(data)
-            // nav("/")
-            console.log(data)
+            nav("/manager/workers")
         }
         catch (err) {
-
             setIsSubmitted(false);
-            // alert(err.response.data.msg);
-            console.log(err)
+            alert(err.response.data.msg);
         }
     }
     return (
