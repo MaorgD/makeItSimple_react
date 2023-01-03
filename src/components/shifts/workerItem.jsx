@@ -4,31 +4,7 @@ import { API_URL, doApiMethodTokenNotStringify, doApiMethodTokenPatch } from '..
 export default function UserItem(props) {
     let item = props.item;
     let doApi = props.doApi;
-    console.log(item);
-    // משנה תפקיד של משתמש
-    // const onRoleClick = async () => {
-    //   let bodyData;
-    //   if (item.role == "user") {
-    //     bodyData = { role: "admin" }
-    //   }
-    //   else if (item.role == "admin") {
-    //     bodyData = { role: "user" }
-    //   }
-    //   let url = API_URL + "/users/changeRole/" + item._id;
-    //   try {
-
-    //       let resp = await doApiMethodTokenPatch(url, "PATCH", bodyData)
-    //       console.log(resp.data)
-    //       if (resp.data) {
-
-    //         props.doApi()
-    //       }
-    //   }
-    //   catch (err) {
-    //     console.log(err.response);
-    //     alert("There problem, or you try to change superAdmin to user");
-    //   }
-    // }
+       
     const onActiveClick = async () => {
         let body;
         if (item.active) {
@@ -40,14 +16,12 @@ export default function UserItem(props) {
         try {
 
             let data = await doApiMethodTokenNotStringify(url, "PATCH", body)
-            console.log(data)
 
             doApi()
 
         }
         catch (err) {
-            console.log(err);
-            // alert("There problem, or you try to change superAdmin to user");
+            alert("There problem, or you try to change superAdmin to user");
         }
     }
 
