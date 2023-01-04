@@ -17,24 +17,33 @@ const Restaurant = (props) => {
 
 
         if (props.jobs.includes("manager"))
-        nav(`/manager/orders/`)
+            nav(`/manager/orders/`)
         else if (props.jobs.includes("chef"))
-        nav("/chef/orders/");
-        
+            nav("/chef/orders/");
+
         else if (props.jobs.includes("waiter"))
-        nav(`/waiter/orders/`)
+            nav(`/waiter/orders/`)
 
     }
     return (
-        <div key={item._id} className='col-md-4 overflow-hidden h-100'>
-            {(item.name) ?
-                <div onClick={() => { onClickResta() }} className='shadow p-2'>
-                    <h2>{item.name}</h2>
+        <>
+            <div key={item._id} className=' my-3 grid lg:grid-cols-1 lg:gap-y-6 overflow-hidden h-100'>
+                {(item.name) ?
+                    <div onClick={() => { onClickResta() }} className='aspect-w-2 aspect-h-1 overflow-hidden shadow  '>
+                        <h2 className='text-center'>{item.name}</h2>
+                    </div>
+
+                    : <h3>loading...</h3>}
+
+            </div>
+            {/* <div class="grid lg:grid-cols-1 lg:gap-y-6">
+                <div class="aspect-w-2 aspect-h-1 overflow-hidden rounded-lg">
+                    maor
                 </div>
-
-                : <h3>loading...</h3>}
-
-        </div>
+                <div class="aspect-w-2 aspect-h-1 overflow-hidden rounded-lg">
+                    ben                </div>
+            </div> */}
+        </>
     )
 }
 export default Restaurant

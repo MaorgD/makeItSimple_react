@@ -78,9 +78,6 @@ export const navigationShiftManager = {
   mainNav: [
     { name: 'Tables', to: '/worker/tables', current: false },
     { name: 'Orders', to: '/worker/orders', current: false },
-    // { name: 'Work lane', to: '/worker/workLane', current: false },
-    // { name: 'resturant order', to: '/worker/resturantOrder', current: false },
-    // { name: 'app order', to: '/worker/appOrder', current: false },
     { name: 'Shift  Page', to: '/worker/shift Page', current: false },
     // { name: 'my Info', to: '/myInfo', current: false },
     { name: 'Menu', to: '/worker/menu', current: false },
@@ -98,8 +95,6 @@ export const navigationManager = {
   mainNav: [
     { name: 'Tables', to: '/manager/tables', current: false },
     { name: 'Orders', to: '/manager/orders', current: false },
-    // { name: 'resturant order', to: '/resturantOrder', current: false },
-    // { name: 'app order', to: '/appOrder', current: false },
     { name: 'Shift  Page', to: '/manager/shifts', current: false },
     { name: 'Menu', to: '/manager/menu', current: false },
     { name: 'AllWorkZone', to: '/manager/workZones', current: false },

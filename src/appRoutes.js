@@ -111,6 +111,9 @@ const AppRoutes = () => {
                             <Route path='/chef/menu' element={< Menu />} />
                             <Route path='/chef/tables' element={< Tables />} />
                             <Route path='/chef/myInfo' element={< MyInfo />} />
+                            <Route path='/chef/Settings' element={< RestaurantSettings />} />
+                            <Route path='/chef/Shifts' element={< Shifts />} />
+                            {/* <Route path='/chef/orders' element={< Orders />} /> */}
                             {/* Outlet */}
 
                         </Route>
@@ -120,6 +123,8 @@ const AppRoutes = () => {
                             <Route path='/waiter/menu' element={< Menu />} />
                             <Route path='/waiter/tables' element={< Tables />} />
                             <Route path='/waiter/myInfo' element={< MyInfo />} />
+                            <Route path='/waiter/Settings' element={< RestaurantSettings />} />
+                            <Route path='/waiter/Shifts' element={< Shifts />} />
 
                             {/* Outlet */}
 

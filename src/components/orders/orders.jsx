@@ -37,7 +37,7 @@ const Orders = () => {
 
     return (
         <div className="bg-white">
-            <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+            <div className="mx-auto max-w-2xl py-16 px-4 sm:py-10 sm:px-1 lg:max-w-7xl lg:px-8">
 
                 {<OrdersController allOrders={allOrders} setDisplayOrders={setDisplayOrders} setSortType={setSortType} setActive={setActive} setOrderType={setOrderType} setCreator={setCreator} setIsReverse={setIsReverse} />}
 

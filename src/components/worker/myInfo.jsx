@@ -5,10 +5,8 @@ import { ThreeDots } from 'react-loader-spinner';
 import { useSelector } from 'react-redux';
 import { getCities, getCountries } from '../../helpers/fillCountry';
 import { API_URL, doApiMethodTokenPatch } from '../../services/servise';
-import InputConfirmPassword from '../ui/inputs/groupLinked/inputConfirmPassword';
 import InputFirstName from '../ui/inputs/groupLinked/inputFirstName';
 import InputLastName from '../ui/inputs/groupLinked/InputLastName';
-import InputPasswordLinked from '../ui/inputs/groupLinked/inputPasswordLinked';
 import InputPhoneLinked from '../ui/inputs/groupLinked/inputPhoneLinked';
 import InputPinCode from '../ui/inputs/groupLinked/inputPinCode';
 import InputStreetAddress from '../ui/inputs/groupSpace/inputStreetAddress';
@@ -18,7 +16,7 @@ import SelectCountrySpaced from '../ui/inputs/groupSpace/selectCountrySpaced';
 
 const MyInfo = () => {
 
-    const [myInfo, setMyInfo] = useState({})
+    // const [myInfo, setMyInfo] = useState({})
     const { user } = useSelector((state) => state.userSlice)
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [isSubmitted, setIsSubmitted] = useState(false)
@@ -36,7 +34,6 @@ const MyInfo = () => {
     }, []);
 
     useEffect(() => {
-        // console.log(selectedCountry)
         getAllCities(selectedCountry)
 
     }, [selectedCountry])
@@ -56,7 +53,6 @@ const MyInfo = () => {
 
     const onSub = (_dataBody) => {
         setIsSubmitted(true);
-        // doApiEditInfo(_dataBody)
         _dataBody.worker.jobs = user.data.worker.jobs
         _dataBody.worker.restaurantID = user.data.worker.restaurantID
         if (isChangeAddress) {
@@ -64,7 +60,6 @@ const MyInfo = () => {
             _dataBody.address.country = selectedCountry
             _dataBody.address.city = selectedCity
         }
-        // console.log(_dataBody)
         doApiEditInfo(_dataBody)
     }
 

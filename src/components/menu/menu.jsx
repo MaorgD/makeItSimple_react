@@ -74,13 +74,13 @@ const Menu = (props) => {
 
   return (
     <>
-      {/* <div className="bg-white">
-        <div className=" mx-auto max-w-2xl  px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 justify-center"> */}
-          <div className=' mb-3 flex justify-center '>
+      <div className="bg-white">
+        <div className=" mx-auto max-w-2xl px-4 sm:py-2 sm:px-6 lg:max-w-7xl lg:px-8 justify-center">
+          <div className=' mb-3 flex justify-center'>
             {user?.data?.worker?.jobs.includes("manager")&&!props?.fromTable
               &&
               <button onClick={() => { openAddItem() }}
-                className="rounded-full border mr-4 border-transparent bg-indigo-300 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                className="mt-5 rounded-full border mr-4 border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
 
                 Add item to Menu
               </button>
@@ -106,8 +106,8 @@ const Menu = (props) => {
           </div>}
 
 
-        {/* </div>
-      </div> */}
+        </div>
+      </div>
 
 
     </>

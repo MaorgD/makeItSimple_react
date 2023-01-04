@@ -175,8 +175,8 @@ const AddItemMenu = (props) => {
                                         <InputImage setImageSelected={setImageSelected} />
                                     </div>
                                 </div>
-                                <div className="px-4 py-3  sm:px-6 flex justify-center">
-                                    <button type='submit' className="w-1/3 rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-lg font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add</button>
+                                <div className="px-2 py-3  sm:px-6 flex justify-center">
+                                    <button type='submit' className="w-1/6 rounded-full border border-transparent bg-indigo-400 py-2 px-4 text-lg font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Add</button>
                                 </div>
 
                             </div>

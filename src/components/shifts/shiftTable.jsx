@@ -1,11 +1,7 @@
 import React, { useRef, useState } from 'react';
 
 const ShiftTable = (props) => {
-    // const [employees, setEmployees] = useState([
-    //     { id: 1, name: 'John Smith' },
-    //     { id: 2, name: 'Jane Doe' },
-    //     { id: 3, name: 'Bob Johnson' },
-    // ]);
+   
     const employees = props.workers
     const [shifts, setShifts] = useState([
         { id: 1, day: 'Monday', type: 'Morning' },
