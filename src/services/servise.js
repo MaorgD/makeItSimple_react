@@ -12,6 +12,7 @@ export const jobs = [
     "chef",
     "waiter",
     "bartender",
+    // מה עם צקר?
 ]
 
 export const doApiGet = async (_url) => {

@@ -12,7 +12,7 @@ const Shifts = () => {
                 <div className='columns-1 mx-0'>
 
                     <div className="w-full max-w-md space-y-8 mb-6 ">
-                        <Link className='bg-indigo-400 rounded-full p-2  ' to={"/manager/workers"} >workers list </Link>
+                        <Link className='bg-indigo-400 rounded-full p-2  ' to={"/manager/workers"} >check workers list </Link>
                     </div>
                     <div className="w-full max-w-md space-y-8 pe-6" >
                         <ShiftTable workers={restaurant?.workersArray} />

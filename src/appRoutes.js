@@ -13,6 +13,9 @@ import FullItemOrder from './components/orders/fullItemOrder'
 import AddItemMenu from './components/menu/addItemMenu'
 import EditItemMenu from './components/menu/editItemMenu'
 import FullTableItem from './components/tables/fullTableItem'
+import LayoutBarthender from './layoutBarthender/layoutBarthender'
+import LayoutShiftManager from './layoutShiftManager/layoutShiftManager'
+import LayoutCheker from './layoutCheker/layoutCheker'
 
 // import MyInfo from './components/worker/myInfo'
 
@@ -125,6 +128,42 @@ const AppRoutes = () => {
                             <Route path='/waiter/myInfo' element={< MyInfo />} />
                             <Route path='/waiter/Settings' element={< RestaurantSettings />} />
                             <Route path='/waiter/Shifts' element={< Shifts />} />
+
+                            {/* Outlet */}
+
+                        </Route>
+
+                        <Route path='/barthender' element={<LayoutBarthender />}>
+                            <Route path='/barthender/orders' element={< Orders />} />
+                            <Route path='/barthender/menu' element={< Menu />} />
+                            <Route path='/barthender/tables' element={< Tables />} />
+                            <Route path='/barthender/myInfo' element={< MyInfo />} />
+                            <Route path='/barthender/Settings' element={< RestaurantSettings />} />
+                            <Route path='/barthender/Shifts' element={< Shifts />} />
+
+                            {/* Outlet */}
+
+                        </Route>
+
+                        <Route path='/shiftManager' element={<LayoutShiftManager />}>
+                            <Route path='/shiftManager/orders' element={< Orders />} />
+                            <Route path='/shiftManager/menu' element={< Menu />} />
+                            <Route path='/shiftManager/tables' element={< Tables />} />
+                            <Route path='/shiftManager/myInfo' element={< MyInfo />} />
+                            <Route path='/shiftManager/Settings' element={< RestaurantSettings />} />
+                            <Route path='/shiftManager/Shifts' element={< Shifts />} />
+
+                            {/* Outlet */}
+
+                        </Route>
+
+                        <Route path='/cheker' element={<LayoutCheker />}>
+                            <Route path='/cheker/orders' element={< Orders />} />
+                            <Route path='/cheker/menu' element={< Menu />} />
+                            <Route path='/cheker/tables' element={< Tables />} />
+                            <Route path='/cheker/myInfo' element={< MyInfo />} />
+                            <Route path='/cheker/Settings' element={< RestaurantSettings />} />
+                            <Route path='/cheker/Shifts' element={< Shifts />} />
 
                             {/* Outlet */}
 

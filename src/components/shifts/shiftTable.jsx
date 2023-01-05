@@ -54,11 +54,11 @@ const ShiftTable = (props) => {
     console.log(employees)
 
     return (
-        <div>
-            <table className='table-auto text-center border  boder-2'>
+        <div >
+            <table className='table-auto items-center mx-auto'>
                 <thead className='border boder-2'>
-                    <tr>
-                        <th></th>
+                    <tr className="bg-gray-400" >
+                        <th className="px-4 py-2"></th>
                         {shifts.reduce((rows, shift) => {
                             if (!rows.includes(shift.day)) {
                                 rows.push(shift.day);
@@ -66,7 +66,7 @@ const ShiftTable = (props) => {
                             }
                             return rows;
                         }, []).map((row) => (
-                            <th className='border p-2' key={row}>{row}</th>
+                            <th className="px-4 py-2" key={row}>{row}</th>
                         ))}
                     </tr>
                 </thead>
@@ -78,12 +78,12 @@ const ShiftTable = (props) => {
                         }
                         return rows;
                     }, []).map((row) => (
-                        <tr  key={row}>
-                            <td className='border p-2'>{row}</td>
+                        <tr  className="bg-white" key={row}>
+                            <td className="border px-4 py-2">{row}</td>
                             {shifts
                                 .filter((shift) => shift.type === row)
                                 .map((shift) => (
-                                    <td className='border p-2' key={shift.id}>
+                                    <td className="border px-4 py-2" key={shift.id}>
                                         {shift.employees ? (
                                             <ul
                                                 onDrop={(event) => handleDrop(event, shift.id)}
@@ -99,7 +99,7 @@ const ShiftTable = (props) => {
                                                 onDragOver={handleDragOver}
                                                 // onDragStart={(event) => handleDragStart(event, employee.id)}
                                                 draggable
-                                                className="employee-drag"
+                                                className="employee-drag "
                                             >
                                                 Drag  here
                                             </div>

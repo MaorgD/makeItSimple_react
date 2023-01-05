@@ -28,7 +28,7 @@ useEffect(() => {
     <div className='columns justify-center min-h-full py-12 px-4 sm:px-6 lg:px-8'>
       <div className='flex justify-center'>
 
-        <h1 className='text-indigo-400 hover:bg-indigo-500 rounded-full p-2 mb-3 '>List of users in systems</h1>
+        <h1 className='text-indigo-400 hover:bg-indigo-400 hover:text-black rounded-full p-2 mb-3 '>List of users in systems</h1>
       </div>
       <div className='flex justify-center'>
       <Link className='bg-indigo-400 rounded-full p-2 cursor-pointer mb-3 my-3' to={"/manager/AddWorker"} >add worker </Link>
