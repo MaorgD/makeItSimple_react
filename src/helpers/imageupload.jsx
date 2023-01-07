@@ -16,6 +16,7 @@ export const uploadImage = async (file) => {
     return resp.data.url
 
 }
+// לא מוסיף לדטא בייס של מסעדה
 export const uploadImageAndAddToGallery = async (file) => {
     if (file == "" || file == null || file == undefined) {
         return false
@@ -31,6 +32,7 @@ export const uploadImageAndAddToGallery = async (file) => {
     if(resp.data.url) {
         let url = API_URL + '/restaurants/addimage/' + localStorage.getItem(RESTAURNAT_ID);
       let data =await doApiMethodTokenPatch(url , "PATCH",{img:resp.data.url})
+      console.log(data)
       return resp.data.url
       
     }

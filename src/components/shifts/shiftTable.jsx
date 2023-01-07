@@ -1,33 +1,28 @@
-import React, { useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const ShiftTable = (props) => {
-   
+
+    const isEditShifts = props.isEditShifts
     const employees = props.workers
-    const [shifts, setShifts] = useState([
-        { id: 1, day: 'Monday', type: 'Morning' },
-        { id: 2, day: 'Monday', type: 'Afternoon' },
-        { id: 3, day: 'Monday', type: 'Evening' },
-        { id: 4, day: 'Tuesday', type: 'Morning' },
-        { id: 5, day: 'Tuesday', type: 'Afternoon' },
-        { id: 6, day: 'Tuesday', type: 'Evening' },
-        { id: 7, day: 'Wednesday', type: 'Morning' },
-        { id: 8, day: 'Wednesday', type: 'Afternoon' },
-        { id: 9, day: 'Wednesday', type: 'Evening' },
-        { id: 10, day: 'Thursday', type: 'Morning' },
-        { id: 11, day: 'Thursday', type: 'Afternoon' },
-        { id: 12, day: 'Thursday', type: 'Evening' },
-        { id: 13, day: 'Friday', type: 'Morning' },
-        { id: 14, day: 'Friday', type: 'Afternoon' },
-        { id: 15, day: 'Friday', type: 'Evening' },
-        { id: 16, day: 'Saturday', type: 'Morning' },
-        { id: 17, day: 'Saturday', type: 'Afternoon' },
-        { id: 18, day: 'Saturday', type: 'Evening' },
-        { id: 19, day: 'Sunday', type: 'Morning' },
-        { id: 20, day: 'Sunday', type: 'Afternoon' },
-        { id: 21, day: 'Sunday', type: 'Evening' },
-    ]);
+    const days = props.days
+    const typeShifts = props.typeShifts
+    const generate = (arrDays, arrTypeShifts,) => {
+        let tempArr = [];
+        let i = 1;
+        arrDays.forEach(day => {
+            arrTypeShifts.forEach(shiftType => {
+                tempArr.push({ id: i++, day: day, type: shiftType.type, hours: shiftType.hours, employees: [] })
+            })
+        })
+        setShifts(tempArr)
 
+    };
+    const [shifts, setShifts] = useState([]);
 
+    useEffect(() => {
+        generate(days, typeShifts)
+    }, [days])
+    useEffect(() => { console.log(shifts) }, [shifts])
 
     const handleDragStart = (event, employeeId) => {
         event.dataTransfer.setData('employeeId', employeeId);
@@ -36,12 +31,10 @@ const ShiftTable = (props) => {
     const handleDrop = (event, shiftId) => {
         event.preventDefault();
         const employeeId = event.dataTransfer.getData('employeeId');
-        console.log(employeeId);
         const employee = employees.find((employee) => employee._id === employeeId);
-        console.log(employee)
         const shift = shifts.find((shift) => shift.id === shiftId);
-        if (!shift.employees) {
-            shift.employees = [employee];
+        if (shift.employees.includes(employee)) {
+            return
         } else {
             shift.employees.push(employee);
         }
@@ -51,59 +44,52 @@ const ShiftTable = (props) => {
     const handleDragOver = (event) => {
         event.preventDefault();
     };
-    console.log(employees)
+    const removeFromShift = (shift, employee) => {
+        let inx = shift.employees.indexOf(employee)
+        shift.employees.splice(inx, 1)
+        setShifts([...shifts]);
 
+    };
     return (
         <div >
-            <table className='table-auto items-center mx-auto'>
+            <table className='table-auto items-center mx-auto '>
                 <thead className='border boder-2'>
                     <tr className="bg-gray-400" >
-                        <th className="px-4 py-2"></th>
-                        {shifts.reduce((rows, shift) => {
+                        <th className="md:px-4 py-2"></th>
+                        {shifts?.reduce((rows, shift) => {
                             if (!rows.includes(shift.day)) {
                                 rows.push(shift.day);
                                 return rows;
                             }
                             return rows;
                         }, []).map((row) => (
-                            <th className="px-4 py-2" key={row}>{row}</th>
+                            <th className="md:px-4 py-2 border" key={row}>{row}</th>
                         ))}
                     </tr>
                 </thead>
                 <tbody>
-                    {shifts.reduce((rows, shift) => {
-                        if (!rows.includes(shift.type)) {
-                            rows.push(shift.type);
-                            return rows;
-                        }
+                    {typeShifts?.reduce((rows, shiftType) => {
+
+                        rows.push(shiftType);
+
                         return rows;
                     }, []).map((row) => (
-                        <tr  className="bg-white" key={row}>
-                            <td className="border px-4 py-2">{row}</td>
+                        <tr className="bg-white" key={row.type}>
+                            <td className="border md:px-4 py-2">{row.type} {row.hours}</td>
                             {shifts
-                                .filter((shift) => shift.type === row)
+                                .filter((shift) => shift.type === row.type)
                                 .map((shift) => (
-                                    <td className="border px-4 py-2" key={shift.id}>
-                                        {shift.employees ? (
-                                            <ul
-                                                onDrop={(event) => handleDrop(event, shift.id)}
-                                                onDragOver={handleDragOver}
-                                            >
-                                                {shift.employees.map((employee) => (
-                                                    <li key={employee._id}>{employee.fullName.firstName + " " + employee.fullName.lastName}</li>
-                                                ))}
-                                            </ul>
-                                        ) : (
-                                            <div
-                                                onDrop={(event) => handleDrop(event, shift.id)}
-                                                onDragOver={handleDragOver}
-                                                // onDragStart={(event) => handleDragStart(event, employee.id)}
-                                                draggable
-                                                className="employee-drag "
-                                            >
-                                                Drag  here
-                                            </div>
-                                        )}
+                                    <td className="border md:px-4 py-2" key={shift.id} onDrop={(event) => handleDrop(event, shift.id)}
+                                        onDragOver={handleDragOver}>
+                                        <ul>
+                                            {shift.employees.map((employee) => (
+                                                <li className='flex ' key={employee._id}>{employee.fullName.firstName + " " + employee.fullName.lastName}
+                                                   { isEditShifts&&<button onClick={() => {
+                                                        removeFromShift(shift, employee)
+                                                    }} >X</button>}</li>
+                                            ))}
+                                        </ul>
+
                                     </td>
                                 ))}
                         </tr>
@@ -111,17 +97,8 @@ const ShiftTable = (props) => {
                 </tbody>
 
             </table>
-            <div>
-                {employees?.map((employee) => (
-                    <div
-                        key={employee._id}
-                        draggable
-                        onDragStart={(event) => handleDragStart(event, employee._id)}
-                    >
-                        {employee.fullName.firstName + " " + employee.fullName.lastName}
-                    </div>
-                ))}
-            </div>
+           
+            
         </div>
     );
 };

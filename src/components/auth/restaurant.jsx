@@ -27,15 +27,15 @@ const Restaurant = (props) => {
     }
     return (
         <>
-            <div key={item._id} className=' my-3 grid lg:grid-cols-1 lg:gap-y-6 overflow-hidden h-100'>
-                {(item.name) ?
-                    <div onClick={() => { onClickResta() }} className='aspect-w-2 aspect-h-1 overflow-hidden shadow  '>
+            {/* <div key={item._id} className=' my-3 grid lg:grid-cols-1 lg:gap-y-6 overflow-hidden h-100'> */}
+                {item.name ?
+                    <div onClick={() => { onClickResta() }} className='p-2 rounded-xl shadow bg-indigo-100 hover:bg-indigo-300  my-2'>
                         <h2 className='text-center'>{item.name}</h2>
                     </div>
 
                     : <h3>loading...</h3>}
 
-            </div>
+            {/* </div> */}
             {/* <div class="grid lg:grid-cols-1 lg:gap-y-6">
                 <div class="aspect-w-2 aspect-h-1 overflow-hidden rounded-lg">
                     maor
