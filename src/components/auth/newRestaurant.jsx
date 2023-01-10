@@ -12,11 +12,13 @@ import InputStreetAddress from '../ui/inputs/groupSpace/inputStreetAddress';
 import InputStreetNumber from '../ui/inputs/groupSpace/inputStreetNumber';
 import SelectCountrySpaced from '../ui/inputs/groupSpace/selectCountrySpaced';
 import SelectCitySpaced from '../ui/inputs/groupSpace/selectCitySpaced';
+import InputZone from '../ui/inputs/groupSpace/inputZone';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 const NewRestaurant = () => {
+    const [kitchenZone , setKitchenZone ] = useState(["main kitchen"])
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState("Israel");
     const [selectedCity, setSelectedCity] = useState("");
@@ -67,12 +69,14 @@ const NewRestaurant = () => {
         }
     };
     const onSub = (_dataBody) => {
-        _dataBody.address.country = selectedCountry
-        _dataBody.address.city = selectedCity
-        console.log(_dataBody)
+        console.log(kitchenZone);
+        _dataBody.kitchenZone=kitchenZone;
+        _dataBody.address.country = selectedCountry;
+        _dataBody.address.city = selectedCity;
+        console.log(_dataBody);
 
         setIsSubmitted(true);
-        doApi(_dataBody)
+        doApi(_dataBody);
 
     };
     return (
@@ -92,6 +96,7 @@ const NewRestaurant = () => {
 
                                 <InputEmail label={" Email address "} register={register} errors={errors} />
 
+
                                 {countries &&
                                     <SelectCountrySpaced label={"Country"} classNameStyle="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" register={register} setSelectedCountry={setSelectedCountry} countries={countries} countryRef={countryRef} />
                                 }
@@ -103,8 +108,8 @@ const NewRestaurant = () => {
 
                                 <InputStreetAddress label={" Street address "}
                                     classNameStyle={classNames(errors?.address?.Street ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                        :
-                                        "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
+                                    :
+                                    "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
                                     register={register}
                                     errors={errors} />
 
@@ -112,10 +117,12 @@ const NewRestaurant = () => {
 
                                 <InputStreetNumber label={"addres number"}
                                     classNameStyle={classNames(errors?.address?.num ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                        :
-                                        "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
+                                    :
+                                    "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
                                     register={register}
                                     errors={errors} />
+
+                                    <InputZone label={" zone "} kitchenZone={kitchenZone} setKitchenZone={setKitchenZone} />
 
                                 <div className="col-span-6">
                                     <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">

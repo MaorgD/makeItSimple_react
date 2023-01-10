@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 const ShiftTable = (props) => {
 
@@ -6,6 +7,7 @@ const ShiftTable = (props) => {
     const employees = props.workers
     const days = props.days
     const typeShifts = props.typeShifts
+    console.log(employees)
     const generate = (arrDays, arrTypeShifts,) => {
         let tempArr = [];
         let i = 1;

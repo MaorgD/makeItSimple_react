@@ -20,11 +20,11 @@ const Shifts = () => {
         <>
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className='flex-col mx-0'>
-                    <div className='flex-col space-y-3'>
+                    <div className='flex-col space-y-3  mb-3 text-center'>
 
-                        <Link className='bg-indigo-400 rounded-full p-1 ' to={"/manager/workers"} >check workers list </Link>
+                        <Link className='bg-indigo-400 rounded-full p-1  mr-1' to={"/manager/workers"} >check workers list </Link>
                         <button
-                            className='bg-indigo-400 rounded-full p-1'
+                            className='bg-indigo-400 rounded-full p-1  ml-1'
                             onClick={() => {
                                 if (isEditShifts)
                                     setIsEditShifts(false)

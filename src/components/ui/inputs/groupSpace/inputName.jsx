@@ -15,7 +15,7 @@ const InputName = (props) => {
 
     return (
         <>
-            <div className="col-span-6 sm:col-span-3">
+            <div className="col-span-6 sm:col-span-2">
                 <label htmlFor='name' className="block text-sm font-medium text-gray-700"> {label}</label>
                 <input
                     defaultValue={defaultValue}

@@ -41,6 +41,7 @@ const MyInfo = React.lazy(() => import('./components/worker/myInfo'));
 const Shifts = React.lazy(() => import('./components/shifts/shifts'));
 const Workers = React.lazy(() => import('./components/shifts/workers'));
 const AddWorker = React.lazy(() => import('./components/shifts/addWorker'));
+const AllWorkZone = React.lazy(() => import('./components/workZone/allWorkZone'));
 
 
 const AppRoutes = () => {
@@ -103,6 +104,7 @@ const AppRoutes = () => {
                             <Route path='/manager/Shifts' element={< Shifts />} />
                             <Route path='/manager/workers' element={< Workers />} />
                             <Route path='/manager/AddWorker' element={<AddWorker  />} />
+                            <Route path='/manager/AllWorkZone' element={<AllWorkZone  />} />
 
 
 

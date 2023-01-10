@@ -39,7 +39,7 @@ const ShiftControl = (props) => {
   return (
     <div className='flex '>
       <FormControl sx={{ width: 1 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Jobs</InputLabel>
+        <InputLabel id="demo-multiple-checkbox-label">days</InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"

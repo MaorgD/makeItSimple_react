@@ -54,6 +54,7 @@ const AddItemMenu = (props) => {
         _dataBody.calories = Number(_dataBody.calories)
         doApi(_dataBody)
         dispatch(onClickHideAddItem())
+        console.log(_dataBody)
     }
 
     const doApi = async (_dataBody) => {
@@ -101,6 +102,20 @@ const AddItemMenu = (props) => {
                                 <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                                     <div className='grid grid-cols-4 gap-4'>
                                         <InputName label={"Name"} register={register} errors={errors} />
+                                        <div className="col-span-6 sm:col-span-2">
+                                       
+                                        
+                                        <label className="block text-sm font-medium text-gray-700">put</label>
+                                            <select
+                                                {...register('preparationArea', { required: { value: false } })}
+                                                id="preparationArea"
+                                                name="preparationArea"
+                                                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
+                                                {restaurant?.kitchenZone.map((item) => (
+                                                    <option key={item} value={item}>{item}</option>
+                                                    ))}
+                                            </select>
+                                            </div>
                                         <InputPrice register={register} errors={errors} />
                                         <InputCalories register={register} errors={errors} />
                                         <CheckBox label={"New Category"} isNew={newCategory} setNew={setNewCategory} register={register} errors={errors} />
@@ -170,6 +185,9 @@ const AddItemMenu = (props) => {
                                                 {errors.subCategory && errors.subCategory.type === 'required' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.subCategory?.message}</div>}
 
                                             </div>}
+
+                                            
+                                            
 
                                         <InputInfo register={register} errors={errors} />
                                         <InputImage setImageSelected={setImageSelected} />

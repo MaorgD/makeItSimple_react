@@ -23,21 +23,7 @@ export const navigationChef = {
       { name: 'Log out', to: '/Logout', current: false },
     ]
 }
-// export const navigationCooker = {
-//   mainNav: [
-//     { name: 'Tables', to: '/tables', current: false },
-//     { name: 'Cooker work zone', to: '/worker/workLane', current: false },
-//     { name: 'Menu', to: '/menu', current: false },
-//     { name: 'Shift  Page', to: '/shiftPage', current: false },
-//     // { name: 'my Info', to: '/myInfo', current: false },
 
-//   ], secenderyNav:
-//     [
-//       { name: 'My Info', to: '/manager/myInfo', current: false },
-//       { name: 'Settings', to: '/manager/settings', current: false },
-//       { name: 'Log out', to: '/Logout', current: false },
-//     ]
-// }
 export const navigationCheker = {
   mainNav: [
     { name: 'Tables', to: '/tables', current: false },
@@ -84,7 +70,7 @@ export const navigationManager = {
     { name: 'Orders', to: '/manager/orders', current: false },
     { name: 'Shift  Page', to: '/manager/shifts', current: false },
     { name: 'Menu', to: '/manager/menu', current: false },
-    { name: 'AllWorkZone', to: '/manager/workZones', current: false },
+    { name: 'AllWorkZone', to: '/manager/AllWorkZone', current: false },
   ],
   secenderyNav:
     [
