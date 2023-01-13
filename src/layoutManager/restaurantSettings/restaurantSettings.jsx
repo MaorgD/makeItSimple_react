@@ -90,18 +90,18 @@ const RestaurantSettings = () => {
         <div>
 
           <h2 className="mt-2 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Edit your restaurant here !
+            Edit restaurant 
           </h2>
-          <div className='flex justify-evenly'>
+          <div className='flex justify-evenly my-3 '>
 
             <button
-              className='border-2 rounded-lg bg-cyan-200 p-1' onClick={() => {
+              className='border-2 rounded-full  bg-slate-300 p-2' onClick={() => {
                 if (isChangeAddress)
                   setIsChangeAddress(false)
                 else
                   setIsChangeAddress(true)
               }}>change addres</button>
-            <button className='border-2 rounded-lg bg-cyan-200 p-1' onClick={() => {
+            <button className='border-2 rounded-full  bg-slate-300 p-2' onClick={() => {
               if (isGallery)
                 setIsGallery(false)
               else

@@ -122,7 +122,7 @@ const EditItemMenu = (props) => {
                                                 <option key={props.item?.preparationArea} value={props.item?.preparationArea}>{props.item?.preparationArea}</option>
                                                 {restaurant?.kitchenZone.filter((item) => item != props.item?.preparationArea).map((item) => (
 
-                                                    <option option key={item} value={item} > {item}</option>
+                                                    <option key={item} value={item} > {item}</option>
                                                 ))}
                                             </select>
                                         </div>

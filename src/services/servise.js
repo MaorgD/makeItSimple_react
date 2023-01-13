@@ -1,4 +1,5 @@
 import axios from 'axios'
+
 export const API_URL = 'https://restaurant-ubfg.onrender.com'
 export const TOKEN_NAME = "my-token";
 export const RESTAURNAT_ID = "res-ID";
@@ -14,7 +15,9 @@ export const jobs = [
     "bartender",
     // מה עם צקר?
 ]
-
+export const ItemTypes = {
+    CARD: 'card'
+  }
 export const doApiGet = async (_url) => {
     try {
         let resp = await axios.get(_url, {

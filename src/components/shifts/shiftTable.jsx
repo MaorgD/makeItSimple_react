@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-// import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-
+import { TdShift } from './tdShift'
 const ShiftTable = (props) => {
-
+    const shifts1 = props.shifts
     const isEditShifts = props.isEditShifts
     const employees = props.workers
     const days = props.days
@@ -13,6 +12,8 @@ const ShiftTable = (props) => {
         let i = 1;
         arrDays.forEach(day => {
             arrTypeShifts.forEach(shiftType => {
+
+
                 tempArr.push({ id: i++, day: day, type: shiftType.type, hours: shiftType.hours, employees: [] })
             })
         })
@@ -22,18 +23,29 @@ const ShiftTable = (props) => {
     const [shifts, setShifts] = useState([]);
 
     useEffect(() => {
-        generate(days, typeShifts)
-    }, [days])
-    useEffect(() => { console.log(shifts) }, [shifts])
+        console.log(shifts)
+       
+        console.log(new Date(new Date().getFullYear(),new Date().getMonth() + 1, 0).getDate())
+    }, [shifts])
+    useEffect(() => {
+        try {
+            let obj = JSON.parse(shifts1);
+            setShifts(obj);
+        } catch (e) {
+            generate(days, typeShifts)
+            console.log("Invalid JSON : " + e);
+        }
+        console.log(shifts)
+    }, [shifts1, days])
 
-    const handleDragStart = (event, employeeId) => {
-        event.dataTransfer.setData('employeeId', employeeId);
-    };
+    // const handleDragStart = (event, employeeId) => {
+    //     event.dataTransfer.setData('employeeId', employeeId);
+    // };
 
-    const handleDrop = (event, shiftId) => {
-        event.preventDefault();
-        const employeeId = event.dataTransfer.getData('employeeId');
-        const employee = employees.find((employee) => employee._id === employeeId);
+    const handleDrop = (item, shiftId) => {
+        // event.preventDefault();
+        // const employeeId = event.dataTransfer.getData('employeeId');
+        const employee = employees.find((employee) => employee._id === item._id);
         const shift = shifts.find((shift) => shift.id === shiftId);
         if (shift.employees.includes(employee)) {
             return
@@ -43,9 +55,9 @@ const ShiftTable = (props) => {
         setShifts([...shifts]);
     };
 
-    const handleDragOver = (event) => {
-        event.preventDefault();
-    };
+    // const handleDragOver = (event) => {
+    //     event.preventDefault();
+    // };
     const removeFromShift = (shift, employee) => {
         let inx = shift.employees.indexOf(employee)
         shift.employees.splice(inx, 1)
@@ -80,27 +92,16 @@ const ShiftTable = (props) => {
                             <td className="border md:px-4 py-2">{row.type} {row.hours}</td>
                             {shifts
                                 .filter((shift) => shift.type === row.type)
-                                .map((shift) => (
-                                    <td className="border md:px-4 py-2" key={shift.id} onDrop={(event) => handleDrop(event, shift.id)}
-                                        onDragOver={handleDragOver}>
-                                        <ul>
-                                            {shift.employees.map((employee) => (
-                                                <li className='flex ' key={employee._id}>{employee.fullName.firstName + " " + employee.fullName.lastName}
-                                                   { isEditShifts&&<button onClick={() => {
-                                                        removeFromShift(shift, employee)
-                                                    }} >X</button>}</li>
-                                            ))}
-                                        </ul>
+                                .map((shift) => (<TdShift key={shift.id} shift={shift} handleDrop={handleDrop} removeFromShift={removeFromShift} isEditShifts={isEditShifts} />
 
-                                    </td>
                                 ))}
                         </tr>
                     ))}
                 </tbody>
 
             </table>
-           
-            
+
+
         </div>
     );
 };
