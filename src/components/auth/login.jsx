@@ -1,23 +1,27 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Triangle } from 'react-loader-spinner'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
+import { useDispatch } from 'react-redux';
+import { saveInfo } from '../../redux/featchers/restaurantSlice';
+import { API_URL, doApiMethodSignUpLogin, TOKEN_NAME, regEmail, regPassword } from '../../services/servise';
+import { getUserInfo } from '../../redux/featchers/userSlice';
+import InputEmailLinked from '../ui/inputs/groupLinked/inputEmailLinked';
+import InputPasswordLinked from '../ui/inputs/groupLinked/inputPasswordLinked';
 
-
-import {
-    API_URL, doApiMethodSignUpLogin,
-    TOKEN_NAME, TOKEN_ROLE, TOKEN_ID, regEmail, regPassword
-} from '../../services/servise';
-
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
 const Login = () => {
+    const dispatch = useDispatch();
+
 
     const [isSubmitted, setIsSubmitted] = useState(false)
     const nav = useNavigate()
-    let { register, handleSubmit, getValues, formState: { errors } } = useForm();
+    let { register, handleSubmit, formState: { errors } } = useForm();
     const onSub = (_dataBody) => {
-        console.log(_dataBody);
         setIsSubmitted(true);
         doApi(_dataBody)
     }
@@ -26,26 +30,29 @@ const Login = () => {
         try {
             const url = API_URL + '/users/login';
             const { data } = await doApiMethodSignUpLogin(url, "POST", _dataBody);
-            console.log(data);
+            console.log(data)
+
             if (data.token) {
-                // localStorage.setItem(TOKEN_ROLE, data.userRole);
-                // localStorage.setItem(TOKEN_NAME, data.token);
-                // localStorage.setItem(TOKEN_ID, data.id);
-                console.log(data);
-                if (data.jobs.includes("manager")) {
-                    nav("/resturant");
-                } else if (data.jobs.includes("chef")) {
-                    nav("/chef");
+                localStorage.setItem(TOKEN_NAME, data.token);
+                if (data.jobs.includes("manager")){
+
+                    console.log(data)
+                    nav("/myRestaurantList");
                 }
-            } else if (data.jobs.includes("waiter")) {
-                nav("/waiter");
+                else if (data.jobs.includes("chef"))
+                nav("/myRestaurantList");
+                else if (data.jobs.includes("shiftManager"))
+                nav("/myRestaurantList");
+
+                else if (data.jobs.includes("waiter"))
+                    nav("/myRestaurantList");
+
+                if (!data.jobs)
+                    nav("/");
             }
-            else if (!data.jobs) {
-                nav("/");
-            }
+            dispatch(getUserInfo())
 
         }
-
         catch (err) {
 
             setIsSubmitted(false);
@@ -57,53 +64,32 @@ const Login = () => {
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8">
                     <div>
-                        <img
+                        {/* <img
                             className="mx-auto h-12 w-auto"
-                            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                            src=""
                             alt="Your Company"
-                        />
+                        /> */}
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                            Sign in to your account
+                            Log in your account over here
                         </h2>
-                        <p className="mt-2 text-center text-sm text-gray-600">
-                            Or{' '}
-                            <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                start your 14-day free trial
-                            </a>
-                        </p>
                     </div>
                     <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">
-                        <input type="hidden" name="remember" defaultValue="true" />
                         <div className="-space-y-px rounded-md shadow-sm">
-                            <div>
-                                <label htmlFor="email-address" className="sr-only">
-                                    Email address
-                                </label>
-                                <input {...register('email', { required: true, minLength: 2, maxLength: 35, pattern: regEmail })}
-                                    id="email-address"
-                                    name="email"
-                                    type="email"
-                                    autoComplete="email"
-                                    required
-                                    className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="Email address"
+                            <InputEmailLinked
+                                label={" Email address "}
+                                register={register}
+                                errors={errors}
+                                className={"relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"}
+                            />
+                            <InputPasswordLinked
+                                label={" Password "}
+                                register={register}
+                                errors={errors}
+                                className={classNames(errors.password ? "relative block w-full appearance-none rounded-none  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                    :
+                                    "relative block w-full appearance-none  rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
+                            />
 
-                                />
-                            </div>
-                            <div>
-                                <label htmlFor="password" className="sr-only">
-                                    Password
-                                </label>
-                                <input {...register('password', { required: true, minLength: 2, maxLength: 25, pattern: regPassword })}
-                                    id="password"
-                                    name="password"
-                                    type="password"
-                                    autoComplete="current-password"
-                                    required
-                                    className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    placeholder="Password"
-                                />
-                            </div>
                         </div>
 
                         <div className="flex items-center justify-between">
@@ -120,9 +106,11 @@ const Login = () => {
                             </div>
 
                             <div className="text-sm">
-                                <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                    Forgot your password?
-                                </a>
+                                <div className="text-sm">
+                                    <Link to={'/requestResetPass'} className="font-medium text-indigo-600 hover:text-indigo-500">
+                                        Forgot your password?
+                                    </Link>
+                                </div>
                             </div>
                         </div>
 
@@ -136,7 +124,7 @@ const Login = () => {
                                     <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                                         <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
                                     </span>
-                                    Sign in
+                                    Log in
                                 </button>
                                 :
                                 <ThreeDots

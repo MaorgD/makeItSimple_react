@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.slick-next:before,
+.slick-prev:before {
+  color: #000;
+}
+
+.resizeBlock {
+  resize: none;
+}
+
+
+
 /* body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
