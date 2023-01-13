@@ -17,6 +17,7 @@ const ItemMenu = (props) => {
             const data = await doApiMethodToken(url, "post", { note: "nn" });
             if (data) {
                 // window.location.reload(false);
+                
                 console.log(data)
             } else {
                 console.log(data)
