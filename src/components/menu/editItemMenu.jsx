@@ -120,7 +120,11 @@ const EditItemMenu = (props) => {
                                                 name="preparationArea"
                                                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
                                                 <option key={props.item?.preparationArea} value={props.item?.preparationArea}>{props.item?.preparationArea}</option>
-                                                {restaurant?.kitchenZone.filter((item) => item != props.item?.preparationArea).map((item) => (
+                                                {restaurant?.kitchenZone.bars.filter((item) => item != props.item?.preparationArea).map((item) => (
+
+                                                    <option key={item} value={item} > {item}</option>
+                                                ))}
+                                                {restaurant?.kitchenZone.kitchens.filter((item) => item != props.item?.preparationArea).map((item) => (
 
                                                     <option key={item} value={item} > {item}</option>
                                                 ))}

@@ -24,7 +24,8 @@ const RestaurantSettings = () => {
   const [cities, setCities] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState("Israel");
   const [selectedCity, setSelectedCity] = useState("");
-  const [kitchenZone, setKitchenZone] = useState([]);
+  const [kitchens, setKitchens] = useState([])
+  const [bars, setBars] = useState([])
   const countryRef = useRef();
   const cityRef = useRef();
 
@@ -39,7 +40,8 @@ const RestaurantSettings = () => {
   }, [selectedCountry])
   useEffect(() => {
     if (restaurant)
-      setKitchenZone(restaurant?.kitchenZone)
+      setBars(restaurant?.kitchenZone.bars)
+    setKitchens(restaurant?.kitchenZone.kitchens)
 
   }, [restaurant])
 
@@ -63,6 +65,7 @@ const RestaurantSettings = () => {
       _dataBody.address.country = selectedCountry
       _dataBody.address.city = selectedCity
     }
+    let kitchenZone = { kitchens: kitchens, bars: bars }
     _dataBody.kitchenZone = kitchenZone;
     console.log(_dataBody)
     setIsSubmitted(true);
@@ -90,7 +93,7 @@ const RestaurantSettings = () => {
         <div>
 
           <h2 className="mt-2 text-center text-3xl font-bold tracking-tight text-gray-900">
-            Edit restaurant 
+            Edit restaurant
           </h2>
           <div className='flex justify-evenly my-3 '>
 
@@ -126,7 +129,8 @@ const RestaurantSettings = () => {
                     defaultValue={restaurant?.phone}
                     register={register} errors={errors} />
 
-                  <InputZone label={" zone "} kitchenZone={kitchenZone} setKitchenZone={setKitchenZone} />
+                  <InputZone label={" zone "} kitchenZone={kitchens} setKitchenZone={setKitchens} />
+                  <InputZone label={" zone "} kitchenZone={bars} setKitchenZone={setBars} />
 
 
                   <div className="col-span-6">
