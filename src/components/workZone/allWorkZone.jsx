@@ -6,6 +6,7 @@ import SingleItemOrder from './singleItemOrder';
 
 const AllWorkZone = () => {
     const { restaurant } = useSelector((state) => state.restaurantSlice);
+    const { user } = useSelector((state) => state.userSlice);
 
     const [allOrders, setAllOrders] = useState([]);
     const [displayOrdercards, setDisplayOrdercards] = useState([]);
@@ -13,7 +14,6 @@ const AllWorkZone = () => {
     useEffect(() => {
         doApiGetAllTOrders()
     }, [])
-
 
     const doApiGetAllTOrders = async () => {
         try {
@@ -72,14 +72,24 @@ const AllWorkZone = () => {
     return (
         <div className='container  mx-auto'>
             <div className='text-center mx-0'>
-                {restaurant && restaurant?.kitchenZone.map((zone) => (
-                    <button key={zone} className='bg-purple-200 hover:bg-purple-500 rounded-full p-2 my-2 mx-2 mb-3' onClick={() => {
-                        getOrdersOfDrink(zone)
-                    }}>{zone}
-                    </button>
-                ))}
+
+                {user && user.data.worker.jobs.includes("manager" || "bartender" || "shiftManager")
+                    && restaurant && restaurant.kitchenZone.bars.map((zone) => (
+                        <button key={zone} className='bg-purple-200 hover:bg-purple-500 rounded-full p-2 my-2 mx-2 mb-3' onClick={() => {
+                            getOrdersOfDrink(zone)
+                        }}>{zone}
+                        </button>
+                    ))}
+
+                {user && user.data.worker.jobs.includes("manager" || "chef" || "shiftManager")
+                    && restaurant && restaurant.kitchenZone.kitchens.map((zone) => (
+                        <button key={zone} className='bg-purple-200 hover:bg-purple-500 rounded-full p-2 my-2 mx-2 mb-3' onClick={() => {
+                            getOrdersOfDrink(zone)
+                        }}>{zone}
+                        </button>
+                    ))}
             </div>
-            <div className="my-3 mx-auto grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8  ">
+            <div className="my-3 mx-auto grid grid-cols-1 gap-y-3 gap-x-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-4  ">
                 {displayOrdercards && displayOrdercards.map((item) => (
                     <SingleItemOrder key={item._id} item={item} />
                 ))}

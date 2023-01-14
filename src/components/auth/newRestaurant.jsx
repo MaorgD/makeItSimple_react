@@ -18,7 +18,8 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 const NewRestaurant = () => {
-    const [kitchenZone , setKitchenZone ] = useState(["main kitchen"])
+    const [kitchens, setKitchens] = useState(["main kitchen"])
+    const [bars, setBars] = useState(["main bar"])
     const [isSubmitted, setIsSubmitted] = useState(false)
     const [selectedCountry, setSelectedCountry] = useState("Israel");
     const [selectedCity, setSelectedCity] = useState("");
@@ -69,8 +70,10 @@ const NewRestaurant = () => {
         }
     };
     const onSub = (_dataBody) => {
-        console.log(kitchenZone);
-        _dataBody.kitchenZone=kitchenZone;
+        // console.log(kitchens);
+        let kitchenZone = { kitchens: kitchens, bars: bars }
+        _dataBody.kitchenZone = kitchenZone;
+        // _dataBody.kitchenZone.bars = bars;
         _dataBody.address.country = selectedCountry;
         _dataBody.address.city = selectedCity;
         console.log(_dataBody);
@@ -108,8 +111,8 @@ const NewRestaurant = () => {
 
                                 <InputStreetAddress label={" Street address "}
                                     classNameStyle={classNames(errors?.address?.Street ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    :
-                                    "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
+                                        :
+                                        "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
                                     register={register}
                                     errors={errors} />
 
@@ -117,12 +120,13 @@ const NewRestaurant = () => {
 
                                 <InputStreetNumber label={"addres number"}
                                     classNameStyle={classNames(errors?.address?.num ? "relative block w-full appearance-none rounded-t-md  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                                    :
-                                    "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
+                                        :
+                                        "relative block w-full appearance-none  rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm")}
                                     register={register}
                                     errors={errors} />
 
-                                    <InputZone label={" zone "} kitchenZone={kitchenZone} setKitchenZone={setKitchenZone} />
+                                <InputZone label={" zone "} kitchenZone={kitchens} setKitchenZone={setKitchens} />
+                                <InputZone label={" zone "} kitchenZone={bars} setKitchenZone={setBars} />
 
                                 <div className="col-span-6">
                                     <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">

@@ -62,7 +62,7 @@ const AddItemMenu = (props) => {
         try {
             _dataBody.img = imageSelected ? await uploadImageAndAddToGallery(imageSelected) : null;
             const data = await doApiMethodTokenNotStringify(url, "POST", _dataBody);
-             if (data) {
+            if (data) {
                 window.location.reload(false);
             } else {
                 alert(data)
@@ -103,19 +103,22 @@ const AddItemMenu = (props) => {
                                     <div className='grid grid-cols-4 gap-4'>
                                         <InputName label={"Name"} register={register} errors={errors} />
                                         <div className="col-span-6 sm:col-span-2">
-                                       
-                                        
-                                        <label className="block text-sm font-medium text-gray-700">put</label>
+
+
+                                            <label className="block text-sm font-medium text-gray-700">put</label>
                                             <select
                                                 {...register('preparationArea', { required: { value: false } })}
                                                 id="preparationArea"
                                                 name="preparationArea"
                                                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-                                                {restaurant?.kitchenZone.map((item) => (
+                                                {restaurant?.kitchenZone.bars.map((item) => (
                                                     <option key={item} value={item}>{item}</option>
-                                                    ))}
+                                                ))}
+                                                {restaurant?.kitchenZone.kitchens.map((item) => (
+                                                    <option key={item} value={item}>{item}</option>
+                                                ))}
                                             </select>
-                                            </div>
+                                        </div>
                                         <InputPrice register={register} errors={errors} />
                                         <InputCalories register={register} errors={errors} />
                                         <CheckBox label={"New Category"} isNew={newCategory} setNew={setNewCategory} register={register} errors={errors} />
@@ -186,8 +189,8 @@ const AddItemMenu = (props) => {
 
                                             </div>}
 
-                                            
-                                            
+
+
 
                                         <InputInfo register={register} errors={errors} />
                                         <InputImage setImageSelected={setImageSelected} />
