@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import ShiftTable from './shiftTable';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,18 +8,25 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 import { TouchBackend } from 'react-dnd-touch-backend'
 import { WorkerBox } from './workerBox'
 import { ShiftCalendar } from './shiftCalendar';
+import { API_URL, doApiMethodTokenNotStringify, RESTAURNAT_ID } from '../../services/servise';
 
 const Shifts = () => {
     const { restaurant } = useSelector((state) => state.restaurantSlice);
     const { user } = useSelector((state) => state.userSlice);
+    const [eventsData, setEventsData] = useState([]);
+
     // const today = new Date();
     // const [days, setDays] = useState(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']);
     // const [typeShifts, setTypeShifts] = useState([{ type: 'Morning', hours: "10:00-13:00" }, { type: 'Noon', hours: "13:00-16:00" }, { type: 'Afternoon', hours: "16:00-19:00" }, { type: 'Evening', hours: "19:00-23:00" }])
     const [isEditShifts, setIsEditShifts] = useState(false);
     const [shifts, setShifts] = useState([]);
     const selectWorkerRef = useRef();
+    useEffect(() => {
+        if (restaurant?.shifts)
+            setShifts(restaurant.shifts)
+        // console.log(restaurant.shifts)
+    }, [restaurant]);
 
-    
     // const handleDragStart = (event, employeeId) => {
     //     event.dataTransfer.setData('employeeId', employeeId);
     // };
@@ -27,12 +34,27 @@ const Shifts = () => {
     // /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     //   ? 'Mobile'
     //   : 'Desktop';
-    
+const onClickSave=()=>{
+    doApi(eventsData)
+}
+const doApi = async (_shifts) => {
+    try {
+        console.log(_shifts);
+
+        const url = API_URL + '/restaurants/setShifts/' + localStorage.getItem(RESTAURNAT_ID);
+        const data = await doApiMethodTokenNotStringify(url, "PATCH", _shifts);
+       console.log(data);
+    }
+    catch (err) {
+        // setIsSubmitted(false);
+        console.log(err);
+    }
+};
     return (
         <>
             <div className=" min-h-full items-center justify-center py-12 ">
                 <div className=''>
-                    {user?.data?.worker?.jobs.includes("manager")&&<div className='flex-col space-y-3  mb-3 text-center'>
+                    {user?.data?.worker?.jobs.includes("manager") && <div className='flex-col space-y-3  mb-3 text-center'>
 
                         <Link className='bg-indigo-400 rounded-full p-1  mr-1' to={"/manager/workers"} >check workers list </Link>
                         <button
@@ -44,15 +66,22 @@ const Shifts = () => {
                                     setIsEditShifts(true)
                             }}>edit shifts</button>
 
-                        {isEditShifts && <select ref={selectWorkerRef} name="employees" id="employees">
-                            <option key={"select worker"} value={null}>select worker</option>
-                            {restaurant?.workersArray.map((employee) => (<option key={employee._id} id={employee._id} value={employee._id}>{employee.fullName.firstName} {employee.fullName.lastName} </option>))}
-                        </select>}
+                        {isEditShifts &&
+                            <div>
+                                <select ref={selectWorkerRef} name="employees" id="employees">
+                                    <option key={"select worker"} value={null}>select worker</option>
+                                    {restaurant?.workersArray.map((employee) => (<option key={employee._id} id={employee._id} value={employee._id}>{employee.fullName.firstName} {employee.fullName.lastName} </option>))}
+                                </select>
+                                <button className="border bg-lime-400 " 
+                        onClick={()=>{onClickSave()}} >save</button>
+
+                            </div>
+                        }
 
 
                     </div>}
 
-                    <ShiftCalendar employees={restaurant?.workersArray} isEditShifts={isEditShifts} selectWorkerRef={selectWorkerRef}  shifts={shifts} />
+                    <ShiftCalendar employees={restaurant?.workersArray} isEditShifts={isEditShifts} selectWorkerRef={selectWorkerRef} shifts={shifts} eventsData={eventsData} setEventsData={setEventsData} />
                     {/* <DndProvider backend={detectDeviceType() == 'Mobile' ? TouchBackend : HTML5Backend}>
                         <div className="" >
                             <ShiftTable days={days} typeShifts={typeShifts} shifts={restaurant?.shifts} workers={restaurant?.workersArray} isEditShifts={isEditShifts} />

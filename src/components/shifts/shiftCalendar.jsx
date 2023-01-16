@@ -5,6 +5,7 @@ import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import ColorHash from 'color-hash';
+import { API_URL, doApiMethodTokenNotStringify, RESTAURNAT_ID } from "../../services/servise";
 
 moment.locale("en-GB");
 const localizer = momentLocalizer(moment);
@@ -16,9 +17,10 @@ const DragAndDropCalendar = withDragAndDrop(Calendar)
 export const ShiftCalendar = (props) => {
     const employees = props.employees
     const myShifts = props.shifts
+    const eventsData = props.eventsData
+    const setEventsData = props.setEventsData
     const selectWorkerRef = props.selectWorkerRef
     const isEditShifts = props.isEditShifts
-    const [eventsData, setEventsData] = useState([]);
 
     const formats = {
         //chenge the display time in left column
@@ -32,16 +34,16 @@ export const ShiftCalendar = (props) => {
 
     }
     useEffect(() => {
-        if(myShifts)
+        if(myShifts!=null)
         addEvents(myShifts)
     
 
     }, [myShifts])
     const addEvents = (newEvents) => {
         const newEventsWithDates = newEvents.map(event => {
-            event.start = new Date(event.start);
-            event.end = new Date(event.end);
-            return event;
+            const newEvent = {...event, start: new Date(event.start), end: new Date(event.end)}
+            // console.log(newEvent)
+            return newEvent;
         });
         setEventsData((prev) => [...prev, ...newEventsWithDates])
     };
@@ -153,10 +155,11 @@ export const ShiftCalendar = (props) => {
         console.log(event)
         setEventsData((prev) => prev.filter((ev) => ev.id !== event.id))
     }, [setEventsData])
+  
 
     return (
         <div className="">
-           
+          
             <DragAndDropCalendar
                 views={["day", "agenda", "week", "month"]}
                 localizer={localizer}
