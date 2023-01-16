@@ -175,7 +175,7 @@ export const ShiftCalendar = (props) => {
                 onDoubleClickEvent={isEditShifts?handleEventDoubleClick:false}
 
 
-                // style={{ height: "100vh" }}
+                style={{ height: "100vh" }}
                 // onSelectEvent={(event) => window.confirm("delete the shift ?")?delEvent(event.id):alert("not deleted")}
                 onSelectSlot={handleSelect}
             />
