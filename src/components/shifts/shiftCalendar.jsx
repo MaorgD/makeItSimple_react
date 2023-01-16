@@ -168,11 +168,11 @@ export const ShiftCalendar = (props) => {
                 formats={formats}
                 events={eventsData}
                 eventPropGetter={eventPropGetter}
-                resizable
-                onEventResize={handleEventResize}
-                selectable
-                onEventDrop={moveEvent}
-                onDoubleClickEvent={handleEventDoubleClick}
+                resizable={isEditShifts?true:false}
+                onEventResize={isEditShifts?handleEventResize:false}
+                selectable={isEditShifts?true:false}
+                onEventDrop={isEditShifts?moveEvent:false}
+                onDoubleClickEvent={isEditShifts?handleEventDoubleClick:false}
 
 
                 // style={{ height: "100vh" }}

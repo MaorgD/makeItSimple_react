@@ -39,11 +39,14 @@ const onClickSave=()=>{
 }
 const doApi = async (_shifts) => {
     try {
-        console.log(_shifts);
+        // console.log(_shifts);
 
         const url = API_URL + '/restaurants/setShifts/' + localStorage.getItem(RESTAURNAT_ID);
         const data = await doApiMethodTokenNotStringify(url, "PATCH", _shifts);
-       console.log(data);
+        if (data) {
+            window.location.reload(false);
+            // console.log(data);
+    }
     }
     catch (err) {
         // setIsSubmitted(false);
@@ -67,12 +70,14 @@ const doApi = async (_shifts) => {
                             }}>edit shifts</button>
 
                         {isEditShifts &&
-                            <div>
-                                <select ref={selectWorkerRef} name="employees" id="employees">
+                            <div >
+                                <select ref={selectWorkerRef} name="employees" id="employees"
+                                className='m-1'
+                                >
                                     <option key={"select worker"} value={null}>select worker</option>
                                     {restaurant?.workersArray.map((employee) => (<option key={employee._id} id={employee._id} value={employee._id}>{employee.fullName.firstName} {employee.fullName.lastName} </option>))}
                                 </select>
-                                <button className="border bg-lime-400 " 
+                                <button className="border rounded-lg p-1 m-1 bg-lime-400 " 
                         onClick={()=>{onClickSave()}} >save</button>
 
                             </div>
