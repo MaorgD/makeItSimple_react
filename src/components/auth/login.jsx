@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate, Link } from 'react-router-dom';
-import { Triangle } from 'react-loader-spinner'
+// import { Triangle } from 'react-loader-spinner'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
 import { useDispatch } from 'react-redux';
-import { saveInfo } from '../../redux/featchers/restaurantSlice';
-import { API_URL, doApiMethodSignUpLogin, TOKEN_NAME, regEmail, regPassword } from '../../services/servise';
+// import { saveInfo } from '../../redux/featchers/restaurantSlice';
+import { API_URL, doApiMethodSignUpLogin, TOKEN_NAME } from '../../services/servise';
 import { getUserInfo } from '../../redux/featchers/userSlice';
 import InputEmailLinked from '../ui/inputs/groupLinked/inputEmailLinked';
 import InputPasswordLinked from '../ui/inputs/groupLinked/inputPasswordLinked';
@@ -34,21 +34,24 @@ const Login = () => {
 
             if (data.token) {
                 localStorage.setItem(TOKEN_NAME, data.token);
-                if (data.jobs.includes("manager")){
+                if (data.jobs.includes("manager")) {
 
                     console.log(data)
                     nav("/myRestaurantList");
                 }
                 else if (data.jobs.includes("chef"))
-                nav("/myRestaurantList");
+                    nav("/myRestaurantList");
                 else if (data.jobs.includes("shiftManager"))
-                nav("/myRestaurantList");
+                    nav("/myRestaurantList");
 
                 else if (data.jobs.includes("waiter"))
                     nav("/myRestaurantList");
 
+                window.location.reload();
+
                 if (!data.jobs)
                     nav("/");
+
             }
             dispatch(getUserInfo())
 

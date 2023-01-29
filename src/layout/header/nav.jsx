@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { TOKEN_NAME } from '../../services/servise'
 const navigation = [
     { name: 'About Us', href: '/aboutUs' },
 ]
 const Nav = () => {
+    const nav = useNavigate()
+    const checkUser = () => {
+        if (localStorage.getItem(TOKEN_NAME)) {
+            nav("/myrestaurantlist")
+        }
+    }
+
+    useEffect(() => {
+        checkUser()
+    }, [])
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 

@@ -1,7 +1,22 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Nav from '../../layout/header/nav'
+import { TOKEN_NAME } from '../../services/servise'
 const Home = () => {
+
+    const nav = useNavigate()
+    // const checkUser = () => {
+    //     if (localStorage.getItem(TOKEN_NAME)) {
+    //         nav("/myrestaurantlist")
+    //     }
+    // }
+
+    // useEffect(() => {
+    //     checkUser()
+    // }, [])
+
+
+
 
     return (
         <div className="isolate bg-white">
@@ -41,12 +56,12 @@ const Home = () => {
                 <div className="relative px-6 lg:px-8">
                     <div className="mx-auto max-w-3xl pt-20 pb-32 sm:pt-48 sm:pb-40">
                         <div>
-                          
+
                             <div>
                                 <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl"> Welcome to the future of restaurants
-                               </h1>
+                                </h1>
                                 <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
-                                Try for yourself and discover how simple it is
+                                    Try for yourself and discover how simple it is
                                 </p>
                                 <div className="mt-8 flex gap-x-4 sm:justify-center">
                                     <Link
