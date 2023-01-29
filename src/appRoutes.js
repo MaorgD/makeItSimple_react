@@ -17,7 +17,6 @@ import LayoutBarthender from './layoutBarthender/layoutBarthender'
 import LayoutShiftManager from './layoutShiftManager/layoutShiftManager'
 import LayoutCheker from './layoutCheker/layoutCheker'
 
-// import MyInfo from './components/worker/myInfo'
 
 const RequestResetPass = React.lazy(() => import('./components/auth/requestResetPass'));
 const ResetPassword = React.lazy(() => import('./components/auth/resetPassword'));
@@ -25,7 +24,6 @@ const Home = React.lazy(() => import('./components/auth/home'));
 const Login = React.lazy(() => import('./components/auth/login'));
 const SignUp = React.lazy(() => import('./components/auth/signUp'));
 const NotFound = React.lazy(() => import('./components/notFound'));
-const Verification = React.lazy(() => import('./components/auth/verification'));
 const LayoutManager = React.lazy(() => import('./layoutManager/layoutManager'));
 const SuperLayout = React.lazy(() => import('./superLayout/superLayout'));
 const LayoutChef = React.lazy(() => import('./layoutChef/layoutChef'));
@@ -54,14 +52,13 @@ const AppRoutes = () => {
     let { showTableItem } = useSelector((state) => state.toggleSlice);
     let { item } = useSelector((state) => state.toggleSlice);
     let { TableItem } = useSelector((state) => state.toggleSlice);
-    // console.log(showiteminfo);
-    // console.log(item);
     useEffect(() => {
         if (localStorage.getItem(TOKEN_NAME)) {
             dispatch(getUserInfo())
-        }
-        if (localStorage.getItem(RESTAURNAT_ID)) {
-            dispatch(getRestaurantInfo())
+            if (localStorage.getItem(RESTAURNAT_ID)) {
+                dispatch(getRestaurantInfo())
+            }
+            // window.location.replace('http://localhost:3000/myrestaurantlist')
         }
     }, [])
 
@@ -103,8 +100,8 @@ const AppRoutes = () => {
                             <Route path='/manager/Settings' element={< RestaurantSettings />} />
                             <Route path='/manager/Shifts' element={< Shifts />} />
                             <Route path='/manager/workers' element={< Workers />} />
-                            <Route path='/manager/AddWorker' element={<AddWorker  />} />
-                            <Route path='/manager/AllWorkZone' element={<AllWorkZone  />} />
+                            <Route path='/manager/AddWorker' element={<AddWorker />} />
+                            <Route path='/manager/AllWorkZone' element={<AllWorkZone />} />
 
 
 

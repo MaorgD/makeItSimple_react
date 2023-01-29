@@ -18,7 +18,7 @@ const AddWorker = () => {
         console.log(_dataBody)
         setIsSubmitted(true);
         doApi(_dataBody)
-    }
+    };
 
     const doApi = async (_dataBody) => {
         try {
@@ -30,7 +30,7 @@ const AddWorker = () => {
             setIsSubmitted(false);
             alert(err.response.data.msg);
         }
-    }
+    };
     return (
         <>
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
