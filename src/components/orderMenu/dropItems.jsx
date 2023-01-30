@@ -1,14 +1,14 @@
 import React from 'react'
 import { useDrop } from 'react-dnd';
 
-const DropItems = () => {
+const DropItems = ({setOrderItems}) => {
   const [{ isOver }, dropRef] = useDrop({
     accept: 'card',
     drop: (item) => 
     
-    {
+    {setOrderItems((prev)=>[...prev,item])
       // props.handleDrop(item,shift.id) ;
-      //  return { added: item }
+       return { added: item }
       }
     ,
     collect: (monitor) => ({
@@ -16,7 +16,8 @@ const DropItems = () => {
     })
 })
   return (
-    <div className='w-full border-4 border-dashed h-1/4 text-center'>
+    <div ref={dropRef}
+     className='w-full border-4 border-dashed h-1/4 text-center'>
 drop here
     </div>
   )

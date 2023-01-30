@@ -46,7 +46,7 @@ const OrderMenuSlider = (props) => {
         // ]
     };
     return (
-        <Slider  className='w-1/4' {...settings}>
+        <Slider  className='w-1/5' {...settings}>
             {props.typ == "CategoryInMenu" && arr && arr.map((item) => (
                 <CategoryInMenu setMenuItem={props.setFunc} key={item} item={item} />
             ))}

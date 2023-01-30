@@ -40,7 +40,7 @@ const FullTableItem = (props) => {
 
     return (
         <PopUPModel>
-<OrderMenu item={item} />
+<OrderMenu item={item} closeItem={closeItem} />
             {/* <>
                 <div key={item._id} className="rounded-lg">
                     <button onClick={closeItem}>X</button>
