@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import ItemMenu from './itemMenu';
 import { onClickAddItem } from '../../redux/featchers/toggleSlice'
-import MySlider from "../ui/slider/mySlider"
+import MenuSlider from "../ui/slider/menuSlider"
 import { getAllCategories } from '../../helpers/getMenuCategories';
 
 const Menu = (props) => {
@@ -89,12 +89,12 @@ const Menu = (props) => {
 
         <div className='mb-2'>
 
-          {categories && <MySlider arr={categories} setFunc={setMenuItem} typ={"CategoryInMenu"} />}
+          {categories && <MenuSlider arr={categories} setFunc={setMenuItem} typ={"CategoryInMenu"} />}
         </div>
 
         <div className='mb-4'>
 
-          {subCategories && <MySlider arr={subCategories} setFunc={setMenuItemByCat} typ={"SubCategoryInMenu"} />}
+          {subCategories && <MenuSlider arr={subCategories} setFunc={setMenuItemByCat} typ={"SubCategoryInMenu"} />}
         </div>
 
         {<div className=" mx-auto grid grid-cols-1 gap-y-10 gap-x-6  sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xl:gap-x-8">

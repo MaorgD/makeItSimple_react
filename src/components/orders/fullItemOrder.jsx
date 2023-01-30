@@ -14,7 +14,7 @@ const FullItemOrder = (props) => {
     return (
         <PopUPModel>
 
-            <>
+            
                 <div onClick={openItem} key={item._id} className="rounded-lg">
                     <div className='mx-3 space-y-5 my-2'>
                         <h3 className="text-2xl xl:text-3xl text-gray-700">{item.note}</h3>
@@ -57,7 +57,7 @@ const FullItemOrder = (props) => {
                         </table>
                     </div>}
                 </div>
-            </>
+            
         </PopUPModel>
     )
 }

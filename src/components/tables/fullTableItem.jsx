@@ -4,6 +4,7 @@ import { onClickHide, onClickHideTableInfo } from '../../redux/featchers/toggleS
 import { API_URL, doApiMethodTokenNotStringify, RESTAURNAT_ID } from '../../services/servise'
 import PopUPModel from '../ui/popUpModel'
 import Menu from '../menu/menu'
+import OrderMenu from '../orderMenu/orderMenu'
 const FullTableItem = (props) => {
     const { user } = useSelector((state) => state.userSlice);
     const dispatch = useDispatch()
@@ -39,8 +40,8 @@ const FullTableItem = (props) => {
 
     return (
         <PopUPModel>
-
-            <>
+<OrderMenu item={item} />
+            {/* <>
                 <div key={item._id} className="rounded-lg">
                     <button onClick={closeItem}>X</button>
 
@@ -79,7 +80,7 @@ const FullTableItem = (props) => {
                                 edit order Details</button>
                         </div>}
                 </div>
-            </>
+            </> */}
         </PopUPModel >
     )
 }

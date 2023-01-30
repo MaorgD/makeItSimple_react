@@ -4,15 +4,15 @@ import CategoryInMenu from '../../menu/categoryInMenu';
 import SubCategoryInMenu from '../../menu/subCategoryInMenu';
 
 
-const MySlider = (props) => {
+const MenuSlider = (props) => {
     const arr = props.arr
     const settings = {
-        infinite: arr?.length>3?true:false,
+        infinite: arr?.length > 3 ? true : false,
         speed: 800,
         slidesToShow: 4,
         slidesToScroll: 4,
         initialSlide: 0,
-        
+
 
         responsive: [
             {
@@ -42,26 +42,19 @@ const MySlider = (props) => {
         ]
     };
     return (
-        <>
-            {props.typ == "CategoryInMenu"
-                &&
-                <Slider  {...settings}>
-                    {arr && arr.map((item) => (
-                        <CategoryInMenu setMenuItem={props.setFunc} key={item} item={item} />
-                    ))}
-                </Slider>}
-            {props.typ == "SubCategoryInMenu"
-                &&
-                <Slider  {...settings}>
-                    {
-                        arr && arr.map((item) => (
-                            <SubCategoryInMenu setMenuItemByCat={props.setFunc} key={item} item={item} />
-                        ))}
-                </Slider>}
+        <Slider  {...settings}>
+            {props.typ == "CategoryInMenu" && arr && arr.map((item) => (
+                <CategoryInMenu setMenuItem={props.setFunc} key={item} item={item} />
+            ))}
+            {props.typ == "SubCategoryInMenu" && arr && arr.map((item) => (
+                <SubCategoryInMenu setMenuItemByCat={props.setFunc} key={item} item={item} />
+            ))}
+            {props.typ == "ItemsMenu" && arr && arr.map((item) => (
+                <SubCategoryInMenu setMenuItemByCat={props.setFunc} key={item} item={item} />
+            ))}
+        </Slider>
 
-
-        </>
     )
 }
 
-export default MySlider
+export default MenuSlider
