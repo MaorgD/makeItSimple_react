@@ -1,35 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Gallery = (props) => {
+const Gallery = ({ images, videos ,display}) => {
 
-    const { images, videos } = props;
-    const [display, setDisplay] = React.useState('both');
-    const handleChange = (event) => {
-        setDisplay(event.target.value);
-    }
+   
+   
     return (
-        <div>
-        <label htmlFor="display-select">Display:</label>
-        <select
-          id="display-select"
-          value={display}
-          onChange={handleChange}
-        >
-          <option value="both">Both</option>
-          <option value="images">Images</option>
-          <option value="videos">Videos</option>
-        </select>
-        <div className="flex flex-wrap">
+        <div className=" w-full  ">
+        
+        <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 ">
           {(display === 'both' || display === 'images') &&
             images.map((image, index) => (
-              <div key={index} className="w-full md:w-1/2 p-4">
-                <img src={image} alt="" className="w-full h-auto" />
+              <div key={index} className="">
+                <img src={image} alt="" className="" />
               </div>
             ))}
           {(display === 'both' || display === 'videos') &&
             videos.map((video, index) => (
-              <div key={index} className="w-full md:w-1/2 p-4">
-                <video src={video} controls className="w-full h-auto" />
+              <div key={index} className="">
+                <video src={video} controls className="" />
               </div>
             ))}
         </div>
