@@ -1,29 +1,20 @@
 import React, { useRef } from 'react'
-// import { regEmail } from '../../../../services/servise';
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
 
 
 const InputZone = (props) => {
 
-    const label = props.label
     const setKitchenZone = props.setKitchenZone
     const kitchenZone = props.kitchenZone
     const ref = useRef()
 
 
     const handleClick = () => {
-
-        
         if (ref.current.value == "" || ref.current.value == " "|| ref.current.value == "  ") {
-            return console.log("empty value")
+            return alert("Name too short")
 
         }
         setKitchenZone([...kitchenZone, ref.current.value]);
     };
-
 
 
     return (

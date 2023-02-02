@@ -8,9 +8,6 @@ const InputPhoneLinked = (props) => {
     const className = props.className
     const defaultValue = props.defaultValue
 
-    // console.log(defaultValue)
-
-
     return (
         <>
             <div className="col-span-6 sm:col-span-3">

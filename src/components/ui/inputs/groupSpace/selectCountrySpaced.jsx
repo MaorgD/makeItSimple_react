@@ -39,11 +39,7 @@ const SelectCountrySpaced = (props) => {
                             <option value={country} key={i + 1} className="capitalize">
                                 {country}
                             </option>
-
-
                         ))}
-
-
                 </select>
             </div>
 

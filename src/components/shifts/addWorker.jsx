@@ -15,7 +15,6 @@ const AddWorker = () => {
 
 
     const onSub = (_dataBody) => {
-        console.log(_dataBody)
         setIsSubmitted(true);
         doApi(_dataBody)
     };

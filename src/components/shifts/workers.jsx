@@ -2,11 +2,8 @@ import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { API_URL, doApiTukenGet ,RESTAURNAT_ID } from '../../services/servise';
 import UserItem from './workerItem';
-// import { useSelector, useDispatch } from 'react-redux';
 
 const Workers = () => {
-  // const { restaurant } = useSelector((state) => state.restaurantSlice);
-
   const [workers, setWorkrs] = useState([]);
 
 useEffect(() => {

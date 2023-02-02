@@ -6,7 +6,6 @@ import PopUPModel from '../ui/popUpModel'
 const FullItemOrder = (props) => {
     const dispatch = useDispatch()
     const item = props.item
-    console.log(item)
     const openItem = () => {
         dispatch(onClickHideOrder())
     }

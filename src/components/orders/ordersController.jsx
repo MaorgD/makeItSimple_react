@@ -10,44 +10,6 @@ const OrdersController = (props) => {
     const setSortType = props.setSortType
     const setIsReverse = props.setIsReverse
 
-    const getAllactiveOrders = async () => {
-        if (allOrders[0]) {
-            let tempsArr = []
-            allOrders.map((item) => {
-
-                if (item.active == true) {
-                    tempsArr.push(item)
-                }
-
-            })
-            setDisplayOrders(tempsArr)
-        }
-    }
-    const getOrderFilterByWorker = async () => {
-        if (allOrders[0]) {
-            let tempsArry = []
-            allOrders.map((item) => {
-
-                if (item.byCustumer.custumerID == null) {
-                    tempsArry.push(item)
-                }
-            })
-            setDisplayOrders(tempsArry)
-            console.log(tempsArry)
-        }
-    }
-    const getOrderFilterByCoutmer = async () => {
-        if (allOrders[0]) {
-            let tempsArry = []
-            allOrders.map((item) => {
-
-                if (item.byCustumer.custumerID != null) {
-                    tempsArry.push(item)
-                }
-            })
-            setDisplayOrders(tempsArry)
-        }
-    }
 
     return (
 

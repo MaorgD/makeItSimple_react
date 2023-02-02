@@ -18,7 +18,6 @@ const Menu = (props) => {
   useEffect(() => {
     if (restaurant)
       setCategories(getAllCategories(restaurant))
-
   }, [restaurant])
 
   const getAllSubCategories = async (_category) => {

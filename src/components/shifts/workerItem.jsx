@@ -1,10 +1,8 @@
 import React from 'react'
 import { API_URL, doApiMethodTokenNotStringify, doApiMethodTokenPatch } from '../../services/servise';
 
-export default function UserItem(props) {
-    let item = props.item;
-    console.log(item);
-    let doApi = props.doApi;
+export default function UserItem({item,doApi,index}) {
+    
  
 
     const onActiveClick = async () => {
@@ -28,7 +26,7 @@ export default function UserItem(props) {
 
     return (
         <tr className="bg-white">
-            <td className="border px-4 py-2">{props.index + 1}</td>
+            <td className="border px-4 py-2">{index + 1}</td>
             <td className="border px-4 py-2">{item.fullName.firstName + " " + item.fullName.lastName}</td>
             <td className="border px-4 py-2">{item.email}</td>
             <td className="border px-4 py-2">{item.worker.jobs?item.worker.jobs.join(" "):"none"}</td>

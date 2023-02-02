@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate, Link } from 'react-router-dom';
-// import { Triangle } from 'react-loader-spinner'
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { ThreeDots } from 'react-loader-spinner'
 import { useDispatch } from 'react-redux';
-// import { saveInfo } from '../../redux/featchers/restaurantSlice';
 import { API_URL, doApiMethodSignUpLogin, TOKEN_NAME } from '../../services/servise';
 import { getUserInfo } from '../../redux/featchers/userSlice';
 import InputEmailLinked from '../ui/inputs/groupLinked/inputEmailLinked';
@@ -16,11 +14,10 @@ function classNames(...classes) {
 }
 const Login = () => {
     const dispatch = useDispatch();
-
-
     const [isSubmitted, setIsSubmitted] = useState(false)
     const nav = useNavigate()
     let { register, handleSubmit, formState: { errors } } = useForm();
+
     const onSub = (_dataBody) => {
         setIsSubmitted(true);
         doApi(_dataBody)
@@ -30,34 +27,25 @@ const Login = () => {
         try {
             const url = API_URL + '/users/login';
             const { data } = await doApiMethodSignUpLogin(url, "POST", _dataBody);
-            console.log(data)
 
             if (data.token) {
                 localStorage.setItem(TOKEN_NAME, data.token);
                 if (data.jobs.includes("manager")) {
-
-                    console.log(data)
                     nav("/myRestaurantList");
                 }
                 else if (data.jobs.includes("chef"))
                     nav("/myRestaurantList");
                 else if (data.jobs.includes("shiftManager"))
                     nav("/myRestaurantList");
-
                 else if (data.jobs.includes("waiter"))
                     nav("/myRestaurantList");
-
                 window.location.reload();
-
                 if (!data.jobs)
                     nav("/");
-
             }
             dispatch(getUserInfo())
-
         }
         catch (err) {
-
             setIsSubmitted(false);
             alert(err.response.data.msg);
         }
@@ -67,13 +55,8 @@ const Login = () => {
             <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
                 <div className="w-full max-w-md space-y-8">
                     <div>
-                        {/* <img
-                            className="mx-auto h-12 w-auto"
-                            src=""
-                            alt="Your Company"
-                        /> */}
                         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-                            Log in your account over here
+                            Log in 
                         </h2>
                     </div>
                     <form onSubmit={handleSubmit(onSub)} className="mt-8 space-y-6" action="#" method="POST">

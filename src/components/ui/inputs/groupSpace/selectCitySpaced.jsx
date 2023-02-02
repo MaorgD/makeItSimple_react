@@ -3,7 +3,6 @@ import { useRef } from 'react'
 
 
 const SelectCitySpaced = (props) => {
-    const register = props.register
     const label = props.label
     const setSelectedCity = props.setSelectedCity
     const cities = props.cities

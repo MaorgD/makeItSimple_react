@@ -16,11 +16,9 @@ const MenuOrderNav = (props) => {
 
   useEffect(() => {
     if (restaurant)
-    console.log(restaurant)
       setCategories(getAllCategories(restaurant))
 
   }, [restaurant])
-  console.log(categories)
 
   const getAllSubCategories = async (_category) => {
     if (restaurant) {

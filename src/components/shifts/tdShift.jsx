@@ -20,10 +20,6 @@ export const TdShift = (props) => {
 
     return (
         <React.Fragment>
-         
-        
-
-
             <td ref={dropRef} className="border md:px-4 py-2" key={shift.id}  >
                     <ul  key={shift.id}>
                       {shift.employees.map((employee ,i) => (

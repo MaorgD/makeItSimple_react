@@ -14,42 +14,26 @@ const Shifts = () => {
     const { restaurant } = useSelector((state) => state.restaurantSlice);
     const { user } = useSelector((state) => state.userSlice);
     const [eventsData, setEventsData] = useState([]);
-
-    // const today = new Date();
-    // const [days, setDays] = useState(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']);
-    // const [typeShifts, setTypeShifts] = useState([{ type: 'Morning', hours: "10:00-13:00" }, { type: 'Noon', hours: "13:00-16:00" }, { type: 'Afternoon', hours: "16:00-19:00" }, { type: 'Evening', hours: "19:00-23:00" }])
     const [isEditShifts, setIsEditShifts] = useState(false);
     const [shifts, setShifts] = useState([]);
     const selectWorkerRef = useRef();
     useEffect(() => {
         if (restaurant?.shifts)
             setShifts(restaurant.shifts)
-        // console.log(restaurant.shifts)
     }, [restaurant]);
 
-    // const handleDragStart = (event, employeeId) => {
-    //     event.dataTransfer.setData('employeeId', employeeId);
-    // };
-    // const detectDeviceType = () =>
-    // /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    //   ? 'Mobile'
-    //   : 'Desktop';
 const onClickSave=()=>{
     doApi(eventsData)
 }
 const doApi = async (_shifts) => {
     try {
-        // console.log(_shifts);
-
         const url = API_URL + '/restaurants/setShifts/' + localStorage.getItem(RESTAURNAT_ID);
         const data = await doApiMethodTokenNotStringify(url, "PATCH", _shifts);
         if (data) {
             window.location.reload(false);
-            // console.log(data);
     }
     }
     catch (err) {
-        // setIsSubmitted(false);
         console.log(err);
     }
 };
@@ -87,25 +71,6 @@ const doApi = async (_shifts) => {
                     </div>}
 
                     <ShiftCalendar employees={restaurant?.workersArray} isEditShifts={isEditShifts} selectWorkerRef={selectWorkerRef} shifts={shifts} eventsData={eventsData} setEventsData={setEventsData} />
-                    {/* <DndProvider backend={detectDeviceType() == 'Mobile' ? TouchBackend : HTML5Backend}>
-                        <div className="" >
-                            <ShiftTable days={days} typeShifts={typeShifts} shifts={restaurant?.shifts} workers={restaurant?.workersArray} isEditShifts={isEditShifts} />
-                        </div>
-                            {user?.data?.worker?.jobs.includes("manager") && isEditShifts &&
-                                <div className='border-2 p-1 '>
-                                    {restaurant?.workersArray?.map((employee) => {
-                                        if (employee.active) {
-                                            return <WorkerBox draggable key={employee._id} employee={employee} />
-
-                                        }
-                                    })}
-                                </div>}
-                        
-                    </DndProvider> */}
-
-
-
-
                 </div>
 
             </div>

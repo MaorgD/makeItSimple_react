@@ -1,22 +1,8 @@
 import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Nav from '../../layout/header/nav'
-import { TOKEN_NAME } from '../../services/servise'
+
 const Home = () => {
-
-    const nav = useNavigate()
-    // const checkUser = () => {
-    //     if (localStorage.getItem(TOKEN_NAME)) {
-    //         nav("/myrestaurantlist")
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     checkUser()
-    // }, [])
-
-
-
 
     return (
         <div className="isolate bg-white">

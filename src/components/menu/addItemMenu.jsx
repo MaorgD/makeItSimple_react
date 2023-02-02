@@ -54,7 +54,6 @@ const AddItemMenu = (props) => {
         _dataBody.calories = Number(_dataBody.calories)
         doApi(_dataBody)
         dispatch(onClickHideAddItem())
-        console.log(_dataBody)
     }
 
     const doApi = async (_dataBody) => {
@@ -188,10 +187,6 @@ const AddItemMenu = (props) => {
                                                 {errors.subCategory && errors.subCategory.type === 'required' && <div className='text-white font-bold text-sm bg-red-800 text-center rounded-b-md  border-gray-300  py-1'>{errors?.subCategory?.message}</div>}
 
                                             </div>}
-
-
-
-
                                         <InputInfo register={register} errors={errors} />
                                         <InputImage setImageSelected={setImageSelected} />
                                     </div>

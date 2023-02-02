@@ -13,7 +13,7 @@ const Loader = () => {
                 wrapperStyle={{ margin: 0 }}
                 wrapperClass="dna-wrapper"
             />
-            <p className='text-4xl font-mono'> loading...</p>
+            <p className='text-4xl font-mono'> Loading...</p>
         </div>
     )
 }

@@ -26,12 +26,10 @@ const ResetPassword = () => {
     }
 
     const doApi = async (_dataBody) => {
-
         try {
             if (params.userId && params.uniqueString) {
                 _dataBody.userId = params.userId;
                 _dataBody.uniqueString = params.uniqueString;
-
                 const url = API_URL + '/users/resetPassword';
                 const { data } = await doApiMethod(url, "POST", _dataBody);
                 if (data) {

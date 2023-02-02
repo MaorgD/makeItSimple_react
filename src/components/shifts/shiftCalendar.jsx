@@ -123,9 +123,6 @@ export const ShiftCalendar = (props) => {
     // handle select slot
     const handleSelect = ({ start, end }) => {
         if (isEditShifts) {
-
-            console.log(start);
-            console.log(end);
             let tmp
             employees.map((employee) => {
                 if (employee._id == selectWorkerRef.current.value)
@@ -133,7 +130,6 @@ export const ShiftCalendar = (props) => {
             })
             if (tmp) {
                 let slotArray = eventsData.filter((shift) => (shift.start <= start && start <= shift.end || shift.start <= end && end <= shift.end || shift.start > start && shift.end < end));
-                console.log(slotArray.length);
                 if (slotArray.filter((shift) => shift.employee == tmp).length == 0) {
                     setEventsData([
                         ...eventsData,
@@ -152,7 +148,6 @@ export const ShiftCalendar = (props) => {
     };
     //delete event on double click
     const handleEventDoubleClick = useCallback((event) => {
-        console.log(event)
         setEventsData((prev) => prev.filter((ev) => ev.id !== event.id))
     }, [setEventsData])
   
@@ -173,10 +168,7 @@ export const ShiftCalendar = (props) => {
                 selectable={isEditShifts?true:false}
                 onEventDrop={isEditShifts?moveEvent:false}
                 onDoubleClickEvent={isEditShifts?handleEventDoubleClick:false}
-
-
                 style={{ height: "100vh" }}
-                // onSelectEvent={(event) => window.confirm("delete the shift ?")?delEvent(event.id):alert("not deleted")}
                 onSelectSlot={handleSelect}
             />
         </div>

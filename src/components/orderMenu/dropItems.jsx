@@ -7,7 +7,6 @@ const DropItems = ({setOrderItems}) => {
     drop: (item) => 
     
     {setOrderItems((prev)=>[...prev,item])
-      // props.handleDrop(item,shift.id) ;
        return { added: item }
       }
     ,
@@ -18,7 +17,7 @@ const DropItems = ({setOrderItems}) => {
   return (
     <div ref={dropRef}
      className='w-full border-4 border-dashed h-1/4 text-center'>
-drop here
+Drop here
     </div>
   )
 }
