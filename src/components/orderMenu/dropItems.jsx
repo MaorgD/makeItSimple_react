@@ -1,12 +1,13 @@
 import React from 'react'
 import { useDrop } from 'react-dnd';
+import { v4 as uuidv4 } from 'uuid';
 
 const DropItems = ({setOrderItems}) => {
   const [{ isOver }, dropRef] = useDrop({
     accept: 'card',
     drop: (item) => 
     
-    {setOrderItems((prev)=>[...prev,item])
+    {setOrderItems((prev)=>[...prev,{item,id:uuidv4()}])
        return { added: item }
       }
     ,

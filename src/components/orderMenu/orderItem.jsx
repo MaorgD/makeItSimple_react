@@ -5,6 +5,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const OrderItem = ({ item ,setOrderItems}) => {
+  const Item=item.item;
   const [expanded, setExpanded] = React.useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -16,7 +17,7 @@ const OrderItem = ({ item ,setOrderItems}) => {
       // console.log(item._id);
       console.log(prev);
       // console.log( );
-      return prev.filter((it) => it._id!=item._id)
+      return prev.filter((it) => it.id!=item.id)
       
     })
   };
@@ -31,13 +32,13 @@ const OrderItem = ({ item ,setOrderItems}) => {
           id="panel1bh-header"
         >
           <Typography variant={"body2"} sx={{ width: '33%', flexShrink: 0 ,marginRight:1 }}>
-          {item.name}
+          {Item.name}
           </Typography>
-          <Typography variant={"caption"} sx={{ color: 'text.secondary',marginLeft:2 }}>{item.category}</Typography>
+          <Typography variant={"caption"} sx={{ color: 'text.secondary',marginLeft:2 }}>{Item.category}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-          {item.price}
+          {Item.price}
 
           </Typography>
           <button onClick={removeItem}>remove </button>

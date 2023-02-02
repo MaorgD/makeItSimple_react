@@ -73,10 +73,12 @@ const OrderMenu = ({ item, closeItem }) => {
           </Button>
           <div>
             {
-              orderItems && orderItems.map((item) => (
+              orderItems && orderItems.map((item) => 
+              (
 
-                <OrderItem key={item._id} item={item} setOrderItems={setOrderItems} />
-              ))
+                <OrderItem key={item.id} item={item}  setOrderItems={setOrderItems} />
+              )
+              )
             }
           </div>
            {item.orderID &&<Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
