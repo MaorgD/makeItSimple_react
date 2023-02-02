@@ -28,6 +28,7 @@ const OrderItem = ({ item }) => {
           <Typography>
           {item.price}
           </Typography>
+          
         </AccordionDetails>
       </Accordion>
      
