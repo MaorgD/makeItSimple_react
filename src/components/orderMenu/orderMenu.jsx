@@ -31,7 +31,7 @@ const OrderMenu = ({ item, closeItem }) => {
   const addItemsToOrder = () => {
     if (!orderItems) return
     let tmpArr = [];
-    orderItems.map((item) => {
+    orderItems.map(({item}) => {
       tmpArr.push({ itemMenuId: item._id, note: "f" })
     })
     console.log(tmpArr)
@@ -92,12 +92,14 @@ const OrderMenu = ({ item, closeItem }) => {
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-               {item.orderID.orderItems.map((order)=>(<Box sx={{border:1}} key={order._id}>
+               {item.orderID.orderItems.map((order)=>
+               (<Box sx={{border:1}} key={order._id}>
                 <Typography sx={{marginX:0.5}} variant={"caption"}>{order.itemMenuId.name}</Typography>
                 <Typography sx={{marginX:0.5}} variant={"caption"}>{order.note}</Typography>
                 <Typography sx={{marginX:0.5}} variant={"caption"}>{order.itemMenuId.price}</Typography>
                </Box>
-               ))}
+               )
+               )}
 
               </AccordionDetails>
             </Accordion>}
