@@ -38,6 +38,7 @@ const AllWorkZone = () => {
             allOrders.map((order) => {
                 let isHave = false;
                 if (order.orderItems) {
+
                     let orderCard = {
                         _id: order._id,
                         isTA: order.isTA,
@@ -45,9 +46,9 @@ const AllWorkZone = () => {
                     }
                     // console.log(order.orderItems)
                     order.orderItems.map((orderItem) => {
+                        console.log(orderItem);
                         if (orderItem.itemMenuId.preparationArea == _kitchenZone) {
 
-                            // console.log(orderItem);
                             orderCard.arrOfItems.push(orderItem);
                             isHave = true;
                         };
@@ -91,7 +92,7 @@ const AllWorkZone = () => {
             </div>
             <div className="my-3 mx-auto grid grid-cols-1 gap-y-3 gap-x-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-4  ">
                 {displayOrdercards && displayOrdercards.map((item) => (
-                    <SingleItemOrder key={item._id} item={item} />
+                    <SingleItemOrder key={item._id} item={item}/>
                 ))}
             </div>
 
