@@ -1,6 +1,4 @@
 import React from 'react'
-import { useRef } from 'react'
-
 
 const SelectCountrySpaced = (props) => {
     const label = props.label
@@ -10,8 +8,6 @@ const SelectCountrySpaced = (props) => {
     const classNameStyle = props.classNameStyle
     const labelStyle = props.labelStyle ? props.labelStyle : "block text-sm font-medium text-gray-700"
     const defaultValue = props.defaultValue ? props.defaultValue : "Israel"
-
-
 
 
     return (

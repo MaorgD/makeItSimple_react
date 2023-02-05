@@ -1,8 +1,7 @@
 import { Fragment } from 'react'
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { TOKEN_NAME, RESTAURNAT_ID } from '../../services/servise'
 import { useSelector } from 'react-redux';
 import SettingsIcon from '@mui/icons-material/Settings';
 function classNames(...classes) {
@@ -10,7 +9,6 @@ function classNames(...classes) {
 }
 
 export default function Header(props) {
-  const nav = useNavigate();
 
   const { user } = useSelector(state => state.userSlice)
   

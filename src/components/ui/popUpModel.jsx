@@ -1,8 +1,6 @@
 
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
-// import ExitFill from "./../icons/exitFill";
-// import ExitNoFill from "./../icons/exitNoFill";
 import classes from "./PopUp.module.css";
 import { useDispatch } from "react-redux";
 
@@ -23,20 +21,6 @@ const PopUpOverlay = ({ action, children }) => {
   const dispatch = useDispatch();
   return (
     <div className={classes.model}>
-      {/* <h2
-          className=" exit w-full md:hidden flex justify-end "
-          onMouseOver={() => setOver(true)}
-          onMouseLeave={() => setOver(false)}
-          onClick={() => {
-            dispatch(action());
-          }}
-        >
-          {over ? (
-            <ExitFill className="icon" width={32} height={32} />
-          ) : (
-            <ExitNoFill className="icon" width={32} height={32} />
-          )}
-        </h2> */}
 
       <div className="">{children}</div>
     </div>
