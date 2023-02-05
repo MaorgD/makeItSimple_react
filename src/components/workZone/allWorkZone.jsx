@@ -14,7 +14,7 @@ const AllWorkZone = () => {
     const [socket, setSocket] = useState(null);
 
     useEffect(() => {
-        setSocket(io("http://localhost:3001"));
+        setSocket(io(API_URL));
         console.log("ג")
         doApiGetAllTOrders()
     }, [])

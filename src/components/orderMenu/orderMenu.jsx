@@ -24,7 +24,7 @@ const OrderMenu = ({ item, closeItem }) => {
 
 
   useEffect(() => {
-       setSocket(io("http://localhost:3001"));
+       setSocket(io(API_URL));
        console.log("ג")
   
   }, [])
