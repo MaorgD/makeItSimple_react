@@ -16,7 +16,18 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Box } from '@mui/system'
+import { io } from "socket.io-client";
+
 const OrderMenu = ({ item, closeItem }) => {
+  const [socket, setSocket] = useState(null);
+
+
+
+  useEffect(() => {
+       setSocket(io("http://localhost:3001"));
+       console.log("ג")
+  
+  }, [])
 
   console.log(item)
   const [orderItems, setOrderItems] = useState([])
@@ -36,6 +47,7 @@ const OrderMenu = ({ item, closeItem }) => {
     })
     console.log(tmpArr)
     doApiAddToorder(tmpArr)
+    socket.emit("new-order", tmpArr);
 
   };
   const doApiAddToorder = async (_orderItems) => {

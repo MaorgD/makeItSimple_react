@@ -1,5 +1,6 @@
 import axios from 'axios'
 
+// export const API_URL = 'http://localhost:3001'
 export const API_URL = 'https://restaurant-ubfg.onrender.com'
 export const TOKEN_NAME = "my-token";
 export const RESTAURNAT_ID = "res-ID";
