@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const InputStreetAddress = (props) => {
     const errors = props.errors
     const register = props.register

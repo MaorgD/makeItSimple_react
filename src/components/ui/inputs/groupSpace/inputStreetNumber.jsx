@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 const InputStreetNumber = (props) => {
     const errors = props.errors
     const register = props.register
