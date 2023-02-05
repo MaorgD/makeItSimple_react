@@ -1,15 +1,10 @@
 import React from 'react'
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
 
 const InputStreetNumber = (props) => {
     const errors = props.errors
     const register = props.register
     const label = props.label
-    const classNameStyle = props.classNameStyle
     const labelStyle = props.labelStyle ? props.labelStyle : "block text-sm font-medium text-gray-700"
     const defaultValue = props.defaultValue
 

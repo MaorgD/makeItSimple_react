@@ -1,16 +1,14 @@
 import { Fragment } from 'react'
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { TOKEN_NAME, RESTAURNAT_ID } from '../../services/servise'
 import { useSelector } from 'react-redux';
-
+import SettingsIcon from '@mui/icons-material/Settings';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Header(props) {
-  const nav = useNavigate();
 
   const { user } = useSelector(state => state.userSlice)
   
@@ -36,12 +34,12 @@ export default function Header(props) {
                 <div className="flex flex-shrink-0 items-center ">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="https://res.cloudinary.com/dukiq0kql/image/upload/v1671472533/users/a7ngfxcc281r24bz4mju.png"
+                    src="https://res.cloudinary.com/dukiq0kql/image/upload/v1675596372/MBstore/make_it_simple55__1_-removebg-preview_eep7wc.png"
                     alt="Your Company"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
-                    src="https://res.cloudinary.com/dukiq0kql/image/upload/v1671472533/users/a7ngfxcc281r24bz4mju.png"
+                    src="https://res.cloudinary.com/dukiq0kql/image/upload/v1675596372/MBstore/make_it_simple55__1_-removebg-preview_eep7wc.png"
                     alt="Your Company"
                   />
                 </div>
@@ -81,11 +79,12 @@ export default function Header(props) {
                   <div>
                     <Menu.Button  className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
-                      <img
+                      <SettingsIcon fontSize='large' >
+                        </SettingsIcon>                      {/* <img
                         className="h-8 w-8 rounded-full"
-                        src="https://res.cloudinary.com/dukiq0kql/image/upload/v1671472533/users/a7ngfxcc281r24bz4mju.png"
+                        src="https://res.cloudinary.com/dukiq0kql/image/upload/v1675596372/MBstore/make_it_simple55__1_-removebg-preview_eep7wc.png"
                         alt=""
-                      />
+                      /> */}
                     </Menu.Button>
                   </div>
                   <Transition

@@ -1,6 +1,4 @@
 import React from 'react'
-import { useRef } from 'react'
-
 
 const SelectCitySpaced = (props) => {
     const label = props.label
