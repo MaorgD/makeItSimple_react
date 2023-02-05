@@ -115,6 +115,8 @@ const AppRoutes = () => {
                             <Route path='/chef/myInfo' element={< MyInfo />} />
                             <Route path='/chef/Settings' element={< RestaurantSettings />} />
                             <Route path='/chef/Shifts' element={< Shifts />} />
+                            <Route path='/chef/AllWorkZone' element={<AllWorkZone />} />
+
                             {/* <Route path='/chef/orders' element={< Orders />} /> */}
                             {/* Outlet */}
 

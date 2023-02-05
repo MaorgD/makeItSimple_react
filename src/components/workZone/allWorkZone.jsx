@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { API_URL, doApiTukenGet, RESTAURNAT_ID } from '../../services/servise'
 import ItemOrder from '../orders/itemOrder';
 import SingleItemOrder from './singleItemOrder';
+import { io } from "socket.io-client";
 
 const AllWorkZone = () => {
     const { restaurant } = useSelector((state) => state.restaurantSlice);
@@ -10,10 +11,20 @@ const AllWorkZone = () => {
 
     const [allOrders, setAllOrders] = useState([]);
     const [displayOrdercards, setDisplayOrdercards] = useState([]);
+    const [socket, setSocket] = useState(null);
 
     useEffect(() => {
+        setSocket(io("http://localhost:3001"));
+        console.log("ג")
         doApiGetAllTOrders()
     }, [])
+   
+   
+    useEffect(() => {
+        if(!socket)return
+        console.log("Connect")
+        socket.on('new-order-from-server',({items})=>{console.log(items)});
+    }, [socket])
 
     const doApiGetAllTOrders = async () => {
         try {
