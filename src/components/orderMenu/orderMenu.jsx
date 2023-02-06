@@ -39,15 +39,16 @@ const OrderMenu = ({ item, closeItem }) => {
   };
 
 
-  const addItemsToOrder = () => {
+  const addItemsToOrder = async () => {
     if (!orderItems) return
     let tmpArr = [];
     orderItems.map(({item}) => {
       tmpArr.push({ itemMenuId: item._id, note: "f" })
     })
     console.log(tmpArr)
-    doApiAddToorder(tmpArr)
-    socket.emit("new-order", tmpArr);
+   let items = await doApiAddToorder(tmpArr)
+   console.log(items)
+    await socket.emit("new-order", items);
 
   };
   const doApiAddToorder = async (_orderItems) => {
@@ -55,12 +56,12 @@ const OrderMenu = ({ item, closeItem }) => {
     const url = `${API_URL}/orders/addItemsToOrder/${item.orderID._id}`;
     try {
 
-      const data = await doApiMethodTokenNotStringify(url, "post", { items: _orderItems });
+      const {data} = await doApiMethodTokenNotStringify(url, "post", { items: _orderItems });
       if (data) {
 
         // window.location.reload(false);
 
-        console.log(data)
+        return data
       } else {
         console.log(data)
       }
