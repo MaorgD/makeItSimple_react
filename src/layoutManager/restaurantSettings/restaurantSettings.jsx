@@ -94,7 +94,7 @@ const RestaurantSettings = () => {
       <div className="flex justify-center">
 
       <div className="w-full max-w-md ">
-        <h2 className="mt-2 text-center text-3xl font-bold tracking-tight text-gray-900">
+        <h2 className="mt-2 text-center text-3xl font-bold tracking-tight text-blue-500">
           Edit restaurant
         </h2>
         <div className="flex justify-evenly my-3 ">

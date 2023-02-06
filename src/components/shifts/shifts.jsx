@@ -43,9 +43,9 @@ const doApi = async (_shifts) => {
                 <div className=''>
                     {user?.data?.worker?.jobs.includes("manager") && <div className='flex-col space-y-3  mb-3 text-center'>
 
-                        <Link className='bg-indigo-400 rounded-full p-1  mr-1' to={"/manager/workers"} >check workers list </Link>
+                        <Link className='bg-indigo-400 rounded-full p-2  mr-1' to={"/manager/workers"} >check workers list </Link>
                         <button
-                            className='bg-indigo-400 rounded-full p-1  ml-1'
+                            className='bg-indigo-400 rounded-full p-2  ml-1'
                             onClick={() => {
                                 if (isEditShifts)
                                     setIsEditShifts(false)

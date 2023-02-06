@@ -88,10 +88,10 @@ const MyInfo = () => {
             <div className="w-full max-w-md space-y-8">
                 <div className='flex-col text-center'>
 
-                    <h2 className="mb-2 text-3xl font-bold tracking-tight text-purple-300">
+                    <h2 className="mb-2 text-3xl font-bold tracking-tight text-blue-300">
                         See yours detales
                     </h2>
-                    <button className="mt-3 tracking-tight text-purple-500 bg-red-200 rounded-full p-2"  onClick={() => {
+                    <button className="mt-3 tracking-tight text-white bg-blue-300 rounded-full p-2"  onClick={() => {
                         if (isChangeAddress)
                             setIsChangeAddress(false)
                         else
@@ -164,7 +164,7 @@ const MyInfo = () => {
                         {!isSubmitted ?
                             <button
                                 type="submit"
-                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                className="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
                                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                                     <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" />
