@@ -4,6 +4,7 @@ import { API_URL, doApiTukenGet, RESTAURNAT_ID } from '../../services/servise'
 import ItemOrder from '../orders/itemOrder';
 import SingleItemOrder from './singleItemOrder';
 import { io } from "socket.io-client";
+import { Button } from '@mui/material';
 
 const AllWorkZone = () => {
     const { restaurant } = useSelector((state) => state.restaurantSlice);
@@ -12,35 +13,39 @@ const AllWorkZone = () => {
     const [allOrders, setAllOrders] = useState([]);
     const [displayOrdercards, setDisplayOrdercards] = useState([]);
     const [socket, setSocket] = useState(null);
-    const [zone, setZone] = useState(null);
+    const [zone, setZone] = useState();
 
     useEffect(() => {
         setSocket(io(API_URL));
         console.log("ג")
         doApiGetAllTOrders()
     }, [])
+    // useEffect(() => {
+    //     console.log(zone)
+    // }, [zone])
 
 
     useEffect(() => {
+
         if (!socket) return
         console.log("Connect")
         socket.on('new-order-from-server', ( data ) => {
 console.log(data)
             data.items.forEach(item => {
-                console.log(zone)
                 // console.log(item)
                 console.log(item.itemMenuId.preparationArea)
                 //if there is item that has the user zone choice
                 if (item.itemMenuId.preparationArea == zone) {
-                    let filter = displayOrdercards.filter((card) => card._id==data.order._id)
+                    // let filter = displayOrdercards.filter((card) => card._id==data.order._id)
                     // setDisplayOrdercards()
-
-                    console.log(filter)
-                    console.log(displayOrdercards)
-                    console.log(item)
-                    console.log(data.order._id)
+                    
+                    // console.log(filter)
+                    // console.log(displayOrdercards)
+                    // console.log(item)
+                    // console.log(data.order._id)
                 }
-
+                console.log(zone)
+                
             });
         });
     }, [socket])
@@ -98,7 +103,12 @@ console.log(data)
             setDisplayOrdercards(tempsArry);
         }
     }
+const onClickZone = (_zone) => {
+    setZone(_zone)
+    console.log(_zone)
 
+    getOrdersOfDrink(_zone)
+};
 
     return (
         <div className='container  mx-auto'>
@@ -106,21 +116,14 @@ console.log(data)
 
                 {user && ["manager", "bartender", "shiftManager"].some(i => user.data.worker.jobs.includes(i))
                     && restaurant && restaurant.kitchenZone.bars.map((zone) => (
-                        <button key={zone} className='bg-purple-200 hover:bg-purple-500 rounded-full p-2 my-2 mx-2 mb-3' onClick={() => {
-                            setZone(zone)
-                            getOrdersOfDrink(zone)
-                        }}>{zone}
-                        </button>
+                        <Button key={zone}  onClick={() => {onClickZone(zone)}}>{zone}
+                        </Button>
                     ))}
 
                 {user && ["manager", "chef", "shiftManager"].some(i => user.data.worker.jobs.includes(i))
                     && restaurant && restaurant.kitchenZone.kitchens.map((zone) => (
-                        <button key={zone} className='bg-purple-200 hover:bg-purple-500 rounded-full p-2 my-2 mx-2 mb-3' onClick={() => {
-                            setZone(zone)
-
-                            getOrdersOfDrink(zone)
-                        }}>{zone}
-                        </button>
+                        <Button key={zone}  onClick={() => {onClickZone(zone)}}>{zone}
+                        </Button>
                     ))}
             </div>
             <div className="my-3 mx-auto grid grid-cols-1 gap-y-3 gap-x-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-4  ">

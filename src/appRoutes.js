@@ -96,12 +96,12 @@ const AppRoutes = () => {
                             <Route path='/manager/orders' element={< Orders />} />
                             <Route path='/manager/menu' element={< Menu />} />
                             <Route path='/manager/tables' element={< Tables />} />
-                            <Route path='/manager/myInfo' element={< MyInfo />} />
-                            <Route path='/manager/Settings' element={< RestaurantSettings />} />
                             <Route path='/manager/Shifts' element={< Shifts />} />
                             <Route path='/manager/workers' element={< Workers />} />
                             <Route path='/manager/AddWorker' element={<AddWorker />} />
                             <Route path='/manager/AllWorkZone' element={<AllWorkZone />} />
+                            <Route path='/manager/Settings' element={< RestaurantSettings />} />
+                            <Route path='/manager/myInfo' element={< MyInfo />} />
 
 
 
@@ -111,13 +111,13 @@ const AppRoutes = () => {
 
                         <Route path='/chef' element={<LayoutChef />}>
                             <Route path='/chef/menu' element={< Menu />} />
-                            <Route path='/chef/tables' element={< Tables />} />
-                            <Route path='/chef/myInfo' element={< MyInfo />} />
-                            <Route path='/chef/Settings' element={< RestaurantSettings />} />
+                            {/* <Route path='/chef/tables' element={< Tables />} /> */}
+                            <Route path='/chef/orders' element={< Orders />} />
                             <Route path='/chef/Shifts' element={< Shifts />} />
                             <Route path='/chef/AllWorkZone' element={<AllWorkZone />} />
+                            <Route path='/chef/myInfo' element={< MyInfo />} />
+                            <Route path='/chef/Settings' element={< RestaurantSettings />} />
 
-                            {/* <Route path='/chef/orders' element={< Orders />} /> */}
                             {/* Outlet */}
 
                         </Route>
@@ -126,9 +126,9 @@ const AppRoutes = () => {
                             <Route path='/waiter/orders' element={< Orders />} />
                             <Route path='/waiter/menu' element={< Menu />} />
                             <Route path='/waiter/tables' element={< Tables />} />
+                            <Route path='/waiter/Shifts' element={< Shifts />} />
                             <Route path='/waiter/myInfo' element={< MyInfo />} />
                             <Route path='/waiter/Settings' element={< RestaurantSettings />} />
-                            <Route path='/waiter/Shifts' element={< Shifts />} />
 
                             {/* Outlet */}
 
@@ -138,9 +138,10 @@ const AppRoutes = () => {
                             <Route path='/barthender/orders' element={< Orders />} />
                             <Route path='/barthender/menu' element={< Menu />} />
                             <Route path='/barthender/tables' element={< Tables />} />
+                            <Route path='/barthender/Shifts' element={< Shifts />} />
                             <Route path='/barthender/myInfo' element={< MyInfo />} />
                             <Route path='/barthender/Settings' element={< RestaurantSettings />} />
-                            <Route path='/barthender/Shifts' element={< Shifts />} />
+                            <Route path='/barthender/AllWorkZone' element={<AllWorkZone />} />
 
                             {/* Outlet */}
 

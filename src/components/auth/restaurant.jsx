@@ -18,7 +18,7 @@ const Restaurant = (props) => {
             nav(`/manager/orders/`)
 
         else if (props.jobs.includes("chef"))
-            nav("/chef/orders/");
+            nav("/chef/AllWorkZone");
 
         else if (props.jobs.includes("waiter"))
             nav(`/waiter/orders/`)

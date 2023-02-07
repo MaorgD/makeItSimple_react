@@ -213,7 +213,7 @@ export default function Tables() {
 
       <div className="flex flex-col  items-center ">
         <div>
-          {user?.data?.worker?.jobs.includes("manager") &&
+          {user&&["manager", "shiftManager"].some(i => user.data?.worker.jobs.includes(i)) &&
             <div className="  flex-col justify-center  items-center p-2 ">
               <div className=" mx-2">
                 {editMode ?

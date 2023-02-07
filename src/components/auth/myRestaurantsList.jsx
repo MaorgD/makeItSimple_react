@@ -35,8 +35,6 @@ const MyRestaurantsList = () => {
 
             }
             catch (err) {
-                // לתקן alert
-                // alert("there problem")
                 console.log(err)
                 
             }

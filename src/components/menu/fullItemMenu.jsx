@@ -61,7 +61,9 @@ const FullItemMenu = (props) => {
                         {item.info != "" && <p className="mt-1 xl:text-1xl font-medium text-gray-900">Some info about our {item.name} : {item.info}</p>}
 
                     </div>
-                    {user?.data?.worker?.jobs.includes("manager") && <div className=" px-4 py-3  sm:px-6 flex justify-center">
+                    
+                    {user&&["manager", "chef"].some(i => user.data?.worker.jobs.includes(i))
+                    && <div className=" px-4 py-3  sm:px-6 flex justify-center">
                         <button onClick={() => { openEditMode() }}
                             type='button'
                             className="text-center mr-2 w-1/4 rounded-full border border-transparent bg-indigo-400 py-2 px-4 text-lg font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">

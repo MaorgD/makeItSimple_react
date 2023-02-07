@@ -75,7 +75,7 @@ const Menu = (props) => {
     <div className="bg-white container mx-auto">
       <div className=" mx-auto max-w-2xl px-4 sm:py-2 sm:px-6 lg:max-w-7xl lg:px-8 justify-center">
         <div className=' mb-3 flex justify-center'>
-          {user?.data?.worker?.jobs.includes("manager") && !props?.fromTable
+          {user&&["manager", "chef"].some(i => user.data?.worker.jobs.includes(i)) && !props?.fromTable
             &&
             <button onClick={() => { openAddItem() }}
               className="mt-5 rounded-full border mr-4 border-transparent bg-indigo-400 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
