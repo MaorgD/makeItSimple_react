@@ -158,6 +158,7 @@ const RestaurantSettings = () => {
                   defaultValue={restaurant?.name}
                   register={register}
                   errors={errors}
+                  classNameStyleDiv={"col-span-6 sm:col-span-6 lg:col-span-3"}
                   />
 
                 <InputPhone
@@ -165,6 +166,7 @@ const RestaurantSettings = () => {
                   defaultValue={restaurant?.phone}
                   register={register}
                   errors={errors}
+                  classNameStylePhone={"col-span-6 sm:col-span-6 lg:col-span-3"}
                   />
 
                 <InputZone

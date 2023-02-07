@@ -34,6 +34,7 @@ const doApi = async (_shifts) => {
     }
     }
     catch (err) {
+                        // לשנות קונסול
         console.log(err);
     }
 };
@@ -43,7 +44,7 @@ const doApi = async (_shifts) => {
                 <div className=''>
                     {user?.data?.worker?.jobs.includes("manager") && <div className='flex-col space-y-3  mb-3 text-center'>
 
-                        <Link className='bg-indigo-400 rounded-full p-2  mr-1' to={"/manager/workers"} >check workers list </Link>
+                        <Link className='bg-indigo-400 rounded-full p-2  mr-1' to={"/manager/workers"} >Check workers list </Link>
                         <button
                             className='bg-indigo-400 rounded-full p-2  ml-1'
                             onClick={() => {
@@ -51,18 +52,18 @@ const doApi = async (_shifts) => {
                                     setIsEditShifts(false)
                                 else
                                     setIsEditShifts(true)
-                            }}>edit shifts</button>
+                            }}>Edit shifts</button>
 
                         {isEditShifts &&
                             <div >
                                 <select ref={selectWorkerRef} name="employees" id="employees"
                                 className='m-1'
                                 >
-                                    <option key={"select worker"} value={null}>select worker</option>
+                                    <option key={"select worker"} value={null}>Select worker</option>
                                     {restaurant?.workersArray.map((employee) => (<option key={employee._id} id={employee._id} value={employee._id}>{employee.fullName.firstName} {employee.fullName.lastName} </option>))}
                                 </select>
                                 <button className="border rounded-lg p-1 m-1 bg-lime-400 " 
-                        onClick={()=>{onClickSave()}} >save</button>
+                        onClick={()=>{onClickSave()}} >Save</button>
 
                             </div>
                         }

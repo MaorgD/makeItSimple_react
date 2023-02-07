@@ -5,27 +5,10 @@ import { API_URL, doApiMethodToken } from '../../services/servise'
 const ItemMenu = (props) => {
     const dispatch = useDispatch()
     const item = props.item
-    const fromTable = props.fromTable;
-    const orderID = props.orderID
     const openItem = () => {
         dispatch(onClickShow({ item: item }));
     }
-    // const onAddItemToOrder = async () => {
-    //     const url = `${API_URL}/orders/addItemToOrder/${orderID}/${item._id}/${item.price}`;
-    //     try {
-
-    //         const data = await doApiMethodToken(url, "post", { note: "nn" });
-    //         if (data) {
-    //             console.log(data)
-    //         } else {
-    //             console.log(data)
-    //         }
-    //     }
-    //     catch (err) {
-    //         console.log(err);
-    //     }
-    // };
-
+   
     return (
 
         <>
@@ -42,13 +25,6 @@ const ItemMenu = (props) => {
                 <div className='flex justify-between'>
 
                     <p className="mt-1 text-lg font-medium text-gray-900">{item.price}</p>
-                    {/* {fromTable &&
-                        <div className='space-x-1 '>
-
-                            <button onClick={() => { console.log("-") }} className='border-2 rounded-lg bg-red-500 h-7 w-7 '>-</button>
-                            <button onClick={() => { onAddItemToOrder() }} className='border-2 rounded-lg bg-green-500 h-7 w-7 '>+</button>
-                        </div>
-                    } */}
                 </div>
             </div>
         </>

@@ -11,12 +11,13 @@ const InputPhone = (props) => {
     const register = props.register
     const defaultValue = props.defaultValue
     const label = props.label
+    const classNameStylePhone = props.classNameStylePhone
 
 
 
     return (
         <>
-            <div className="col-span-6 sm:col-span-3">
+            <div className={classNameStylePhone}>
                 <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
                     {label}
                 </label>

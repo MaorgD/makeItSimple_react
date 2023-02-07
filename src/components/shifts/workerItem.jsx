@@ -3,7 +3,6 @@ import { API_URL, doApiMethodTokenNotStringify, doApiMethodTokenPatch } from '..
 
 export default function UserItem({item,doApi,index}) {
     
- 
 
     const onActiveClick = async () => {
         let body;

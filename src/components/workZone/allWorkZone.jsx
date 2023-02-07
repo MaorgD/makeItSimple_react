@@ -12,6 +12,7 @@ const AllWorkZone = () => {
     const [allOrders, setAllOrders] = useState([]);
     const [displayOrdercards, setDisplayOrdercards] = useState([]);
     const [socket, setSocket] = useState(null);
+    const [zone, setZone] = useState(null);
 
     useEffect(() => {
         setSocket(io(API_URL));
@@ -23,8 +24,29 @@ const AllWorkZone = () => {
     useEffect(() => {
         if(!socket)return
         console.log("Connect")
-        socket.on('new-order-from-server',({items})=>{console.log(items)});
-    }, [socket])
+        socket.on('new-order-from-server',({items})=>{
+            
+            items.items.forEach(item => {
+                console.log(zone)
+                // console.log(item)
+                console.log(item.itemMenuId.preparationArea)
+
+                if(item.itemMenuId.preparationArea==zone){
+                    displayOrdercards.map((orderCard)=>{
+                        if(orderCard._id==items.order._id){
+                            orderCard.arrOfItems.push(item)
+                            setDisplayOrdercards(displayOrdercards)
+                        }
+
+                    })
+                    console.log(displayOrdercards)
+                    console.log(item)
+                    console.log(items.order._id)
+                }
+                
+            });
+           });
+    }, [socket,zone])
 
     const doApiGetAllTOrders = async () => {
         try {
@@ -57,17 +79,17 @@ const AllWorkZone = () => {
                     }
                     // console.log(order.orderItems)
                     order.orderItems.map((orderItem) => {
-                        console.log(orderItem);
-                        if (orderItem.itemMenuId.preparationArea == _kitchenZone) {
+                        // console.log(orderItem);
+                        if (orderItem.itemMenuId?.preparationArea == _kitchenZone) {
 
                             orderCard.arrOfItems.push(orderItem);
                             isHave = true;
                         };
                     });
                     if (isHave) {
-                        console.log(orderCard);
+                        // console.log(orderCard);
                         restaurant?.tables.map((table) => {
-                            console.log(table)
+                            // console.log(table)
                             if (table.orderID && table.orderID._id == orderCard._id) {
                                 orderCard.tableNumber = table.tableNumber
                             }
@@ -85,17 +107,20 @@ const AllWorkZone = () => {
         <div className='container  mx-auto'>
             <div className='text-center mx-0'>
 
-                {user && user.data.worker.jobs.includes("manager" || "bartender" || "shiftManager")
+                {user &&["manager" , "bartender", "shiftManager"].some(i=>user.data.worker.jobs.includes(i)) 
                     && restaurant && restaurant.kitchenZone.bars.map((zone) => (
                         <button key={zone} className='bg-purple-200 hover:bg-purple-500 rounded-full p-2 my-2 mx-2 mb-3' onClick={() => {
+                            setZone(zone)
                             getOrdersOfDrink(zone)
                         }}>{zone}
                         </button>
                     ))}
 
-                {user && user.data.worker.jobs.includes("manager" || "chef" || "shiftManager")
+                {user &&["manager" , "chef", "shiftManager"].some(i=>user.data.worker.jobs.includes(i)) 
                     && restaurant && restaurant.kitchenZone.kitchens.map((zone) => (
                         <button key={zone} className='bg-purple-200 hover:bg-purple-500 rounded-full p-2 my-2 mx-2 mb-3' onClick={() => {
+                            setZone(zone)
+
                             getOrdersOfDrink(zone)
                         }}>{zone}
                         </button>

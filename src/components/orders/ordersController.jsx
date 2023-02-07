@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 const OrdersController = (props) => {
 
-    const allOrders = props.allOrders
-    const setDisplayOrders = props.setDisplayOrders
     const setCreator = props.setCreator
     const setOrderType = props.setOrderType
     const setActive = props.setActive

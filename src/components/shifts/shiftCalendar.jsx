@@ -42,7 +42,6 @@ export const ShiftCalendar = (props) => {
     const addEvents = (newEvents) => {
         const newEventsWithDates = newEvents.map(event => {
             const newEvent = {...event, start: new Date(event.start), end: new Date(event.end)}
-            // console.log(newEvent)
             return newEvent;
         });
         setEventsData((prev) => [...prev, ...newEventsWithDates])

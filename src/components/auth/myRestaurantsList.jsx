@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const MyRestaurantsList = () => {
-    // משתמשים ביוזר פה??
     const { user } = useSelector((state) => state.userSlice)
     const [ar, setAr] = useState([]);
     const [isManager, setIsManager] = useState();
@@ -33,10 +32,10 @@ const MyRestaurantsList = () => {
             try {
                 let  {data}  = await doApiTukenGet(url);
                 setAr(data);
-                // console.log(data)
 
             }
             catch (err) {
+                // לתקן alert
                 // alert("there problem")
                 console.log(err)
                 

@@ -10,12 +10,13 @@ const InputName = (props) => {
     const register = props.register
     const defaultValue = props.defaultValue
     const label = props.label
+    const classNameStyleDiv = props.classNameStyleDiv
 
 
 
     return (
         <>
-            <div className="col-span-6 sm:col-span-2">
+            <div className={classNameStyleDiv}>
                 <label htmlFor='name' className="block text-sm font-medium text-gray-700"> {label}</label>
                 <input
                     defaultValue={defaultValue}

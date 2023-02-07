@@ -101,7 +101,7 @@ const EditItemMenu = (props) => {
                     <div className='flex justify-between px-2 '>
 
                         <button onClick={closeItem}>X</button>
-                        <button className='' onClick={returnItemInfo}> back </button>
+                        <button className='' onClick={returnItemInfo}> Back </button>
                     </div>
                     <div className="mt-5 md:col-span-2 md:mt-0 ">
                         <form onSubmit={handleSubmit(onClickSave)} action="#" method="POST">
@@ -109,11 +109,16 @@ const EditItemMenu = (props) => {
                                 <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
                                     <div className='grid grid-cols-4 gap-4'>
 
-                                        <InputName label={"Name"} defaultValue={props.item.name} register={register} errors={errors} />
+                                        <InputName label={"Name"}
+                                         defaultValue={props.item.name}
+                                          register={register}
+                                           errors={errors}
+                                           classNameStyleDiv={"col-span-6 sm:col-span-2"}
+                                            />
                                         <div className="col-span-6 sm:col-span-2">
 
 
-                                            <label className="block text-sm font-medium text-gray-700">put</label>
+                                            <label className="block text-sm font-medium text-gray-700">Put</label>
                                             <select
                                                 {...register('preparationArea', { required: { value: false } })}
                                                 id="preparationArea"
@@ -177,7 +182,6 @@ const EditItemMenu = (props) => {
                                         {!newSubCategory ? <div className="col-span-6 sm:col-span-2">
                                             <label className="block text-sm font-medium text-gray-700">SubCategory</label>
                                             <select onChange={() => {
-                                                console.log(selecteSubCategoryRef.current.value)
                                                 setSelecteSubCategory(selecteSubCategoryRef.current.value)
 
                                             }}

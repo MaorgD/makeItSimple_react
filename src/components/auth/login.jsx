@@ -47,6 +47,7 @@ const Login = () => {
         }
         catch (err) {
             setIsSubmitted(false);
+            // לשנות alert
             alert(err.response.data.msg);
         }
     }
@@ -123,7 +124,6 @@ const Login = () => {
                                     wrapperClass="flex justify-center"
                                     visible={true}
                                 />
-
                             }
 
                         </div>

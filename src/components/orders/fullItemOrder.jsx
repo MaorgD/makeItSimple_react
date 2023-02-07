@@ -19,9 +19,9 @@ const FullItemOrder = (props) => {
                         <h3 className="text-2xl xl:text-3xl text-gray-700">{item.note}</h3>
                         {item.info != "" && <p className="mt-1 xl:text-2xl font-medium text-gray-900">{item.info}</p>}
 
-                        <p className=" xl:text-2xl font-medium text-gray-900">status : {item.status}</p>
+                        <p className=" xl:text-2xl font-medium text-gray-900">Status : {item.status}</p>
                         {item.calories > 0 && <p className="mt-1 xl:text-2xl font-medium text-gray-900">Calories : {item.estimatedTime}</p>}
-                        <p className=" xl:text-2xl font-medium text-gray-900">finalPrice : {item.finalPrice}</p>
+                        <p className=" xl:text-2xl font-medium text-gray-900">FinalPrice : {item.finalPrice}</p>
 
                     </div>
                     {item.orderItems[0] &&<div className="  p-2 rounded-lg bg-gray-200 ">
@@ -29,14 +29,14 @@ const FullItemOrder = (props) => {
                             <thead className=" border-2 border-black ">
                                 <tr  >
                                     <th className=" p-2" >
-                                        name
+                                        Name
                                     </th>
                                     <th className="p-2 border-2 border-black ">
-                                        note
+                                        Note
 
                                     </th>
                                     <th className=" p-2">
-                                        price
+                                        Price
                                     </th>
                                 </tr>
 

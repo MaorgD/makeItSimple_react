@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../../services/servise';
 
-
-
 export const TdShift = (props) => {
   const isEditShifts = props.isEditShifts
 

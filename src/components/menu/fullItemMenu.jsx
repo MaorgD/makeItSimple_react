@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { onClickHide, onClickShowEditItem } from '../../redux/featchers/toggleSlice'
 import { API_URL, doApiMethodTokenNotStringify, RESTAURNAT_ID } from '../../services/servise'
@@ -8,30 +8,27 @@ const FullItemMenu = (props) => {
     const { user } = useSelector((state) => state.userSlice);
     const dispatch = useDispatch()
     const item = props.item
-    // משתמשים בסטייט?
-    // const [isEditMode, setIsEditMode] = useState(false)
     const closeItem = () => {
         dispatch(onClickHide())
-
     }
 
     const openEditMode = () => {
         dispatch(onClickShowEditItem())
-
     }
     const onClickDelete = () => {
-        if (window.confirm(`are you sure you want to delete ${item.name}?`))
+        if (window.confirm(`Are you sure you want to delete ${item.name}?`))
             doApiDelete()
-
     }
+
     const doApiDelete = async () => {
+
         const url = `${API_URL}/menus/remove/${localStorage.getItem(RESTAURNAT_ID)}/${props.item._id}`;
         try {
             const data = await doApiMethodTokenNotStringify(url, "PATCH",);
             if (data) {
                 window.location.reload(false);
             } else {
-                console.log(data);
+            // לשנות alert
                 alert(data)
             }
         }
@@ -68,11 +65,11 @@ const FullItemMenu = (props) => {
                         <button onClick={() => { openEditMode() }}
                             type='button'
                             className="text-center mr-2 w-1/4 rounded-full border border-transparent bg-indigo-400 py-2 px-4 text-lg font-medium text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                            edit item</button>
+                            Edit</button>
                         <button onClick={() => { onClickDelete() }}
                             type='button'
                             className=" w-1/4 rounded-full border border-transparent bg-red-400 py-2 px-4 text-lg font-medium text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 ">
-                            delete</button>
+                            Delete</button>
                     </div>}
                 </div>
             </>

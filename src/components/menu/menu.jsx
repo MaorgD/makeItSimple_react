@@ -64,7 +64,6 @@ const Menu = (props) => {
       setItesmOfCat(tempsArr)
       setIsSelecte(true)
     }
-
   }
   const openAddItem = () => {
     dispatch(onClickAddItem())

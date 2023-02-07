@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Nav from '../../layout/header/nav'
 
+
 const Home = () => {
 
     return (

@@ -46,9 +46,9 @@ const OrderMenu = ({ item, closeItem }) => {
       tmpArr.push({ itemMenuId: item._id, note: "f" })
     })
     console.log(tmpArr)
-   let items = await doApiAddToorder(tmpArr)
-   console.log(items)
-    await socket.emit("new-order", items);
+    let data = await doApiAddToorder(tmpArr)
+    console.log(data)
+     await socket.emit("new-order", data);
 
   };
   const doApiAddToorder = async (_orderItems) => {
@@ -107,9 +107,9 @@ const OrderMenu = ({ item, closeItem }) => {
               <AccordionDetails>
                {item.orderID.orderItems.map((order)=>
                (<Box sx={{border:1}} key={order._id}>
-                <Typography sx={{marginX:0.5}} variant={"caption"}>{order.itemMenuId.name}</Typography>
-                <Typography sx={{marginX:0.5}} variant={"caption"}>{order.note}</Typography>
-                <Typography sx={{marginX:0.5}} variant={"caption"}>{order.itemMenuId.price}</Typography>
+                <Typography sx={{marginX:0.5}} variant={"caption"}>{order.itemMenuId?.name}</Typography>
+                <Typography sx={{marginX:0.5}} variant={"caption"}>{order?.note}</Typography>
+                <Typography sx={{marginX:0.5}} variant={"caption"}>{order.itemMenuId?.price}</Typography>
                </Box>
                )
                )}

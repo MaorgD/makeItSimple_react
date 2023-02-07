@@ -6,27 +6,27 @@ const ShiftTable = (props) => {
     const employees = props.workers
     const days = props.days
     const typeShifts = props.typeShifts
-    console.log(employees)
+    const [shifts, setShifts] = useState([]);
+
     const generate = (arrDays, arrTypeShifts,) => {
         let tempArr = [];
         let i = 1;
         arrDays.forEach(day => {
             arrTypeShifts.forEach(shiftType => {
-
-
                 tempArr.push({ id: i++, day: day, type: shiftType.type, hours: shiftType.hours, employees: [] })
             })
         })
         setShifts(tempArr)
-
     };
-    const [shifts, setShifts] = useState([]);
+    
 
     useEffect(() => {
         console.log(shifts)
        
         console.log(new Date(new Date().getFullYear(),new Date().getMonth() + 1, 0).getDate())
     }, [shifts])
+
+
     useEffect(() => {
         try {
             let obj = JSON.parse(shifts1);
@@ -38,13 +38,8 @@ const ShiftTable = (props) => {
         console.log(shifts)
     }, [shifts1, days])
 
-    // const handleDragStart = (event, employeeId) => {
-    //     event.dataTransfer.setData('employeeId', employeeId);
-    // };
-
+    
     const handleDrop = (item, shiftId) => {
-        // event.preventDefault();
-        // const employeeId = event.dataTransfer.getData('employeeId');
         const employee = employees.find((employee) => employee._id === item._id);
         const shift = shifts.find((shift) => shift.id === shiftId);
         if (shift.employees.includes(employee)) {
@@ -55,9 +50,7 @@ const ShiftTable = (props) => {
         setShifts([...shifts]);
     };
 
-    // const handleDragOver = (event) => {
-    //     event.preventDefault();
-    // };
+
     const removeFromShift = (shift, employee) => {
         let inx = shift.employees.indexOf(employee)
         shift.employees.splice(inx, 1)

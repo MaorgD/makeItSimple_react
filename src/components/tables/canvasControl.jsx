@@ -58,8 +58,8 @@ const CanvasControl = (props) => {
             editor.canvas.add(g);
 
         }
-        console.log("table number", tableNumsRef.current.value)
-        console.log("seats number", seatsRef.current.value)
+        // console.log("table number", tableNumsRef.current.value)
+        // console.log("seats number", seatsRef.current.value)
 
     };
 
@@ -101,7 +101,6 @@ const CanvasControl = (props) => {
     const addTable = async (tableType) => {
         if (seatsRef.current.value > 0 && tableNumsRef.current.value) {
             let { data } = await doApiAdd({ status: "empty", seats: seatsRef.current.value, tableNumber: tableNumsRef.current.value, location: { x: 1, y: 5 } })
-            console.log(data)
 
             if (data) {
                 if (tableType == "circle")
@@ -126,6 +125,7 @@ const CanvasControl = (props) => {
             if (data) {
                 return data
             } else {
+                                // לשנות alert
                 alert(data)
             }
         }

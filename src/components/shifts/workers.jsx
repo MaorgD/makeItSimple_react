@@ -17,7 +17,7 @@ const Workers = () => {
       setWorkrs(data);
     }
     catch (err) {
-      alert("there problem ,try again later")
+      alert("There problem ,try again later")
     }
   };
 
@@ -29,7 +29,7 @@ const Workers = () => {
       </div>
       <div className='flex justify-center'>
         <Link className='text-indigo-400 hover:bg-indigo-400 hover:text-black rounded-full p-2 mb-3
-' to={"/manager/AddWorker"} >add worker </Link>
+' to={"/manager/AddWorker"} >Add worker </Link>
       </div>
       <div>
         <table className="table-auto items-center mx-auto">
@@ -38,10 +38,10 @@ const Workers = () => {
               <th className="px-4 py-2">#</th>
               <th className="px-4 py-2">FullName</th>
               <th className="px-4 py-2">Email</th>
-              <th className="px-4 py-2">jobs</th>
-              <th className="px-4 py-2">phone</th>
+              <th className="px-4 py-2">Jobs</th>
+              <th className="px-4 py-2">Phone</th>
 
-              <th className="px-4 py-2">active</th>
+              <th className="px-4 py-2">Active</th>
             </tr>
           </thead>
           <tbody>
