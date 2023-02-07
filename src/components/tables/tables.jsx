@@ -35,7 +35,6 @@ export default function Tables() {
 
   }, [onReady])
 
-  console.log(selectedObjects)
   const initcanvas = () => {
     editor.canvas.setBackgroundColor("lightgrey")
 
@@ -95,7 +94,6 @@ export default function Tables() {
   const doApiUploadJson = async () => {
     // צריך לעשות GET
     // לקבל אורך ורוחב JSON
-    console.log("onUploadJson")
 
     try {
       const url = API_URL + "/restaurants/getCanvas/" + localStorage.getItem(RESTAURNAT_ID)
@@ -198,7 +196,6 @@ export default function Tables() {
           dispatch(onClickShowTableInfo({ TableItem: data }))
       }
       catch (err) {
-        console.log(err);
       }
     }
   };
@@ -225,9 +222,9 @@ export default function Tables() {
                     customerMode()
                     window.location.reload(false);
 
-                  }} className='  border-4 rounded-xl p-2' >set</button>
+                  }} className='  border-4 rounded-xl p-2' >Set</button>
                   :
-                  <button onClick={() => { managerMode() }} className=' border-4 rounded-xl p-2' >edit</button>}
+                  <button onClick={() => { managerMode() }} className=' border-4 rounded-xl p-2' >Edit</button>}
               </div>
 
               {editMode && <CanvasControl onDownloadJSON={onDownloadJSON} editor={editor} setCanvasHeight={setCanvasHeight} setCanvasWidth={setCanvasWidth} canvasHeight={canvasHeight} canvasWidth={canvasWidth} />
@@ -237,10 +234,10 @@ export default function Tables() {
           {!editMode &&
             <div className="border-4 my-2 p-2 ">
               <button className="border-2 re" onClick={() => { onClickNewOrder() }}>
-                open new order
+                Open new order
               </button>
               <button className="border-2 re" onClick={() => { onClickOpenOrder() }}>
-                open order
+                Open order
               </button>
             </div>}
         </div>

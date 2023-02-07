@@ -9,8 +9,6 @@ const InputConfirmPassword = (props) => {
     const defaultValue = props.defaultValue
 
 
-       
-
     return (
         <>
             <div>

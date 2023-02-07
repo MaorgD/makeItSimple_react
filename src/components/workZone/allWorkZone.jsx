@@ -19,34 +19,31 @@ const AllWorkZone = () => {
         console.log("ג")
         doApiGetAllTOrders()
     }, [])
-   
-   
+
+
     useEffect(() => {
-        if(!socket)return
+        if (!socket) return
         console.log("Connect")
-        socket.on('new-order-from-server',({items})=>{
-            
-            items.items.forEach(item => {
+        socket.on('new-order-from-server', ( data ) => {
+console.log(data)
+            data.items.forEach(item => {
                 console.log(zone)
                 // console.log(item)
                 console.log(item.itemMenuId.preparationArea)
+                //if there is item that has the user zone choice
+                if (item.itemMenuId.preparationArea == zone) {
+                    let filter = displayOrdercards.filter((card) => card._id==data.order._id)
+                    // setDisplayOrdercards()
 
-                if(item.itemMenuId.preparationArea==zone){
-                    displayOrdercards.map((orderCard)=>{
-                        if(orderCard._id==items.order._id){
-                            orderCard.arrOfItems.push(item)
-                            setDisplayOrdercards(displayOrdercards)
-                        }
-
-                    })
+                    console.log(filter)
                     console.log(displayOrdercards)
                     console.log(item)
-                    console.log(items.order._id)
+                    console.log(data.order._id)
                 }
-                
+
             });
-           });
-    }, [socket,zone])
+        });
+    }, [socket])
 
     const doApiGetAllTOrders = async () => {
         try {
@@ -107,7 +104,7 @@ const AllWorkZone = () => {
         <div className='container  mx-auto'>
             <div className='text-center mx-0'>
 
-                {user &&["manager" , "bartender", "shiftManager"].some(i=>user.data.worker.jobs.includes(i)) 
+                {user && ["manager", "bartender", "shiftManager"].some(i => user.data.worker.jobs.includes(i))
                     && restaurant && restaurant.kitchenZone.bars.map((zone) => (
                         <button key={zone} className='bg-purple-200 hover:bg-purple-500 rounded-full p-2 my-2 mx-2 mb-3' onClick={() => {
                             setZone(zone)
@@ -116,7 +113,7 @@ const AllWorkZone = () => {
                         </button>
                     ))}
 
-                {user &&["manager" , "chef", "shiftManager"].some(i=>user.data.worker.jobs.includes(i)) 
+                {user && ["manager", "chef", "shiftManager"].some(i => user.data.worker.jobs.includes(i))
                     && restaurant && restaurant.kitchenZone.kitchens.map((zone) => (
                         <button key={zone} className='bg-purple-200 hover:bg-purple-500 rounded-full p-2 my-2 mx-2 mb-3' onClick={() => {
                             setZone(zone)
@@ -128,7 +125,7 @@ const AllWorkZone = () => {
             </div>
             <div className="my-3 mx-auto grid grid-cols-1 gap-y-3 gap-x-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-4  ">
                 {displayOrdercards && displayOrdercards.map((item) => (
-                    <SingleItemOrder key={item._id} item={item}/>
+                    <SingleItemOrder key={item._id} item={item} />
                 ))}
             </div>
 

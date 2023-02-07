@@ -48,7 +48,7 @@ const Login = () => {
         catch (err) {
             setIsSubmitted(false);
             // לשנות alert
-            alert(err.response.data.msg);
+            console.log(err);
         }
     }
     return (
