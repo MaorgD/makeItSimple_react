@@ -30,12 +30,14 @@ const AllWorkZone = () => {
         if (!socket) return
         console.log("Connect")
         socket.on('new-order-from-server', ( data ) => {
-console.log(data)
+          
             data.items.forEach(item => {
                 // console.log(item)
                 console.log(item.itemMenuId.preparationArea)
                 //if there is item that has the user zone choice
                 if (item.itemMenuId.preparationArea == zone) {
+                    console.log(data)
+                    console.log(zone)
                     // let filter = displayOrdercards.filter((card) => card._id==data.order._id)
                     // setDisplayOrdercards()
                     
@@ -44,7 +46,6 @@ console.log(data)
                     // console.log(item)
                     // console.log(data.order._id)
                 }
-                console.log(zone)
                 
             });
         });
