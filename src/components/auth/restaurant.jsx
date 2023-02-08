@@ -13,6 +13,7 @@ const Restaurant = (props) => {
     const onClickResta = () => {
         localStorage.setItem(RESTAURNAT_ID, item._id)
         dispatch(getRestaurantInfo())
+        
 
         if (props.jobs.includes("manager"))
             nav(`/manager/orders/`)
@@ -22,14 +23,16 @@ const Restaurant = (props) => {
 
         else if (props.jobs.includes("waiter"))
             nav(`/waiter/orders/`)
+        else if (props.jobs.includes("shiftManager"))
+            nav(`/shiftManager/orders/`)
     }
 
     return (
         <>
                 {item.name ?
-                    <div onClick={() => { onClickResta() }} className='p-2 rounded-xl shadow bg-indigo-100 hover:bg-indigo-300  my-2'>
+                    <button onClick={() => { onClickResta() }} className='p-2 rounded-xl shadow bg-indigo-100 hover:bg-indigo-300  my-2'>
                         <h2 className='text-center'>{item.name}</h2>
-                    </div>
+                    </button>
 
                     : <h3>loading...</h3>}
         </>

@@ -48,7 +48,8 @@ console.log(data)
                 
             });
         });
-    }, [socket])
+        //לנסות להוסיף ZONE
+    }, [socket,zone])
 
     const doApiGetAllTOrders = async () => {
         try {

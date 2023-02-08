@@ -24,9 +24,11 @@ const FullItemMenu = (props) => {
 
         const url = `${API_URL}/menus/remove/${localStorage.getItem(RESTAURNAT_ID)}/${props.item._id}`;
         try {
-            const data = await doApiMethodTokenNotStringify(url, "PATCH",);
+            const {data} = await doApiMethodTokenNotStringify(url, "PATCH",);
             if (data) {
+                if(data.rest.modifiedCount>0 && data.itemDel.deletedCount>0)
                 window.location.reload(false);
+                // console.log(data)
             } else {
             // לשנות alert
                 alert(data)
